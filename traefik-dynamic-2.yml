@@ -1,0 +1,14 @@
+http:
+  routers:
+    ayuntamientos-modelo-01-guestsvalencia-es:
+      rule: "Host(`ayuntamientos-modelo-01.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+    ayuntamientos-modelo-02-guestsvalencia-es:
+      rule: "Host(`ayuntamientos-modelo-02.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site

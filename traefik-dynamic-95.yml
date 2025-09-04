@@ -1,0 +1,666 @@
+http:
+  routers:
+    hospitales-modelo-01-guestsvalencia-es:
+      rule: "Host(`hospitales-modelo-01.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    clinicas-modelo-02-guestsvalencia-es:
+      rule: "Host(`clinicas-modelo-02.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    farmacias-modelo-03-guestsvalencia-es:
+      rule: "Host(`farmacias-modelo-03.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    hospitales-modelo-04-guestsvalencia-es:
+      rule: "Host(`hospitales-modelo-04.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    clinicas-modelo-05-guestsvalencia-es:
+      rule: "Host(`clinicas-modelo-05.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    farmacias-modelo-06-guestsvalencia-es:
+      rule: "Host(`farmacias-modelo-06.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    hospitales-modelo-07-guestsvalencia-es:
+      rule: "Host(`hospitales-modelo-07.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    clinicas-modelo-08-guestsvalencia-es:
+      rule: "Host(`clinicas-modelo-08.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    farmacias-modelo-09-guestsvalencia-es:
+      rule: "Host(`farmacias-modelo-09.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    hospitales-modelo-10-guestsvalencia-es:
+      rule: "Host(`hospitales-modelo-10.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    colegios-modelo-01-guestsvalencia-es:
+      rule: "Host(`colegios-modelo-01.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    universidades-modelo-02-guestsvalencia-es:
+      rule: "Host(`universidades-modelo-02.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    academias-modelo-03-guestsvalencia-es:
+      rule: "Host(`academias-modelo-03.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    colegios-modelo-04-guestsvalencia-es:
+      rule: "Host(`colegios-modelo-04.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    universidades-modelo-05-guestsvalencia-es:
+      rule: "Host(`universidades-modelo-05.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    academias-modelo-06-guestsvalencia-es:
+      rule: "Host(`academias-modelo-06.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    colegios-modelo-07-guestsvalencia-es:
+      rule: "Host(`colegios-modelo-07.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    universidades-modelo-08-guestsvalencia-es:
+      rule: "Host(`universidades-modelo-08.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    academias-modelo-09-guestsvalencia-es:
+      rule: "Host(`academias-modelo-09.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    colegios-modelo-10-guestsvalencia-es:
+      rule: "Host(`colegios-modelo-10.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    universidades-modelo-11-guestsvalencia-es:
+      rule: "Host(`universidades-modelo-11.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    academias-modelo-12-guestsvalencia-es:
+      rule: "Host(`academias-modelo-12.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    tiendas-modelo-01-guestsvalencia-es:
+      rule: "Host(`tiendas-modelo-01.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    restaurantes-modelo-02-guestsvalencia-es:
+      rule: "Host(`restaurantes-modelo-02.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    servicios-modelo-03-guestsvalencia-es:
+      rule: "Host(`servicios-modelo-03.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    tiendas-modelo-04-guestsvalencia-es:
+      rule: "Host(`tiendas-modelo-04.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    restaurantes-modelo-05-guestsvalencia-es:
+      rule: "Host(`restaurantes-modelo-05.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    servicios-modelo-06-guestsvalencia-es:
+      rule: "Host(`servicios-modelo-06.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    tiendas-modelo-07-guestsvalencia-es:
+      rule: "Host(`tiendas-modelo-07.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    restaurantes-modelo-08-guestsvalencia-es:
+      rule: "Host(`restaurantes-modelo-08.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    servicios-modelo-09-guestsvalencia-es:
+      rule: "Host(`servicios-modelo-09.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    tiendas-modelo-10-guestsvalencia-es:
+      rule: "Host(`tiendas-modelo-10.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    restaurantes-modelo-11-guestsvalencia-es:
+      rule: "Host(`restaurantes-modelo-11.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    servicios-modelo-12-guestsvalencia-es:
+      rule: "Host(`servicios-modelo-12.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    tiendas-modelo-13-guestsvalencia-es:
+      rule: "Host(`tiendas-modelo-13.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    restaurantes-modelo-14-guestsvalencia-es:
+      rule: "Host(`restaurantes-modelo-14.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    servicios-modelo-15-guestsvalencia-es:
+      rule: "Host(`servicios-modelo-15.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    hoteles-modelo-01-guestsvalencia-es:
+      rule: "Host(`hoteles-modelo-01.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    turismo-modelo-02-guestsvalencia-es:
+      rule: "Host(`turismo-modelo-02.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    eventos-modelo-03-guestsvalencia-es:
+      rule: "Host(`eventos-modelo-03.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    hoteles-modelo-04-guestsvalencia-es:
+      rule: "Host(`hoteles-modelo-04.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    turismo-modelo-05-guestsvalencia-es:
+      rule: "Host(`turismo-modelo-05.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    eventos-modelo-06-guestsvalencia-es:
+      rule: "Host(`eventos-modelo-06.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    hoteles-modelo-07-guestsvalencia-es:
+      rule: "Host(`hoteles-modelo-07.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    turismo-modelo-08-guestsvalencia-es:
+      rule: "Host(`turismo-modelo-08.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    eventos-modelo-09-guestsvalencia-es:
+      rule: "Host(`eventos-modelo-09.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    hoteles-modelo-10-guestsvalencia-es:
+      rule: "Host(`hoteles-modelo-10.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    consultoras-modelo-01-guestsvalencia-es:
+      rule: "Host(`consultoras-modelo-01.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    abogados-modelo-02-guestsvalencia-es:
+      rule: "Host(`abogados-modelo-02.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    contables-modelo-03-guestsvalencia-es:
+      rule: "Host(`contables-modelo-03.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    consultoras-modelo-04-guestsvalencia-es:
+      rule: "Host(`consultoras-modelo-04.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    abogados-modelo-05-guestsvalencia-es:
+      rule: "Host(`abogados-modelo-05.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    contables-modelo-06-guestsvalencia-es:
+      rule: "Host(`contables-modelo-06.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    consultoras-modelo-07-guestsvalencia-es:
+      rule: "Host(`consultoras-modelo-07.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    abogados-modelo-08-guestsvalencia-es:
+      rule: "Host(`abogados-modelo-08.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    contables-modelo-09-guestsvalencia-es:
+      rule: "Host(`contables-modelo-09.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    consultoras-modelo-10-guestsvalencia-es:
+      rule: "Host(`consultoras-modelo-10.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    abogados-modelo-11-guestsvalencia-es:
+      rule: "Host(`abogados-modelo-11.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    contables-modelo-12-guestsvalencia-es:
+      rule: "Host(`contables-modelo-12.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    consultoras-modelo-13-guestsvalencia-es:
+      rule: "Host(`consultoras-modelo-13.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    abogados-modelo-14-guestsvalencia-es:
+      rule: "Host(`abogados-modelo-14.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    contables-modelo-15-guestsvalencia-es:
+      rule: "Host(`contables-modelo-15.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    startups-modelo-01-guestsvalencia-es:
+      rule: "Host(`startups-modelo-01.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    software-modelo-02-guestsvalencia-es:
+      rule: "Host(`software-modelo-02.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    innovation-modelo-03-guestsvalencia-es:
+      rule: "Host(`innovation-modelo-03.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    startups-modelo-04-guestsvalencia-es:
+      rule: "Host(`startups-modelo-04.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    software-modelo-05-guestsvalencia-es:
+      rule: "Host(`software-modelo-05.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    innovation-modelo-06-guestsvalencia-es:
+      rule: "Host(`innovation-modelo-06.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    startups-modelo-07-guestsvalencia-es:
+      rule: "Host(`startups-modelo-07.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    software-modelo-08-guestsvalencia-es:
+      rule: "Host(`software-modelo-08.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    innovation-modelo-09-guestsvalencia-es:
+      rule: "Host(`innovation-modelo-09.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    startups-modelo-10-guestsvalencia-es:
+      rule: "Host(`startups-modelo-10.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    deportes-modelo-01-guestsvalencia-es:
+      rule: "Host(`deportes-modelo-01.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    entretenimiento-modelo-02-guestsvalencia-es:
+      rule: "Host(`entretenimiento-modelo-02.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    cultura-modelo-03-guestsvalencia-es:
+      rule: "Host(`cultura-modelo-03.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    deportes-modelo-04-guestsvalencia-es:
+      rule: "Host(`deportes-modelo-04.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    entretenimiento-modelo-05-guestsvalencia-es:
+      rule: "Host(`entretenimiento-modelo-05.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    cultura-modelo-06-guestsvalencia-es:
+      rule: "Host(`cultura-modelo-06.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    deportes-modelo-07-guestsvalencia-es:
+      rule: "Host(`deportes-modelo-07.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    entretenimiento-modelo-08-guestsvalencia-es:
+      rule: "Host(`entretenimiento-modelo-08.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    energia-modelo-01-guestsvalencia-es:
+      rule: "Host(`energia-modelo-01.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    transporte-modelo-02-guestsvalencia-es:
+      rule: "Host(`transporte-modelo-02.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    telecomunicaciones-modelo-03-guestsvalencia-es:
+      rule: "Host(`telecomunicaciones-modelo-03.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    energia-modelo-04-guestsvalencia-es:
+      rule: "Host(`energia-modelo-04.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    transporte-modelo-05-guestsvalencia-es:
+      rule: "Host(`transporte-modelo-05.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    telecomunicaciones-modelo-06-guestsvalencia-es:
+      rule: "Host(`telecomunicaciones-modelo-06.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    energia-modelo-07-guestsvalencia-es:
+      rule: "Host(`energia-modelo-07.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    transporte-modelo-08-guestsvalencia-es:
+      rule: "Host(`transporte-modelo-08.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    telecomunicaciones-modelo-09-guestsvalencia-es:
+      rule: "Host(`telecomunicaciones-modelo-09.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    energia-modelo-10-guestsvalencia-es:
+      rule: "Host(`energia-modelo-10.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    transporte-modelo-11-guestsvalencia-es:
+      rule: "Host(`transporte-modelo-11.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    telecomunicaciones-modelo-12-guestsvalencia-es:
+      rule: "Host(`telecomunicaciones-modelo-12.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    energia-modelo-13-guestsvalencia-es:
+      rule: "Host(`energia-modelo-13.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    transporte-modelo-14-guestsvalencia-es:
+      rule: "Host(`transporte-modelo-14.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site
+
+    telecomunicaciones-modelo-15-guestsvalencia-es:
+      rule: "Host(`telecomunicaciones-modelo-15.guestsvalencia.es`)"
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: le
+      service: sandra-site

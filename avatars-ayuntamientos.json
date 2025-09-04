@@ -1,0 +1,24 @@
+{
+  "provider": "HeyGen",
+  "realtime": {
+    "openai_model": "gpt-4o-realtime-preview-2024-12-17",
+    "latency_target_ms": 300,
+    "sample_rate_hz": 24000
+  },
+  "clones": {
+    "ayuntamientos-modelo-01": {
+      "avatar_ref": "HEYGEN_AVATAR_ID_Ayto01",
+      "voice_hint": "es-ES femenina profesional, tempo medio, dicción clara",
+      "tts_voice_id": "OPENAI_TTS_ES_FEMALE_01"
+    },
+    "ayuntamientos-modelo-02": {
+      "avatar_ref": "HEYGEN_AVATAR_ID_Ayto02",
+      "voice_hint": "es-ES masculina/amable para turismo, tempo dinámico",
+      "tts_voice_id": "OPENAI_TTS_ES_MALE_01"
+    }
+  },
+  "env_required": [
+    "OPENAI_API_KEY",
+    "HEYGEN_API_KEY"
+  ]
+}
