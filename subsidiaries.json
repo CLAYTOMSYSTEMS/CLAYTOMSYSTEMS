@@ -1,0 +1,562 @@
+[
+  {
+    "id": "subs01",
+    "name": "Hospitality",
+    "slug": "hospitality",
+    "subdomain": "hospitality.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.hospitality.metrics.*",
+    "commands_topic": "org.claytom.hospitality.command.*"
+  },
+  {
+    "id": "subs02",
+    "name": "Tourism",
+    "slug": "tourism",
+    "subdomain": "tourism.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.tourism.metrics.*",
+    "commands_topic": "org.claytom.tourism.command.*"
+  },
+  {
+    "id": "subs03",
+    "name": "Revenue",
+    "slug": "revenue",
+    "subdomain": "revenue.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.revenue.metrics.*",
+    "commands_topic": "org.claytom.revenue.command.*"
+  },
+  {
+    "id": "subs04",
+    "name": "Pricing",
+    "slug": "pricing",
+    "subdomain": "pricing.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.pricing.metrics.*",
+    "commands_topic": "org.claytom.pricing.command.*"
+  },
+  {
+    "id": "subs05",
+    "name": "Cleaning",
+    "slug": "cleaning",
+    "subdomain": "cleaning.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.cleaning.metrics.*",
+    "commands_topic": "org.claytom.cleaning.command.*"
+  },
+  {
+    "id": "subs06",
+    "name": "Maintenance",
+    "slug": "maintenance",
+    "subdomain": "maintenance.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.maintenance.metrics.*",
+    "commands_topic": "org.claytom.maintenance.command.*"
+  },
+  {
+    "id": "subs07",
+    "name": "Checkin",
+    "slug": "checkin",
+    "subdomain": "checkin.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.checkin.metrics.*",
+    "commands_topic": "org.claytom.checkin.command.*"
+  },
+  {
+    "id": "subs08",
+    "name": "Checkout",
+    "slug": "checkout",
+    "subdomain": "checkout.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.checkout.metrics.*",
+    "commands_topic": "org.claytom.checkout.command.*"
+  },
+  {
+    "id": "subs09",
+    "name": "Sales",
+    "slug": "sales",
+    "subdomain": "sales.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.sales.metrics.*",
+    "commands_topic": "org.claytom.sales.command.*"
+  },
+  {
+    "id": "subs10",
+    "name": "Marketing",
+    "slug": "marketing",
+    "subdomain": "marketing.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.marketing.metrics.*",
+    "commands_topic": "org.claytom.marketing.command.*"
+  },
+  {
+    "id": "subs11",
+    "name": "Support",
+    "slug": "support",
+    "subdomain": "support.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.support.metrics.*",
+    "commands_topic": "org.claytom.support.command.*"
+  },
+  {
+    "id": "subs12",
+    "name": "Legal",
+    "slug": "legal",
+    "subdomain": "legal.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.legal.metrics.*",
+    "commands_topic": "org.claytom.legal.command.*"
+  },
+  {
+    "id": "subs13",
+    "name": "Finance",
+    "slug": "finance",
+    "subdomain": "finance.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.finance.metrics.*",
+    "commands_topic": "org.claytom.finance.command.*"
+  },
+  {
+    "id": "subs14",
+    "name": "Itops",
+    "slug": "itops",
+    "subdomain": "itops.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.itops.metrics.*",
+    "commands_topic": "org.claytom.itops.command.*"
+  },
+  {
+    "id": "subs15",
+    "name": "Security",
+    "slug": "security",
+    "subdomain": "security.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.security.metrics.*",
+    "commands_topic": "org.claytom.security.command.*"
+  },
+  {
+    "id": "subs16",
+    "name": "Ai",
+    "slug": "ai",
+    "subdomain": "ai.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.ai.metrics.*",
+    "commands_topic": "org.claytom.ai.command.*"
+  },
+  {
+    "id": "subs17",
+    "name": "Ml",
+    "slug": "ml",
+    "subdomain": "ml.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.ml.metrics.*",
+    "commands_topic": "org.claytom.ml.command.*"
+  },
+  {
+    "id": "subs18",
+    "name": "Data",
+    "slug": "data",
+    "subdomain": "data.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.data.metrics.*",
+    "commands_topic": "org.claytom.data.command.*"
+  },
+  {
+    "id": "subs19",
+    "name": "Infrastructure",
+    "slug": "infrastructure",
+    "subdomain": "infrastructure.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.infrastructure.metrics.*",
+    "commands_topic": "org.claytom.infrastructure.command.*"
+  },
+  {
+    "id": "subs20",
+    "name": "Frontend",
+    "slug": "frontend",
+    "subdomain": "frontend.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.frontend.metrics.*",
+    "commands_topic": "org.claytom.frontend.command.*"
+  },
+  {
+    "id": "subs21",
+    "name": "Backend",
+    "slug": "backend",
+    "subdomain": "backend.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.backend.metrics.*",
+    "commands_topic": "org.claytom.backend.command.*"
+  },
+  {
+    "id": "subs22",
+    "name": "Devops",
+    "slug": "devops",
+    "subdomain": "devops.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.devops.metrics.*",
+    "commands_topic": "org.claytom.devops.command.*"
+  },
+  {
+    "id": "subs23",
+    "name": "Product",
+    "slug": "product",
+    "subdomain": "product.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.product.metrics.*",
+    "commands_topic": "org.claytom.product.command.*"
+  },
+  {
+    "id": "subs24",
+    "name": "Design",
+    "slug": "design",
+    "subdomain": "design.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.design.metrics.*",
+    "commands_topic": "org.claytom.design.command.*"
+  },
+  {
+    "id": "subs25",
+    "name": "Ux",
+    "slug": "ux",
+    "subdomain": "ux.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.ux.metrics.*",
+    "commands_topic": "org.claytom.ux.command.*"
+  },
+  {
+    "id": "subs26",
+    "name": "Local Guides",
+    "slug": "local-guides",
+    "subdomain": "local-guides.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.local-guides.metrics.*",
+    "commands_topic": "org.claytom.local-guides.command.*"
+  },
+  {
+    "id": "subs27",
+    "name": "Restaurants",
+    "slug": "restaurants",
+    "subdomain": "restaurants.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.restaurants.metrics.*",
+    "commands_topic": "org.claytom.restaurants.command.*"
+  },
+  {
+    "id": "subs28",
+    "name": "Events",
+    "slug": "events",
+    "subdomain": "events.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.events.metrics.*",
+    "commands_topic": "org.claytom.events.command.*"
+  },
+  {
+    "id": "subs29",
+    "name": "Wellness",
+    "slug": "wellness",
+    "subdomain": "wellness.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.wellness.metrics.*",
+    "commands_topic": "org.claytom.wellness.command.*"
+  },
+  {
+    "id": "subs30",
+    "name": "Yoga",
+    "slug": "yoga",
+    "subdomain": "yoga.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.yoga.metrics.*",
+    "commands_topic": "org.claytom.yoga.command.*"
+  },
+  {
+    "id": "subs31",
+    "name": "Pilates",
+    "slug": "pilates",
+    "subdomain": "pilates.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.pilates.metrics.*",
+    "commands_topic": "org.claytom.pilates.command.*"
+  },
+  {
+    "id": "subs32",
+    "name": "Mindfulness",
+    "slug": "mindfulness",
+    "subdomain": "mindfulness.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.mindfulness.metrics.*",
+    "commands_topic": "org.claytom.mindfulness.command.*"
+  },
+  {
+    "id": "subs33",
+    "name": "Transport",
+    "slug": "transport",
+    "subdomain": "transport.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.transport.metrics.*",
+    "commands_topic": "org.claytom.transport.command.*"
+  },
+  {
+    "id": "subs34",
+    "name": "Concierge",
+    "slug": "concierge",
+    "subdomain": "concierge.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.concierge.metrics.*",
+    "commands_topic": "org.claytom.concierge.command.*"
+  },
+  {
+    "id": "subs35",
+    "name": "Property Management",
+    "slug": "property-management",
+    "subdomain": "property-management.claytomsystems.com",
+    "min_headcount": 1500,
+    "target_headcount": 1500,
+    "status": "planned",
+    "goals": [
+      "Operational excellence",
+      "Autonomous learning loop (weekly)",
+      "Innovation landing >3/mo"
+    ],
+    "metrics_topic": "org.claytom.property-management.metrics.*",
+    "commands_topic": "org.claytom.property-management.command.*"
+  }
+]

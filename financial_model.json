@@ -1,0 +1,11 @@
+{
+  "horizon_years": 5,
+  "aggregate_value_billion_eur": 31.174,
+  "aggregate_cost_billion_eur": 4.498,
+  "aggregate_roi_pct": 593.1,
+  "assumptions": {
+    "pricing_power": "direct booking uplift 8-15%",
+    "automation_savings": "ops -35% cost/unit",
+    "innovation_landings": "\u22653 per month/subsidiary"
+  }
+}

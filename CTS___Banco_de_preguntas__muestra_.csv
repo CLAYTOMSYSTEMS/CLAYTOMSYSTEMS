@@ -1,0 +1,11 @@
+id,domain,question,answer_key,weight
+T001,backend,[backend] ¿Cuál es el procedimiento correcto ante un fallo SEV2 en producción?,"Mitigar en <2h, comunicar, postmortem 48h, acciones preventivas.",2
+T002,marketing,[marketing] ¿Cuál es el procedimiento correcto ante un fallo SEV2 en producción?,"Mitigar en <2h, comunicar, postmortem 48h, acciones preventivas.",2
+T003,local-guides,[local-guides] ¿Cuál es el procedimiento correcto ante un fallo SEV2 en producción?,"Mitigar en <2h, comunicar, postmortem 48h, acciones preventivas.",2
+T004,pricing,[pricing] ¿Cuál es el procedimiento correcto ante un fallo SEV2 en producción?,"Mitigar en <2h, comunicar, postmortem 48h, acciones preventivas.",2
+T005,cleaning,[cleaning] ¿Cuál es el procedimiento correcto ante un fallo SEV2 en producción?,"Mitigar en <2h, comunicar, postmortem 48h, acciones preventivas.",2
+T006,property-management,[property-management] ¿Cuál es el procedimiento correcto ante un fallo SEV2 en producción?,"Mitigar en <2h, comunicar, postmortem 48h, acciones preventivas.",2
+T007,checkin,[checkin] ¿Cuál es el procedimiento correcto ante un fallo SEV2 en producción?,"Mitigar en <2h, comunicar, postmortem 48h, acciones preventivas.",2
+T008,design,[design] ¿Cuál es el procedimiento correcto ante un fallo SEV2 en producción?,"Mitigar en <2h, comunicar, postmortem 48h, acciones preventivas.",2
+T009,pricing,[pricing] ¿Cuál es el procedimiento correcto ante un fallo SEV2 en producción?,"Mitigar en <2h, comunicar, postmortem 48h, acciones preventivas.",2
+T010,transport,[transport] ¿Cuál es el procedimiento correcto ante un fallo SEV2 en producción?,"Mitigar en <2h, comunicar, postmortem 48h, acciones preventivas.",2

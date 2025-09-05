@@ -1,0 +1,19 @@
+# NATS subject schema for ClayTom Systems
+# org.claytom.<domain>.<role>.<agentId>
+# Example: org.claytom.security.director.dom15-dir-01
+
+prefix: org.claytom
+domains: 35
+roles:
+  - Director (L4)
+  - Coordinator (L3)
+  - Specialist (L2)
+  - Innovator (L2)
+  - Global Empire Director (L4)
+  - Cross-Domain Coordinator (L4)
+  - Autonomous Learning Master (L5)
+  - Future Development Officer (L5)
+patterns:
+  domain_role: "org.claytom.<domain>.<role>.*"
+  any_in_domain: "org.claytom.<domain>.*.*"
+  executive_all: "org.claytom.corporate.*.*"
