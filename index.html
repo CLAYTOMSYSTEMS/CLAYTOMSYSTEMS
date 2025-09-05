@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ClayTomSystems — Autonomous Empire</title>
+  <style>
+    html,body{height:100%;margin:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;background:#0b1020;color:#eaf2ff;overflow:hidden}
+    #bg{position:fixed;inset:0;z-index:0}
+    .overlay{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;padding:24px;gap:16px}
+    .title{font-size:clamp(28px,6vw,56px);line-height:1.1;font-weight:800;letter-spacing:0.5px;background:linear-gradient(90deg,#b3e5ff,#81b1ff,#e0b3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .subtitle{opacity:.9;max-width:920px;font-size:clamp(14px,2.2vw,18px)}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:8px}
+    .btn{padding:12px 18px;border-radius:12px;border:1px solid #2a3b66;background:#111a33;color:#fff;cursor:pointer;transition:transform .08s ease,background .2s}
+    .btn.primary{background:#2d5bff;border-color:#2d5bff}
+    .btn:hover{transform:translateY(-1px)}
+    .status{position:fixed;bottom:12px;left:12px;font-size:12px;opacity:.7;z-index:20}
+    .panel{position:fixed;right:16px;bottom:16px;z-index:20;background:#0d1533cc;border:1px solid #233269;border-radius:14px;padding:12px;backdrop-filter:blur(6px);width:min(92vw,360px)}
+    .panel h3{margin:4px 0 10px 0;font-size:14px;letter-spacing:.4px;color:#bcd3ff}
+    .panel label{display:block;font-size:12px;margin-top:6px;opacity:.9}
+    .panel input,.panel select{width:100%;margin-top:6px;background:#0a1229;border:1px solid #1e2a52;color:#cfe2ff;border-radius:10px;padding:9px 10px;outline:none}
+    .panel button{margin-top:10px}
+    @media (max-width:600px){ .panel{right:8px;left:8px} }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <div class="overlay">
+    <div class="title">ClayTomSystems — Autonomous Empire</div>
+    <div class="subtitle">
+      1,110 chatbots coordinados por voz en tiempo real. Infraestructura auto-escalable con LiveKit + Realtime Bridge, 
+      Command Center y facturación automática.
+    </div>
+    <div class="cta">
+      <button class="btn primary" id="activate">⚡ Activar 10 Revenue Optimizers</button>
+      <button class="btn" id="scale">📈 Escalar Operaciones</button>
+      <button class="btn" id="train">🧠 Entrenar I+D</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>CEO Command Center (stub)</h3>
+    <label>Comando</label>
+    <select id="cmd">
+      <option value="activate">activate</option>
+      <option value="scale">scale</option>
+      <option value="train">train</option>
+      <option value="report">report</option>
+    </select>
+    <label>Target (role)</label>
+    <select id="target">
+      <option value="revenue_optimizer">revenue_optimizer</option>
+      <option value="operations_manager">operations_manager</option>
+      <option value="innovation_research">innovation_research</option>
+      <option value="autonomous_sales_manager">autonomous_sales_manager</option>
+    </select>
+    <label>Count</label>
+    <input id="count" type="number" min="1" step="1" value="10"/>
+    <button class="btn primary" id="send">Enviar</button>
+  </div>
+
+  <div class="status" id="status">Listo</div>
+
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script>
+    const canvas = document.getElementById('bg');
+    const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(65, 2, 0.1, 100);
+    camera.position.set(0,0,8);
+
+    const particles = 1500;
+    const geo = new THREE.BufferGeometry();
+    const positions = new Float32Array(particles * 3);
+    const speeds = new Float32Array(particles);
+    for (let i=0;i<particles;i++){
+      positions[i*3+0] = (Math.random()*2-1)*8;
+      positions[i*3+1] = (Math.random()*2-1)*4.5;
+      positions[i*3+2] = (Math.random()*2-1)*6;
+      speeds[i] = 0.002 + Math.random()*0.008;
+    }
+    geo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+    const mat = new THREE.PointsMaterial({ size: 0.03, color: 0x88ccff, transparent:true, opacity:0.9 });
+    const points = new THREE.Points(geo, mat);
+    scene.add(points);
+    const light = new THREE.AmbientLight(0x3366ff, 0.7);
+    scene.add(light);
+
+    function resize(){
+      const w = window.innerWidth, h = window.innerHeight;
+      renderer.setSize(w,h,false);
+      camera.aspect = w/h; camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', resize); resize();
+
+    let t = 0;
+    function animate(){
+      t += 0.005;
+      const pos = geo.attributes.position.array;
+      for (let i=0;i<particles;i++){
+        const s = speeds[i];
+        pos[i*3+0] += Math.sin(t+i*0.001)*s*0.1;
+        pos[i*3+1] += Math.cos(t*1.2+i*0.002)*s*0.08;
+        pos[i*3+2] += Math.sin(t*0.8+i*0.003)*s*0.06;
+      }
+      geo.attributes.position.needsUpdate = true;
+      renderer.render(scene,camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    const statusEl = document.getElementById('status');
+    function setStatus(s){ statusEl.textContent = s; }
+    async function postCommand(cmd, target, count){
+      setStatus('Enviando comando...');
+      try{
+        const gateway = (window.CLAY_GATEWAY || 'https://api.claytomsystems.com');
+        const r = await fetch(gateway + '/commands', {
+          method:'POST', headers:{'content-type':'application/json'},
+          body: JSON.stringify({ command: cmd, target, count })
+        });
+        const j = await r.json();
+        setStatus('OK: ' + JSON.stringify(j));
+      }catch(e){ setStatus('Error: ' + (e && e.message || e)); }
+    }
+    document.getElementById('activate').onclick = ()=>postCommand('activate','revenue_optimizer',10);
+    document.getElementById('scale').onclick    = ()=>postCommand('scale','operations_manager',5);
+    document.getElementById('train').onclick    = ()=>postCommand('train','innovation_research',20);
+    document.getElementById('send').onclick = ()=>{
+      const cmd = document.getElementById('cmd').value;
+      const target = document.getElementById('target').value;
+      const count = Number(document.getElementById('count').value || 1);
+      postCommand(cmd, target, count);
+    };
+  </script>
+</body>
+</html>

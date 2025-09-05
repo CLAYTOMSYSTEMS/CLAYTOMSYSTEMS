@@ -1,0 +1,401 @@
+id,role,name
+bot-0001,autonomous_sales_manager,Autonomous Sales Manager #01
+bot-0002,autonomous_sales_manager,Autonomous Sales Manager #02
+bot-0003,autonomous_sales_manager,Autonomous Sales Manager #03
+bot-0004,autonomous_sales_manager,Autonomous Sales Manager #04
+bot-0005,autonomous_sales_manager,Autonomous Sales Manager #05
+bot-0006,autonomous_sales_manager,Autonomous Sales Manager #06
+bot-0007,autonomous_sales_manager,Autonomous Sales Manager #07
+bot-0008,autonomous_sales_manager,Autonomous Sales Manager #08
+bot-0009,autonomous_sales_manager,Autonomous Sales Manager #09
+bot-0010,autonomous_sales_manager,Autonomous Sales Manager #10
+bot-0011,autonomous_sales_manager,Autonomous Sales Manager #11
+bot-0012,autonomous_sales_manager,Autonomous Sales Manager #12
+bot-0013,autonomous_sales_manager,Autonomous Sales Manager #13
+bot-0014,autonomous_sales_manager,Autonomous Sales Manager #14
+bot-0015,autonomous_sales_manager,Autonomous Sales Manager #15
+bot-0016,autonomous_sales_manager,Autonomous Sales Manager #16
+bot-0017,autonomous_sales_manager,Autonomous Sales Manager #17
+bot-0018,autonomous_sales_manager,Autonomous Sales Manager #18
+bot-0019,autonomous_sales_manager,Autonomous Sales Manager #19
+bot-0020,autonomous_sales_manager,Autonomous Sales Manager #20
+bot-0021,autonomous_sales_manager,Autonomous Sales Manager #21
+bot-0022,autonomous_sales_manager,Autonomous Sales Manager #22
+bot-0023,autonomous_sales_manager,Autonomous Sales Manager #23
+bot-0024,autonomous_sales_manager,Autonomous Sales Manager #24
+bot-0025,autonomous_sales_manager,Autonomous Sales Manager #25
+bot-0026,autonomous_sales_manager,Autonomous Sales Manager #26
+bot-0027,autonomous_sales_manager,Autonomous Sales Manager #27
+bot-0028,autonomous_sales_manager,Autonomous Sales Manager #28
+bot-0029,autonomous_sales_manager,Autonomous Sales Manager #29
+bot-0030,autonomous_sales_manager,Autonomous Sales Manager #30
+bot-0031,autonomous_sales_manager,Autonomous Sales Manager #31
+bot-0032,autonomous_sales_manager,Autonomous Sales Manager #32
+bot-0033,autonomous_sales_manager,Autonomous Sales Manager #33
+bot-0034,autonomous_sales_manager,Autonomous Sales Manager #34
+bot-0035,autonomous_sales_manager,Autonomous Sales Manager #35
+bot-0036,autonomous_sales_manager,Autonomous Sales Manager #36
+bot-0037,autonomous_sales_manager,Autonomous Sales Manager #37
+bot-0038,autonomous_sales_manager,Autonomous Sales Manager #38
+bot-0039,autonomous_sales_manager,Autonomous Sales Manager #39
+bot-0040,autonomous_sales_manager,Autonomous Sales Manager #40
+bot-0041,autonomous_sales_manager,Autonomous Sales Manager #41
+bot-0042,autonomous_sales_manager,Autonomous Sales Manager #42
+bot-0043,autonomous_sales_manager,Autonomous Sales Manager #43
+bot-0044,autonomous_sales_manager,Autonomous Sales Manager #44
+bot-0045,autonomous_sales_manager,Autonomous Sales Manager #45
+bot-0046,autonomous_sales_manager,Autonomous Sales Manager #46
+bot-0047,autonomous_sales_manager,Autonomous Sales Manager #47
+bot-0048,autonomous_sales_manager,Autonomous Sales Manager #48
+bot-0049,autonomous_sales_manager,Autonomous Sales Manager #49
+bot-0050,autonomous_sales_manager,Autonomous Sales Manager #50
+bot-0051,customer_service_chief,Customer Service Chief #01
+bot-0052,customer_service_chief,Customer Service Chief #02
+bot-0053,customer_service_chief,Customer Service Chief #03
+bot-0054,customer_service_chief,Customer Service Chief #04
+bot-0055,customer_service_chief,Customer Service Chief #05
+bot-0056,customer_service_chief,Customer Service Chief #06
+bot-0057,customer_service_chief,Customer Service Chief #07
+bot-0058,customer_service_chief,Customer Service Chief #08
+bot-0059,customer_service_chief,Customer Service Chief #09
+bot-0060,customer_service_chief,Customer Service Chief #10
+bot-0061,customer_service_chief,Customer Service Chief #11
+bot-0062,customer_service_chief,Customer Service Chief #12
+bot-0063,customer_service_chief,Customer Service Chief #13
+bot-0064,customer_service_chief,Customer Service Chief #14
+bot-0065,customer_service_chief,Customer Service Chief #15
+bot-0066,customer_service_chief,Customer Service Chief #16
+bot-0067,customer_service_chief,Customer Service Chief #17
+bot-0068,customer_service_chief,Customer Service Chief #18
+bot-0069,customer_service_chief,Customer Service Chief #19
+bot-0070,customer_service_chief,Customer Service Chief #20
+bot-0071,customer_service_chief,Customer Service Chief #21
+bot-0072,customer_service_chief,Customer Service Chief #22
+bot-0073,customer_service_chief,Customer Service Chief #23
+bot-0074,customer_service_chief,Customer Service Chief #24
+bot-0075,customer_service_chief,Customer Service Chief #25
+bot-0076,customer_service_chief,Customer Service Chief #26
+bot-0077,customer_service_chief,Customer Service Chief #27
+bot-0078,customer_service_chief,Customer Service Chief #28
+bot-0079,customer_service_chief,Customer Service Chief #29
+bot-0080,customer_service_chief,Customer Service Chief #30
+bot-0081,customer_service_chief,Customer Service Chief #31
+bot-0082,customer_service_chief,Customer Service Chief #32
+bot-0083,customer_service_chief,Customer Service Chief #33
+bot-0084,customer_service_chief,Customer Service Chief #34
+bot-0085,customer_service_chief,Customer Service Chief #35
+bot-0086,customer_service_chief,Customer Service Chief #36
+bot-0087,customer_service_chief,Customer Service Chief #37
+bot-0088,customer_service_chief,Customer Service Chief #38
+bot-0089,customer_service_chief,Customer Service Chief #39
+bot-0090,customer_service_chief,Customer Service Chief #40
+bot-0091,customer_service_chief,Customer Service Chief #41
+bot-0092,customer_service_chief,Customer Service Chief #42
+bot-0093,customer_service_chief,Customer Service Chief #43
+bot-0094,customer_service_chief,Customer Service Chief #44
+bot-0095,customer_service_chief,Customer Service Chief #45
+bot-0096,customer_service_chief,Customer Service Chief #46
+bot-0097,customer_service_chief,Customer Service Chief #47
+bot-0098,customer_service_chief,Customer Service Chief #48
+bot-0099,customer_service_chief,Customer Service Chief #49
+bot-0100,customer_service_chief,Customer Service Chief #50
+bot-0101,customer_service_chief,Customer Service Chief #51
+bot-0102,customer_service_chief,Customer Service Chief #52
+bot-0103,customer_service_chief,Customer Service Chief #53
+bot-0104,customer_service_chief,Customer Service Chief #54
+bot-0105,customer_service_chief,Customer Service Chief #55
+bot-0106,customer_service_chief,Customer Service Chief #56
+bot-0107,customer_service_chief,Customer Service Chief #57
+bot-0108,customer_service_chief,Customer Service Chief #58
+bot-0109,customer_service_chief,Customer Service Chief #59
+bot-0110,customer_service_chief,Customer Service Chief #60
+bot-0111,technical_support_leader,Technical Support Leader #01
+bot-0112,technical_support_leader,Technical Support Leader #02
+bot-0113,technical_support_leader,Technical Support Leader #03
+bot-0114,technical_support_leader,Technical Support Leader #04
+bot-0115,technical_support_leader,Technical Support Leader #05
+bot-0116,technical_support_leader,Technical Support Leader #06
+bot-0117,technical_support_leader,Technical Support Leader #07
+bot-0118,technical_support_leader,Technical Support Leader #08
+bot-0119,technical_support_leader,Technical Support Leader #09
+bot-0120,technical_support_leader,Technical Support Leader #10
+bot-0121,technical_support_leader,Technical Support Leader #11
+bot-0122,technical_support_leader,Technical Support Leader #12
+bot-0123,technical_support_leader,Technical Support Leader #13
+bot-0124,technical_support_leader,Technical Support Leader #14
+bot-0125,technical_support_leader,Technical Support Leader #15
+bot-0126,technical_support_leader,Technical Support Leader #16
+bot-0127,technical_support_leader,Technical Support Leader #17
+bot-0128,technical_support_leader,Technical Support Leader #18
+bot-0129,technical_support_leader,Technical Support Leader #19
+bot-0130,technical_support_leader,Technical Support Leader #20
+bot-0131,technical_support_leader,Technical Support Leader #21
+bot-0132,technical_support_leader,Technical Support Leader #22
+bot-0133,technical_support_leader,Technical Support Leader #23
+bot-0134,technical_support_leader,Technical Support Leader #24
+bot-0135,technical_support_leader,Technical Support Leader #25
+bot-0136,technical_support_leader,Technical Support Leader #26
+bot-0137,technical_support_leader,Technical Support Leader #27
+bot-0138,technical_support_leader,Technical Support Leader #28
+bot-0139,technical_support_leader,Technical Support Leader #29
+bot-0140,technical_support_leader,Technical Support Leader #30
+bot-0141,technical_support_leader,Technical Support Leader #31
+bot-0142,technical_support_leader,Technical Support Leader #32
+bot-0143,technical_support_leader,Technical Support Leader #33
+bot-0144,technical_support_leader,Technical Support Leader #34
+bot-0145,technical_support_leader,Technical Support Leader #35
+bot-0146,technical_support_leader,Technical Support Leader #36
+bot-0147,technical_support_leader,Technical Support Leader #37
+bot-0148,technical_support_leader,Technical Support Leader #38
+bot-0149,technical_support_leader,Technical Support Leader #39
+bot-0150,technical_support_leader,Technical Support Leader #40
+bot-0151,innovation_research,Innovation Research #01
+bot-0152,innovation_research,Innovation Research #02
+bot-0153,innovation_research,Innovation Research #03
+bot-0154,innovation_research,Innovation Research #04
+bot-0155,innovation_research,Innovation Research #05
+bot-0156,innovation_research,Innovation Research #06
+bot-0157,innovation_research,Innovation Research #07
+bot-0158,innovation_research,Innovation Research #08
+bot-0159,innovation_research,Innovation Research #09
+bot-0160,innovation_research,Innovation Research #10
+bot-0161,innovation_research,Innovation Research #11
+bot-0162,innovation_research,Innovation Research #12
+bot-0163,innovation_research,Innovation Research #13
+bot-0164,innovation_research,Innovation Research #14
+bot-0165,innovation_research,Innovation Research #15
+bot-0166,innovation_research,Innovation Research #16
+bot-0167,innovation_research,Innovation Research #17
+bot-0168,innovation_research,Innovation Research #18
+bot-0169,innovation_research,Innovation Research #19
+bot-0170,innovation_research,Innovation Research #20
+bot-0171,innovation_research,Innovation Research #21
+bot-0172,innovation_research,Innovation Research #22
+bot-0173,innovation_research,Innovation Research #23
+bot-0174,innovation_research,Innovation Research #24
+bot-0175,innovation_research,Innovation Research #25
+bot-0176,innovation_research,Innovation Research #26
+bot-0177,innovation_research,Innovation Research #27
+bot-0178,innovation_research,Innovation Research #28
+bot-0179,innovation_research,Innovation Research #29
+bot-0180,innovation_research,Innovation Research #30
+bot-0181,innovation_research,Innovation Research #31
+bot-0182,innovation_research,Innovation Research #32
+bot-0183,innovation_research,Innovation Research #33
+bot-0184,innovation_research,Innovation Research #34
+bot-0185,innovation_research,Innovation Research #35
+bot-0186,innovation_research,Innovation Research #36
+bot-0187,innovation_research,Innovation Research #37
+bot-0188,innovation_research,Innovation Research #38
+bot-0189,innovation_research,Innovation Research #39
+bot-0190,innovation_research,Innovation Research #40
+bot-0191,innovation_research,Innovation Research #41
+bot-0192,innovation_research,Innovation Research #42
+bot-0193,innovation_research,Innovation Research #43
+bot-0194,innovation_research,Innovation Research #44
+bot-0195,innovation_research,Innovation Research #45
+bot-0196,innovation_research,Innovation Research #46
+bot-0197,innovation_research,Innovation Research #47
+bot-0198,innovation_research,Innovation Research #48
+bot-0199,innovation_research,Innovation Research #49
+bot-0200,innovation_research,Innovation Research #50
+bot-0201,innovation_research,Innovation Research #51
+bot-0202,innovation_research,Innovation Research #52
+bot-0203,innovation_research,Innovation Research #53
+bot-0204,innovation_research,Innovation Research #54
+bot-0205,innovation_research,Innovation Research #55
+bot-0206,innovation_research,Innovation Research #56
+bot-0207,innovation_research,Innovation Research #57
+bot-0208,innovation_research,Innovation Research #58
+bot-0209,innovation_research,Innovation Research #59
+bot-0210,innovation_research,Innovation Research #60
+bot-0211,innovation_research,Innovation Research #61
+bot-0212,innovation_research,Innovation Research #62
+bot-0213,innovation_research,Innovation Research #63
+bot-0214,innovation_research,Innovation Research #64
+bot-0215,innovation_research,Innovation Research #65
+bot-0216,innovation_research,Innovation Research #66
+bot-0217,innovation_research,Innovation Research #67
+bot-0218,innovation_research,Innovation Research #68
+bot-0219,innovation_research,Innovation Research #69
+bot-0220,innovation_research,Innovation Research #70
+bot-0221,innovation_research,Innovation Research #71
+bot-0222,innovation_research,Innovation Research #72
+bot-0223,innovation_research,Innovation Research #73
+bot-0224,innovation_research,Innovation Research #74
+bot-0225,innovation_research,Innovation Research #75
+bot-0226,innovation_research,Innovation Research #76
+bot-0227,innovation_research,Innovation Research #77
+bot-0228,innovation_research,Innovation Research #78
+bot-0229,innovation_research,Innovation Research #79
+bot-0230,innovation_research,Innovation Research #80
+bot-0231,training_coordinator,Training Coordinator #01
+bot-0232,training_coordinator,Training Coordinator #02
+bot-0233,training_coordinator,Training Coordinator #03
+bot-0234,training_coordinator,Training Coordinator #04
+bot-0235,training_coordinator,Training Coordinator #05
+bot-0236,training_coordinator,Training Coordinator #06
+bot-0237,training_coordinator,Training Coordinator #07
+bot-0238,training_coordinator,Training Coordinator #08
+bot-0239,training_coordinator,Training Coordinator #09
+bot-0240,training_coordinator,Training Coordinator #10
+bot-0241,training_coordinator,Training Coordinator #11
+bot-0242,training_coordinator,Training Coordinator #12
+bot-0243,training_coordinator,Training Coordinator #13
+bot-0244,training_coordinator,Training Coordinator #14
+bot-0245,training_coordinator,Training Coordinator #15
+bot-0246,training_coordinator,Training Coordinator #16
+bot-0247,training_coordinator,Training Coordinator #17
+bot-0248,training_coordinator,Training Coordinator #18
+bot-0249,training_coordinator,Training Coordinator #19
+bot-0250,training_coordinator,Training Coordinator #20
+bot-0251,training_coordinator,Training Coordinator #21
+bot-0252,training_coordinator,Training Coordinator #22
+bot-0253,training_coordinator,Training Coordinator #23
+bot-0254,training_coordinator,Training Coordinator #24
+bot-0255,training_coordinator,Training Coordinator #25
+bot-0256,training_coordinator,Training Coordinator #26
+bot-0257,training_coordinator,Training Coordinator #27
+bot-0258,training_coordinator,Training Coordinator #28
+bot-0259,training_coordinator,Training Coordinator #29
+bot-0260,training_coordinator,Training Coordinator #30
+bot-0261,qa_chief,Qa Chief #01
+bot-0262,qa_chief,Qa Chief #02
+bot-0263,qa_chief,Qa Chief #03
+bot-0264,qa_chief,Qa Chief #04
+bot-0265,qa_chief,Qa Chief #05
+bot-0266,qa_chief,Qa Chief #06
+bot-0267,qa_chief,Qa Chief #07
+bot-0268,qa_chief,Qa Chief #08
+bot-0269,qa_chief,Qa Chief #09
+bot-0270,qa_chief,Qa Chief #10
+bot-0271,qa_chief,Qa Chief #11
+bot-0272,qa_chief,Qa Chief #12
+bot-0273,qa_chief,Qa Chief #13
+bot-0274,qa_chief,Qa Chief #14
+bot-0275,qa_chief,Qa Chief #15
+bot-0276,qa_chief,Qa Chief #16
+bot-0277,qa_chief,Qa Chief #17
+bot-0278,qa_chief,Qa Chief #18
+bot-0279,qa_chief,Qa Chief #19
+bot-0280,qa_chief,Qa Chief #20
+bot-0281,qa_chief,Qa Chief #21
+bot-0282,qa_chief,Qa Chief #22
+bot-0283,qa_chief,Qa Chief #23
+bot-0284,qa_chief,Qa Chief #24
+bot-0285,qa_chief,Qa Chief #25
+bot-0286,business_intelligence,Business Intelligence #01
+bot-0287,business_intelligence,Business Intelligence #02
+bot-0288,business_intelligence,Business Intelligence #03
+bot-0289,business_intelligence,Business Intelligence #04
+bot-0290,business_intelligence,Business Intelligence #05
+bot-0291,business_intelligence,Business Intelligence #06
+bot-0292,business_intelligence,Business Intelligence #07
+bot-0293,business_intelligence,Business Intelligence #08
+bot-0294,business_intelligence,Business Intelligence #09
+bot-0295,business_intelligence,Business Intelligence #10
+bot-0296,business_intelligence,Business Intelligence #11
+bot-0297,business_intelligence,Business Intelligence #12
+bot-0298,business_intelligence,Business Intelligence #13
+bot-0299,business_intelligence,Business Intelligence #14
+bot-0300,business_intelligence,Business Intelligence #15
+bot-0301,business_intelligence,Business Intelligence #16
+bot-0302,business_intelligence,Business Intelligence #17
+bot-0303,business_intelligence,Business Intelligence #18
+bot-0304,business_intelligence,Business Intelligence #19
+bot-0305,business_intelligence,Business Intelligence #20
+bot-0306,business_intelligence,Business Intelligence #21
+bot-0307,business_intelligence,Business Intelligence #22
+bot-0308,business_intelligence,Business Intelligence #23
+bot-0309,business_intelligence,Business Intelligence #24
+bot-0310,business_intelligence,Business Intelligence #25
+bot-0311,business_intelligence,Business Intelligence #26
+bot-0312,business_intelligence,Business Intelligence #27
+bot-0313,business_intelligence,Business Intelligence #28
+bot-0314,business_intelligence,Business Intelligence #29
+bot-0315,business_intelligence,Business Intelligence #30
+bot-0316,business_intelligence,Business Intelligence #31
+bot-0317,business_intelligence,Business Intelligence #32
+bot-0318,business_intelligence,Business Intelligence #33
+bot-0319,business_intelligence,Business Intelligence #34
+bot-0320,business_intelligence,Business Intelligence #35
+bot-0321,operations_manager,Operations Manager #01
+bot-0322,operations_manager,Operations Manager #02
+bot-0323,operations_manager,Operations Manager #03
+bot-0324,operations_manager,Operations Manager #04
+bot-0325,operations_manager,Operations Manager #05
+bot-0326,operations_manager,Operations Manager #06
+bot-0327,operations_manager,Operations Manager #07
+bot-0328,operations_manager,Operations Manager #08
+bot-0329,operations_manager,Operations Manager #09
+bot-0330,operations_manager,Operations Manager #10
+bot-0331,operations_manager,Operations Manager #11
+bot-0332,operations_manager,Operations Manager #12
+bot-0333,operations_manager,Operations Manager #13
+bot-0334,operations_manager,Operations Manager #14
+bot-0335,operations_manager,Operations Manager #15
+bot-0336,operations_manager,Operations Manager #16
+bot-0337,operations_manager,Operations Manager #17
+bot-0338,operations_manager,Operations Manager #18
+bot-0339,operations_manager,Operations Manager #19
+bot-0340,operations_manager,Operations Manager #20
+bot-0341,operations_manager,Operations Manager #21
+bot-0342,operations_manager,Operations Manager #22
+bot-0343,operations_manager,Operations Manager #23
+bot-0344,operations_manager,Operations Manager #24
+bot-0345,operations_manager,Operations Manager #25
+bot-0346,operations_manager,Operations Manager #26
+bot-0347,operations_manager,Operations Manager #27
+bot-0348,operations_manager,Operations Manager #28
+bot-0349,operations_manager,Operations Manager #29
+bot-0350,operations_manager,Operations Manager #30
+bot-0351,operations_manager,Operations Manager #31
+bot-0352,operations_manager,Operations Manager #32
+bot-0353,operations_manager,Operations Manager #33
+bot-0354,operations_manager,Operations Manager #34
+bot-0355,operations_manager,Operations Manager #35
+bot-0356,operations_manager,Operations Manager #36
+bot-0357,operations_manager,Operations Manager #37
+bot-0358,operations_manager,Operations Manager #38
+bot-0359,operations_manager,Operations Manager #39
+bot-0360,operations_manager,Operations Manager #40
+bot-0361,operations_manager,Operations Manager #41
+bot-0362,operations_manager,Operations Manager #42
+bot-0363,operations_manager,Operations Manager #43
+bot-0364,operations_manager,Operations Manager #44
+bot-0365,operations_manager,Operations Manager #45
+bot-0366,revenue_optimizer,Revenue Optimizer #01
+bot-0367,revenue_optimizer,Revenue Optimizer #02
+bot-0368,revenue_optimizer,Revenue Optimizer #03
+bot-0369,revenue_optimizer,Revenue Optimizer #04
+bot-0370,revenue_optimizer,Revenue Optimizer #05
+bot-0371,revenue_optimizer,Revenue Optimizer #06
+bot-0372,revenue_optimizer,Revenue Optimizer #07
+bot-0373,revenue_optimizer,Revenue Optimizer #08
+bot-0374,revenue_optimizer,Revenue Optimizer #09
+bot-0375,revenue_optimizer,Revenue Optimizer #10
+bot-0376,revenue_optimizer,Revenue Optimizer #11
+bot-0377,revenue_optimizer,Revenue Optimizer #12
+bot-0378,revenue_optimizer,Revenue Optimizer #13
+bot-0379,revenue_optimizer,Revenue Optimizer #14
+bot-0380,revenue_optimizer,Revenue Optimizer #15
+bot-0381,revenue_optimizer,Revenue Optimizer #16
+bot-0382,revenue_optimizer,Revenue Optimizer #17
+bot-0383,revenue_optimizer,Revenue Optimizer #18
+bot-0384,revenue_optimizer,Revenue Optimizer #19
+bot-0385,revenue_optimizer,Revenue Optimizer #20
+bot-0386,revenue_optimizer,Revenue Optimizer #21
+bot-0387,revenue_optimizer,Revenue Optimizer #22
+bot-0388,revenue_optimizer,Revenue Optimizer #23
+bot-0389,revenue_optimizer,Revenue Optimizer #24
+bot-0390,revenue_optimizer,Revenue Optimizer #25
+bot-0391,revenue_optimizer,Revenue Optimizer #26
+bot-0392,revenue_optimizer,Revenue Optimizer #27
+bot-0393,revenue_optimizer,Revenue Optimizer #28
+bot-0394,revenue_optimizer,Revenue Optimizer #29
+bot-0395,revenue_optimizer,Revenue Optimizer #30
+bot-0396,revenue_optimizer,Revenue Optimizer #31
+bot-0397,revenue_optimizer,Revenue Optimizer #32
+bot-0398,revenue_optimizer,Revenue Optimizer #33
+bot-0399,revenue_optimizer,Revenue Optimizer #34
+bot-0400,revenue_optimizer,Revenue Optimizer #35
