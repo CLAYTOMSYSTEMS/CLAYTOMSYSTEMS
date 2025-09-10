@@ -1,0 +1,20 @@
+{
+  "project_name": "ClayTomSystems",
+  "agent_role": "CODE - Soldier Engineer",
+  "mode": "STRICT",
+  "improvise": false,
+  "hooks": {
+    "PostToolUse": "cts-auto-save",
+    "PostEdit": "cts-workflow-update"
+  },
+  "status_line": {
+    "format": "CODE — Soldier ClayTomSystems | PROJECT={project} | STRICT=1 | NO_IMPROVISE=1",
+    "show_branch": true,
+    "show_changes": true
+  },
+  "workflow": {
+    "require_sop": true,
+    "require_closure_report": true,
+    "auto_backup": true
+  }
+}
