@@ -1,0 +1,23 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ClayTomSystems — Molecular</title>
+<style>html,body,#scene{height:100%;margin:0;background:#020617;color:#e2e8f0;font-family:system-ui}
+.hud{position:fixed;top:20px;left:20px;background:rgba(2,6,23,.6);padding:12px 16px;border-radius:12px;border:1px solid #0ea5e9}
+.btn{background:#0ea5e9;color:#00111a;border:none;padding:10px 14px;border-radius:10px;cursor:pointer}</style></head>
+<body><div id="scene"></div><div class="hud"><div><strong>ClayTomSystems — Command Center</strong></div>
+<button class="btn" onclick="sendCommand('bot.activate',{count:50})">/activate 50</button>
+<button class="btn" onclick="sendCommand('bot.scale',{count:100})">/scale 100</button>
+<button class="btn" onclick="sendCommand('bot.train',{count:25})">/train 25</button>
+<span id="status"></span></div>
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+const container = document.getElementById('scene'); const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ antialias:true }); renderer.setSize(window.innerWidth, window.innerHeight); container.appendChild(renderer.domElement);
+const geometry = new THREE.BufferGeometry(); const count = 1800; const positions = new Float32Array(count*3);
+for(let i=0;i<count*3;i++){ positions[i]=(Math.random()-0.5)*400; } geometry.setAttribute('position', new THREE.BufferAttribute(positions,3));
+const material = new THREE.PointsMaterial({ color:0x0ea5e9, size:1 }); const points = new THREE.Points(geometry, material);
+scene.add(points); camera.position.z = 160; function animate(){ requestAnimationFrame(animate); points.rotation.y += 0.0008; renderer.render(scene,camera); } animate();
+async function sendCommand(type,payload){ const status=document.getElementById('status');
+  try{ const r=await fetch('/api/commands',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type,payload})});
+       const j=await r.json(); status.textContent=' OK '; console.log(j);}catch(e){ status.textContent=' ERROR '; console.error(e);}}
+</script></body></html>

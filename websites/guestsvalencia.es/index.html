@@ -1,0 +1,6 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Guests Valencia — PWA</title><link rel="manifest" href="/manifest.json"/><meta name="theme-color" content="#0ea5e9"/>
+<style>body{font-family:system-ui;margin:0;padding:24px;background:#0b1220;color:#e2e8f0}</style></head>
+<body><h1>Sandra IA — Guests Valencia (PWA)</h1><p>Micrófono 3-en-1 listo. HTTPS requerido.</p><button id="talk">Hablar / Detener</button>
+<script>document.getElementById('talk').onclick=()=>alert('Conecta el hook 3-en-1 aquí (WS + VAD + Avatar).');
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('/sw.js'); }</script></body></html>

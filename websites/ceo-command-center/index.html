@@ -1,0 +1,16 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CEO Command Center</title>
+<style>body{margin:0;background:#0b1220;color:#e2e8f0;font-family:system-ui}
+header{padding:16px;background:#020617;border-bottom:1px solid #0ea5e9}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:16px}
+.card{border:1px solid #0ea5e9;border-radius:12px;padding:16px;background:#0a1528}.btn{background:#0ea5e9;color:#00111a;border:none;padding:10px 14px;border-radius:10px;cursor:pointer}</style></head>
+<body><header><strong>ClayTomSystems — CEO Center</strong></header>
+<div class="grid"><div class="card"><h3>Estado Orchestrator</h3><pre id="log" style="height:220px;overflow:auto"></pre></div>
+<div class="card"><h3>Comandos</h3><button class="btn" onclick="cmd('bot.activate',{count:10})">Activar 10</button>
+<button class="btn" onclick="cmd('bot.scale',{count:50})">Escalar 50</button><button class="btn" onclick="cmd('bot.train',{count:20})">Entrenar 20</button></div>
+<div class="card"><h3>Métrica Rápida</h3><div id="metrics">...</div></div></div>
+<script>
+const log=document.getElementById('log'); function append(s){ log.textContent+=s+"\n"; log.scrollTop=log.scrollHeight; }
+const ws = new WebSocket((location.protocol==='https:'?'wss':'ws')+'://'+location.host.replace('ceo.','api.')+'/ws'); ws.onmessage=(e)=>append(e.data);
+async function cmd(type,payload){ await fetch((location.protocol+'//'+location.host.replace('ceo.','api.'))+'/commands',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({type,payload})}); }
+</script></body></html>
