@@ -270,10 +270,10 @@
             return points;
         };
 
-        // Create smooth blue points system - NO TEMBLORES
-        particleSystems.push(createSmoothPointSystem(2000, 0x0ea5e9, 1.5, 0.0008)); // Main blue layer
-        particleSystems.push(createSmoothPointSystem(1000, 0x0284c7, 2, 0.0005)); // Darker blue layer
-        particleSystems.push(createSmoothPointSystem(500, 0x0369a1, 1, 0.001)); // Deep blue layer
+        // Create smooth blue points system - ULTRA SLOW AND SMOOTH
+        particleSystems.push(createSmoothPointSystem(2000, 0x0ea5e9, 1.5, 0.0002)); // Main blue layer - MUCH SLOWER
+        particleSystems.push(createSmoothPointSystem(1000, 0x0284c7, 2, 0.0001)); // Darker blue layer - ULTRA SLOW
+        particleSystems.push(createSmoothPointSystem(500, 0x0369a1, 1, 0.0003)); // Deep blue layer - SLOWER
 
         particleSystems.forEach(system => scene.add(system));
 
@@ -284,13 +284,13 @@
             requestAnimationFrame(animate);
             
             particleSystems.forEach((system, index) => {
-                // Very smooth rotation - NO TEMBLORES
+                // ULTRA SLOW smooth rotation - MUCH MORE GENTLE
                 system.rotation.y += system.userData.speed;
-                system.rotation.x += system.userData.speed * 0.5;
+                system.rotation.x += system.userData.speed * 0.3;
                 
-                // Very gentle opacity pulsing
-                const time = Date.now() * 0.001;
-                system.material.opacity = 0.7 + Math.sin(time + index) * 0.1;
+                // ULTRA gentle opacity pulsing - SUPER SLOW
+                const time = Date.now() * 0.0003; // Much slower time multiplier
+                system.material.opacity = 0.75 + Math.sin(time + index) * 0.05; // Smaller variation
             });
             
             renderer.render(scene, camera);
