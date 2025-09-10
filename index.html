@@ -289,6 +289,35 @@
         .sandra-input button:hover {
             background: linear-gradient(135deg, #059669 0%, #047857 100%);
         }
+        
+        .sandra-mic-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-left: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sandra-mic-btn:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        }
+        
+        .sandra-mic-btn.recording {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            animation: pulse-mic 1.5s infinite;
+        }
+        
+        @keyframes pulse-mic {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
 
         @media (max-width: 768px) {
             .hud {
@@ -398,6 +427,7 @@
             <div class="sandra-input">
                 <input type="text" id="sandraInput" placeholder="Pregúntame sobre ClayTomSystems..." onkeypress="handleSandraKeyPress(event)">
                 <button onclick="sendSandraMessage()">Enviar</button>
+                <button class="sandra-mic-btn" id="sandraMicBtn" onclick="toggleSandraVoice()" title="Hablar con Sandra">🎤</button>
             </div>
         </div>
     </div>
@@ -536,6 +566,8 @@
 
         // SANDRA MICRO CONVERSACIONAL FUNCTIONALITY - SIN APIS EXTERNAS
         let sandraOpen = false;
+        let sandraRecognition = null;
+        let sandraListening = false;
         
         function toggleSandraChat() {
             const modal = document.getElementById('sandraModal');
@@ -603,6 +635,72 @@
             return responses[Math.floor(Math.random() * responses.length)];
         }
         
+        // SANDRA VOICE RECOGNITION FUNCTIONALITY
+        function initSandraVoice() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                sandraRecognition = new SpeechRecognition();
+                sandraRecognition.lang = 'es-ES';
+                sandraRecognition.continuous = false;
+                sandraRecognition.interimResults = false;
+
+                sandraRecognition.onstart = function() {
+                    sandraListening = true;
+                    const micBtn = document.getElementById('sandraMicBtn');
+                    micBtn.classList.add('recording');
+                    micBtn.textContent = '🔴';
+                    micBtn.title = 'Escuchando... Haz clic para parar';
+                };
+
+                sandraRecognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    const input = document.getElementById('sandraInput');
+                    input.value = transcript;
+                    
+                    // Auto-send the voice message
+                    sendSandraMessage();
+                };
+
+                sandraRecognition.onend = function() {
+                    sandraListening = false;
+                    const micBtn = document.getElementById('sandraMicBtn');
+                    micBtn.classList.remove('recording');
+                    micBtn.textContent = '🎤';
+                    micBtn.title = 'Hablar con Sandra';
+                };
+
+                sandraRecognition.onerror = function(event) {
+                    console.log('Error de reconocimiento de voz:', event.error);
+                    sandraListening = false;
+                    const micBtn = document.getElementById('sandraMicBtn');
+                    micBtn.classList.remove('recording');
+                    micBtn.textContent = '🎤';
+                    micBtn.title = 'Hablar con Sandra';
+                };
+            }
+        }
+
+        function toggleSandraVoice() {
+            if (!sandraRecognition) {
+                initSandraVoice();
+            }
+
+            if (sandraListening) {
+                sandraRecognition.stop();
+            } else {
+                if (sandraRecognition) {
+                    sandraRecognition.start();
+                } else {
+                    alert('Tu navegador no soporta reconocimiento de voz. Usa Chrome, Edge o Safari.');
+                }
+            }
+        }
+
+        // Initialize voice recognition on page load
+        window.addEventListener('load', function() {
+            initSandraVoice();
+        });
+
         // Close modal when clicking outside
         document.getElementById('sandraModal').addEventListener('click', function(event) {
             if (event.target === this) {
