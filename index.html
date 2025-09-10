@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>ClayTomSystems — Molecular Enterprise Command Center</title>
+    <title>ClayTomSystems — Centro de Comando Empresarial Molecular</title>
     <style>
         html, body, #scene {
             height: 100%;
@@ -324,56 +324,56 @@
 <body>
     <div id="scene"></div>
     
-    <!-- HUD Command Center -->
+    <!-- HUD Centro de Comando -->
     <div class="hud">
-        <strong>ClayTomSystems — Enterprise Command Center</strong>
-        <div class="subtitle">Molecular Infrastructure Management</div>
+        <strong>ClayTomSystems — Centro de Comando Empresarial</strong>
+        <div class="subtitle">Gestión de Infraestructura Molecular</div>
         
         <div>
-            <button class="btn" onclick="sendCommand('system.activate', {agents: 50})">🚀 Activate 50 Agents</button>
-            <button class="btn" onclick="sendCommand('system.scale', {nodes: 100})">⚡ Scale 100 Nodes</button>
-            <button class="btn" onclick="sendCommand('ai.train', {models: 25})">🧠 Train 25 Models</button>
+            <button class="btn" onclick="sendCommand('system.activate', {agents: 50})">🚀 Activar 50 Agentes</button>
+            <button class="btn" onclick="sendCommand('system.scale', {nodes: 100})">⚡ Escalar 100 Nodos</button>
+            <button class="btn" onclick="sendCommand('ai.train', {models: 25})">🧠 Entrenar 25 Modelos</button>
         </div>
         
         <div style="margin-top: 12px;">
-            <button class="btn" onclick="sendCommand('deploy.production', {services: 'all'})">🌐 Deploy Production</button>
-            <button class="btn" onclick="sendCommand('security.scan', {depth: 'full'})">🛡️ Security Scan</button>
-            <button class="btn" onclick="sendCommand('optimize.performance', {target: 'global'})">⚙️ Optimize</button>
+            <button class="btn" onclick="sendCommand('deploy.production', {services: 'all'})">🌐 Desplegar Producción</button>
+            <button class="btn" onclick="sendCommand('security.scan', {depth: 'full'})">🛡️ Escaneo Seguridad</button>
+            <button class="btn" onclick="sendCommand('optimize.performance', {target: 'global'})">⚙️ Optimizar</button>
         </div>
         
-        <span id="status">READY</span>
+        <span id="status">LISTO</span>
     </div>
     
-    <!-- Real-time Metrics -->
+    <!-- Métricas en Tiempo Real -->
     <div class="metrics">
-        <h4 style="margin: 0 0 12px 0; color: #ef4444; font-size: 14px;">⚡ Live Metrics</h4>
+        <h4 style="margin: 0 0 12px 0; color: #ef4444; font-size: 14px;">⚡ Métricas en Vivo</h4>
         <div class="metric">
-            <span>Active Agents:</span>
+            <span>Agentes Activos:</span>
             <span class="metric-value" id="agents">1,247</span>
         </div>
         <div class="metric">
-            <span>Processing Power:</span>
+            <span>Poder de Procesamiento:</span>
             <span class="metric-value" id="power">89.4%</span>
         </div>
         <div class="metric">
-            <span>Network Load:</span>
+            <span>Carga de Red:</span>
             <span class="metric-value" id="network">67.2%</span>
         </div>
         <div class="metric">
-            <span>Security Status:</span>
-            <span class="metric-value" id="security">SECURED</span>
+            <span>Estado de Seguridad:</span>
+            <span class="metric-value" id="security">PROTEGIDO</span>
         </div>
     </div>
     
-    <!-- Company Information -->
+    <!-- Información Corporativa -->
     <div class="company-info">
         <h3>🏢 ClayTomSystems Corp</h3>
         <p><strong>CEO:</strong> Clay Thomas</p>
-        <p><strong>Focus:</strong> AI Infrastructure & Automation</p>
-        <p><strong>Services:</strong> Enterprise AI Solutions</p>
+        <p><strong>Enfoque:</strong> Infraestructura IA y Automatización</p>
+        <p><strong>Servicios:</strong> Soluciones IA Empresariales</p>
         <p><strong>Email:</strong> info@claytomsystems.com</p>
         <p style="margin-top: 15px; font-size: 11px; opacity: 0.6;">
-            Molecular design by GPT-5 ⚡
+            Diseño molecular por GPT-5 ⚡
         </p>
     </div>
 
@@ -387,8 +387,8 @@
         <div class="sandra-container">
             <div class="sandra-header">
                 <button class="sandra-close" onclick="toggleSandraChat()">×</button>
-                <h3>Sandra IA 7.0 Assistant</h3>
-                <p>ClayTomSystems Enterprise AI</p>
+                <h3>Sandra IA 7.0 Asistente</h3>
+                <p>Inteligencia Artificial Empresarial ClayTomSystems</p>
             </div>
             <div class="sandra-messages" id="sandraMessages">
                 <div class="sandra-message ai-message">
@@ -416,13 +416,28 @@
         // Create multiple particle systems for molecular effect
         const particleSystems = [];
         
-        // Main molecular structure
+        // Main molecular structure with organic shapes
         const createParticleSystem = (count, color, size, speed) => {
             const geometry = new THREE.BufferGeometry();
             const positions = new Float32Array(count * 3);
             
-            for (let i = 0; i < count * 3; i++) {
-                positions[i] = (Math.random() - 0.5) * 400;
+            // Generate organic, spherical distribution instead of cubic
+            for (let i = 0; i < count; i++) {
+                const index = i * 3;
+                
+                // Create spherical/organic distribution with noise
+                const radius = Math.random() * 200 + 50;
+                const theta = Math.random() * Math.PI * 2; // 0 to 2π
+                const phi = Math.acos(2 * Math.random() - 1); // 0 to π
+                
+                // Add organic distortion with multiple sine waves
+                const distortion = Math.sin(theta * 3) * Math.cos(phi * 2) * 30;
+                const finalRadius = radius + distortion;
+                
+                // Convert spherical to cartesian coordinates
+                positions[index] = finalRadius * Math.sin(phi) * Math.cos(theta);
+                positions[index + 1] = finalRadius * Math.sin(phi) * Math.sin(theta);
+                positions[index + 2] = finalRadius * Math.cos(phi);
             }
             
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -466,7 +481,7 @@
         // Command system with enhanced feedback
         async function sendCommand(type, payload) {
             const status = document.getElementById('status');
-            status.textContent = 'PROCESSING...';
+            status.textContent = 'PROCESANDO...';
             status.style.background = 'rgba(239, 68, 68, 0.2)';
             status.style.color = '#ef4444';
             
@@ -474,7 +489,7 @@
                 // Simulate API call
                 await new Promise(resolve => setTimeout(resolve, 800));
                 
-                status.textContent = 'SUCCESS';
+                status.textContent = 'ÉXITO';
                 status.style.background = 'rgba(34, 197, 94, 0.2)';
                 status.style.color = '#22c55e';
                 
@@ -485,7 +500,7 @@
                 
                 // Reset status after delay
                 setTimeout(() => {
-                    status.textContent = 'READY';
+                    status.textContent = 'LISTO';
                 }, 2000);
                 
             } catch (error) {
@@ -502,7 +517,7 @@
             document.getElementById('power').textContent = (Math.random() * 20 + 75).toFixed(1) + '%';
             document.getElementById('network').textContent = (Math.random() * 30 + 50).toFixed(1) + '%';
             
-            const securityStates = ['SECURED', 'SCANNING', 'OPTIMIZED'];
+            const securityStates = ['PROTEGIDO', 'ESCANEANDO', 'OPTIMIZADO'];
             document.getElementById('security').textContent = securityStates[Math.floor(Math.random() * securityStates.length)];
         }
 
