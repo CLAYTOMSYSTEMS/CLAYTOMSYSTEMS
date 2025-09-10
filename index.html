@@ -314,6 +314,15 @@
             animation: pulse-mic 1.5s infinite;
         }
         
+        .sandra-mic-btn.voice-mode {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            border: 2px solid #a855f7;
+        }
+        
+        .sandra-mic-btn.voice-mode:hover {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+        }
+        
         @keyframes pulse-mic {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -427,7 +436,7 @@
             <div class="sandra-input">
                 <input type="text" id="sandraInput" placeholder="Pregúntame sobre ClayTomSystems..." onkeypress="handleSandraKeyPress(event)">
                 <button onclick="sendSandraMessage()">Enviar</button>
-                <button class="sandra-mic-btn" id="sandraMicBtn" onclick="toggleSandraVoice()" title="Hablar con Sandra">🎤</button>
+                <button class="sandra-mic-btn" id="sandraMicBtn" onclick="toggleSandraVoice()" title="Conversación por voz con Sandra">🎤</button>
             </div>
         </div>
     </div>
@@ -568,6 +577,9 @@
         let sandraOpen = false;
         let sandraRecognition = null;
         let sandraListening = false;
+        let sandraSpeechSynthesis = null;
+        let sandraVoiceMode = false;
+        let sandraInterrupted = false;
         
         function toggleSandraChat() {
             const modal = document.getElementById('sandraModal');
@@ -583,7 +595,7 @@
             }
         }
         
-        function sendSandraMessage() {
+        function sendSandraMessage(fromVoice = false) {
             const input = document.getElementById('sandraInput');
             const messagesContainer = document.getElementById('sandraMessages');
             const message = input.value.trim();
@@ -601,10 +613,16 @@
             
             // Simulate Sandra IA 7.0 response - SIN APIS EXTERNAS
             setTimeout(() => {
+                const response = generateSandraResponse(message);
                 const aiMessage = document.createElement('div');
                 aiMessage.className = 'sandra-message ai-message';
-                aiMessage.textContent = generateSandraResponse(message);
+                aiMessage.textContent = response;
                 messagesContainer.appendChild(aiMessage);
+                
+                // If in voice mode, speak the response
+                if (sandraVoiceMode || fromVoice) {
+                    speakSandraResponse(response);
+                }
                 
                 // Scroll to bottom
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -635,48 +653,89 @@
             return responses[Math.floor(Math.random() * responses.length)];
         }
         
-        // SANDRA VOICE RECOGNITION FUNCTIONALITY
+        // SANDRA VOICE RECOGNITION & SYNTHESIS FUNCTIONALITY
         function initSandraVoice() {
+            // Initialize Speech Recognition
             if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
                 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
                 sandraRecognition = new SpeechRecognition();
                 sandraRecognition.lang = 'es-ES';
-                sandraRecognition.continuous = false;
-                sandraRecognition.interimResults = false;
+                sandraRecognition.continuous = true;  // Keep listening
+                sandraRecognition.interimResults = true;
 
                 sandraRecognition.onstart = function() {
                     sandraListening = true;
-                    const micBtn = document.getElementById('sandraMicBtn');
-                    micBtn.classList.add('recording');
-                    micBtn.textContent = '🔴';
-                    micBtn.title = 'Escuchando... Haz clic para parar';
+                    updateMicrophoneState();
                 };
 
                 sandraRecognition.onresult = function(event) {
-                    const transcript = event.results[0][0].transcript;
-                    const input = document.getElementById('sandraInput');
-                    input.value = transcript;
-                    
-                    // Auto-send the voice message
-                    sendSandraMessage();
+                    const lastResult = event.results[event.results.length - 1];
+                    if (lastResult.isFinal) {
+                        const transcript = lastResult[0].transcript.trim();
+                        if (transcript) {
+                            // Stop Sandra if she's speaking (barge-in)
+                            if (sandraSpeechSynthesis && sandraSpeechSynthesis.speaking) {
+                                sandraSpeechSynthesis.cancel();
+                                sandraInterrupted = true;
+                            }
+                            
+                            const input = document.getElementById('sandraInput');
+                            input.value = transcript;
+                            sendSandraMessage(true);
+                        }
+                    }
                 };
 
                 sandraRecognition.onend = function() {
-                    sandraListening = false;
-                    const micBtn = document.getElementById('sandraMicBtn');
-                    micBtn.classList.remove('recording');
-                    micBtn.textContent = '🎤';
-                    micBtn.title = 'Hablar con Sandra';
+                    // Auto-restart if in voice mode
+                    if (sandraVoiceMode && !sandraInterrupted) {
+                        setTimeout(() => {
+                            if (sandraVoiceMode) {
+                                sandraRecognition.start();
+                            }
+                        }, 100);
+                    } else {
+                        sandraListening = false;
+                        updateMicrophoneState();
+                    }
+                    sandraInterrupted = false;
                 };
 
                 sandraRecognition.onerror = function(event) {
                     console.log('Error de reconocimiento de voz:', event.error);
-                    sandraListening = false;
-                    const micBtn = document.getElementById('sandraMicBtn');
-                    micBtn.classList.remove('recording');
-                    micBtn.textContent = '🎤';
-                    micBtn.title = 'Hablar con Sandra';
+                    if (event.error === 'no-speech' && sandraVoiceMode) {
+                        // Restart if no speech detected but still in voice mode
+                        setTimeout(() => {
+                            if (sandraVoiceMode) {
+                                sandraRecognition.start();
+                            }
+                        }, 1000);
+                    }
                 };
+            }
+
+            // Initialize Speech Synthesis
+            if ('speechSynthesis' in window) {
+                sandraSpeechSynthesis = window.speechSynthesis;
+            }
+        }
+
+        function updateMicrophoneState() {
+            const micBtn = document.getElementById('sandraMicBtn');
+            
+            if (sandraVoiceMode) {
+                micBtn.classList.add('voice-mode');
+                micBtn.classList.remove('recording');
+                micBtn.textContent = '🗣️';
+                micBtn.title = 'Modo conversacional activo - Clic para desactivar';
+                
+                if (sandraListening) {
+                    micBtn.classList.add('recording');
+                }
+            } else {
+                micBtn.classList.remove('voice-mode', 'recording');
+                micBtn.textContent = '🎤';
+                micBtn.title = 'Conversación por voz con Sandra';
             }
         }
 
@@ -685,14 +744,62 @@
                 initSandraVoice();
             }
 
-            if (sandraListening) {
-                sandraRecognition.stop();
+            if (sandraVoiceMode) {
+                // Stop voice mode
+                sandraVoiceMode = false;
+                if (sandraRecognition) {
+                    sandraRecognition.stop();
+                }
+                if (sandraSpeechSynthesis && sandraSpeechSynthesis.speaking) {
+                    sandraSpeechSynthesis.cancel();
+                }
             } else {
+                // Start voice mode
+                sandraVoiceMode = true;
                 if (sandraRecognition) {
                     sandraRecognition.start();
                 } else {
                     alert('Tu navegador no soporta reconocimiento de voz. Usa Chrome, Edge o Safari.');
+                    sandraVoiceMode = false;
                 }
+            }
+            
+            updateMicrophoneState();
+        }
+
+        function speakSandraResponse(text) {
+            if (sandraSpeechSynthesis) {
+                // Cancel any ongoing speech
+                sandraSpeechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'es-ES';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.1;
+                utterance.volume = 0.8;
+
+                // Find a Spanish female voice if available
+                const voices = sandraSpeechSynthesis.getVoices();
+                const spanishVoice = voices.find(voice => 
+                    voice.lang.startsWith('es') && voice.name.toLowerCase().includes('female')
+                ) || voices.find(voice => voice.lang.startsWith('es'));
+                
+                if (spanishVoice) {
+                    utterance.voice = spanishVoice;
+                }
+
+                utterance.onend = function() {
+                    // After Sandra finishes speaking, restart listening if in voice mode
+                    if (sandraVoiceMode && sandraRecognition) {
+                        setTimeout(() => {
+                            if (sandraVoiceMode && !sandraListening) {
+                                sandraRecognition.start();
+                            }
+                        }, 500);
+                    }
+                };
+
+                sandraSpeechSynthesis.speak(utterance);
             }
         }
 
