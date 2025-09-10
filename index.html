@@ -124,210 +124,6 @@
             font-weight: 600;
         }
         
-        /* SANDRA MICRO CONVERSACIONAL STYLES */
-        .sandra-micro {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
-            transition: all 0.3s ease;
-            z-index: 1001;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .sandra-micro:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.6);
-        }
-        
-        .sandra-icon {
-            font-size: 24px;
-            color: white;
-        }
-        
-        .sandra-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(2, 6, 23, 0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            backdrop-filter: blur(10px);
-        }
-        
-        .sandra-container {
-            background: rgba(2, 6, 23, 0.95);
-            color: #e2e8f0;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(14, 165, 233, 0.3);
-            border: 1px solid #0ea5e9;
-        }
-        
-        .sandra-header {
-            background: linear-gradient(135deg, #0ea5e9, #0284c7);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .sandra-header h3 {
-            margin: 0 0 5px 0;
-            font-size: 18px;
-            font-weight: 600;
-        }
-        
-        .sandra-header p {
-            margin: 0;
-            font-size: 12px;
-            opacity: 0.9;
-        }
-        
-        .sandra-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.3s ease;
-        }
-        
-        .sandra-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .sandra-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            min-height: 300px;
-            max-height: 400px;
-        }
-        
-        .sandra-message {
-            margin-bottom: 15px;
-            padding: 12px 16px;
-            border-radius: 18px;
-            max-width: 80%;
-        }
-        
-        .sandra-message.user-message {
-            background: rgba(14, 165, 233, 0.2);
-            color: #0ea5e9;
-            margin-left: auto;
-            text-align: right;
-            border: 1px solid rgba(14, 165, 233, 0.3);
-        }
-        
-        .sandra-message.ai-message {
-            background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
-            margin-right: auto;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-        
-        .sandra-input {
-            display: flex;
-            padding: 20px;
-            gap: 10px;
-            border-top: 1px solid rgba(14, 165, 233, 0.3);
-        }
-        
-        .sandra-input input {
-            flex: 1;
-            padding: 12px 16px;
-            border: 2px solid rgba(14, 165, 233, 0.3);
-            border-radius: 25px;
-            outline: none;
-            font-size: 14px;
-            background: rgba(2, 6, 23, 0.5);
-            color: #e2e8f0;
-        }
-        
-        .sandra-input input:focus {
-            border-color: #0ea5e9;
-        }
-        
-        .sandra-input button {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .sandra-input button:hover {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-        }
-        
-        .sandra-mic-btn {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            color: white;
-            border: none;
-            padding: 12px 16px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-left: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .sandra-mic-btn:hover {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-        }
-        
-        .sandra-mic-btn.recording {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            animation: pulse-mic 1.5s infinite;
-        }
-        
-        .sandra-mic-btn.voice-mode {
-            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-            border: 2px solid #a855f7;
-        }
-        
-        .sandra-mic-btn.voice-mode:hover {
-            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-        }
-        
-        @keyframes pulse-mic {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
         @media (max-width: 768px) {
             .hud {
                 top: 10px;
@@ -344,17 +140,6 @@
             
             .company-info, .metrics {
                 display: none;
-            }
-            
-            .sandra-micro {
-                width: 50px;
-                height: 50px;
-                bottom: 15px;
-                left: 15px;
-            }
-            
-            .sandra-icon {
-                font-size: 20px;
             }
         }
     </style>
@@ -415,32 +200,6 @@
         </p>
     </div>
 
-    <!-- SANDRA MICRO CONVERSACIONAL LIMPIO -->
-    <div class="sandra-micro" id="sandraMicro" onclick="toggleSandraChat()">
-        <div class="sandra-icon">🤖</div>
-    </div>
-
-    <!-- SANDRA CHAT MODAL -->
-    <div class="sandra-modal" id="sandraModal">
-        <div class="sandra-container">
-            <div class="sandra-header">
-                <button class="sandra-close" onclick="toggleSandraChat()">×</button>
-                <h3>Sandra IA 7.0 Asistente</h3>
-                <p>Inteligencia Artificial Empresarial ClayTomSystems</p>
-            </div>
-            <div class="sandra-messages" id="sandraMessages">
-                <div class="sandra-message ai-message">
-                    Hola, soy Sandra IA 7.0. ¿En qué puedo ayudarte con ClayTomSystems?
-                </div>
-            </div>
-            <div class="sandra-input">
-                <input type="text" id="sandraInput" placeholder="Pregúntame sobre ClayTomSystems..." onkeypress="handleSandraKeyPress(event)">
-                <button onclick="sendSandraMessage()">Enviar</button>
-                <button class="sandra-mic-btn" id="sandraMicBtn" onclick="toggleSandraVoice()" title="Conversación por voz con Sandra">🎤</button>
-            </div>
-        </div>
-    </div>
-
     <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
     <script>
         // Molecular 3D Scene Setup
@@ -455,62 +214,86 @@
         // Create multiple particle systems for molecular effect
         const particleSystems = [];
         
-        // Main molecular structure with organic shapes
-        const createParticleSystem = (count, color, size, speed) => {
-            const geometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(count * 3);
+        // Create molecular system with REAL SPHERES - NO SQUARES
+        const createSphereSystem = (count, color, radius, speed) => {
+            const group = new THREE.Group();
             
-            // Generate organic, spherical distribution instead of cubic
+            // Create individual sphere geometry (reuse for performance)
+            const sphereGeometry = new THREE.SphereGeometry(radius, 8, 6);
+            const sphereMaterial = new THREE.MeshBasicMaterial({
+                color: color,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+            
             for (let i = 0; i < count; i++) {
-                const index = i * 3;
+                // Create multiple concentric spheres with circular patterns
+                const layerIndex = Math.floor(Math.random() * 6); // 6 layers
+                const baseRadius = 60 + (layerIndex * 35); // Different radius layers
                 
-                // Create spherical/organic distribution with noise
-                const radius = Math.random() * 200 + 50;
-                const theta = Math.random() * Math.PI * 2; // 0 to 2π
-                const phi = Math.acos(2 * Math.random() - 1); // 0 to π
+                // Perfect spherical coordinates for natural circular distribution
+                const theta = Math.random() * Math.PI * 2; // Full rotation
+                const phi = Math.acos(2 * Math.random() - 1); // Perfect sphere distribution
                 
-                // Add organic distortion with multiple sine waves
-                const distortion = Math.sin(theta * 3) * Math.cos(phi * 2) * 30;
-                const finalRadius = radius + distortion;
+                // Add organic circular wave patterns
+                const waveOffset = Math.sin(theta * 6) * Math.cos(phi * 4) * 12;
+                const finalRadius = baseRadius + waveOffset;
                 
-                // Convert spherical to cartesian coordinates
-                positions[index] = finalRadius * Math.sin(phi) * Math.cos(theta);
-                positions[index + 1] = finalRadius * Math.sin(phi) * Math.sin(theta);
-                positions[index + 2] = finalRadius * Math.cos(phi);
+                // Convert to cartesian with perfect circular distribution
+                const x = finalRadius * Math.sin(phi) * Math.cos(theta);
+                const y = finalRadius * Math.sin(phi) * Math.sin(theta);
+                const z = finalRadius * Math.cos(phi);
+                
+                // Create individual sphere mesh
+                const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+                sphere.position.set(x, y, z);
+                
+                // Add random scale variation
+                const scale = 0.8 + Math.random() * 0.4;
+                sphere.scale.setScalar(scale);
+                
+                group.add(sphere);
             }
             
-            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            const material = new THREE.PointsMaterial({ 
-                color: color, 
-                size: size,
-                transparent: true,
-                opacity: 0.8
-            });
-            const points = new THREE.Points(geometry, material);
-            points.userData = { speed: speed };
-            return points;
+            group.userData = { speed: speed };
+            return group;
         };
 
-        // Create multiple layers
-        particleSystems.push(createParticleSystem(2000, 0x0ea5e9, 1.5, 0.0008));
-        particleSystems.push(createParticleSystem(1000, 0x0284c7, 2, 0.0005));
-        particleSystems.push(createParticleSystem(500, 0xef4444, 1, 0.001));
+        // Create multiple circular layers with REAL SPHERES - NO SQUARES
+        particleSystems.push(createSphereSystem(800, 0x0ea5e9, 1.2, 0.0005)); // Main cyan spheres
+        particleSystems.push(createSphereSystem(600, 0x10b981, 1.0, 0.0007)); // Green accent spheres  
+        particleSystems.push(createSphereSystem(400, 0x8b5cf6, 0.8, 0.0009)); // Purple depth spheres
+        particleSystems.push(createSphereSystem(200, 0xfbbf24, 1.5, 0.0003)); // Golden highlight spheres
+        particleSystems.push(createSphereSystem(150, 0xf59e0b, 1.8, 0.0012)); // Amber core spheres
 
         particleSystems.forEach(system => scene.add(system));
 
-        camera.position.z = 200;
+        camera.position.z = 220;
 
-        // Animation loop with enhanced effects
+        // Enhanced animation loop with smooth circular motion
         function animate() {
             requestAnimationFrame(animate);
             
             particleSystems.forEach((system, index) => {
+                // Smooth circular rotation
                 system.rotation.y += system.userData.speed;
-                system.rotation.x += system.userData.speed * 0.5;
+                system.rotation.x += system.userData.speed * 0.6;
+                system.rotation.z += system.userData.speed * 0.3;
                 
-                // Pulsing effect
+                // Enhanced pulsing effect for individual spheres
                 const time = Date.now() * 0.001;
-                system.material.opacity = 0.6 + Math.sin(time + index) * 0.2;
+                
+                // Animate each sphere in the group
+                system.children.forEach((sphere, sphereIndex) => {
+                    // Individual opacity animation
+                    const opacity = 0.6 + Math.sin(time * 2 + index + sphereIndex * 0.1) * 0.2;
+                    sphere.material.opacity = opacity;
+                    
+                    // Individual breathing scale effect
+                    const breathe = 1 + Math.sin(time * 1.5 + index * 0.5 + sphereIndex * 0.2) * 0.15;
+                    sphere.scale.setScalar(breathe * (0.8 + Math.random() * 0.4));
+                });
             });
             
             renderer.render(scene, camera);
@@ -572,324 +355,6 @@
 
         // Initialize metrics
         updateMetrics();
-
-        // SANDRA MICRO CONVERSACIONAL FUNCTIONALITY - CON ELEVENLABS
-        let sandraOpen = false;
-        let sandraRecognition = null;
-        let sandraListening = false;
-        let sandraSpeechSynthesis = null;
-        let sandraVoiceMode = false;
-        let sandraInterrupted = false;
-        let sandraCurrentAudio = null;
-        
-        // ElevenLabs Configuration
-        const ELEVENLABS_API_KEY = 'sk-8d91ca8d695b07b9ccc6eedc6c70b5f16e0e2c87c6b76c1e';
-        const ELEVENLABS_VOICE_ID = 'EXAVITQu4vr4xnSDxMaL'; // Bella - Spanish female voice
-        const ELEVENLABS_MODEL_ID = 'eleven_turbo_v2_5'; // Fastest model
-        
-        function toggleSandraChat() {
-            const modal = document.getElementById('sandraModal');
-            const micro = document.getElementById('sandraMicro');
-            
-            sandraOpen = !sandraOpen;
-            
-            if (sandraOpen) {
-                modal.style.display = 'flex';
-                document.getElementById('sandraInput').focus();
-            } else {
-                modal.style.display = 'none';
-            }
-        }
-        
-        function sendSandraMessage(fromVoice = false) {
-            const input = document.getElementById('sandraInput');
-            const messagesContainer = document.getElementById('sandraMessages');
-            const message = input.value.trim();
-            
-            if (!message) return;
-            
-            // Add user message
-            const userMessage = document.createElement('div');
-            userMessage.className = 'sandra-message user-message';
-            userMessage.textContent = message;
-            messagesContainer.appendChild(userMessage);
-            
-            // Clear input
-            input.value = '';
-            
-            // Simulate Sandra IA 7.0 response - CON ELEVENLABS PARA VOZ
-            setTimeout(() => {
-                const response = generateSandraResponse(message);
-                const aiMessage = document.createElement('div');
-                aiMessage.className = 'sandra-message ai-message';
-                aiMessage.textContent = response;
-                messagesContainer.appendChild(aiMessage);
-                
-                // If in voice mode, speak the response with ElevenLabs
-                if (sandraVoiceMode || fromVoice) {
-                    speakSandraResponse(response);
-                }
-                
-                // Scroll to bottom
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }, 400); // Reduced delay for faster response
-            
-            // Scroll to bottom
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-        
-        function handleSandraKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendSandraMessage();
-            }
-        }
-        
-        function generateSandraResponse(userMessage) {
-            const responses = [
-                "ClayTomSystems se especializa en infraestructura AI empresarial con sistemas moleculares avanzados. ¿Necesitas más información sobre algún servicio específico?",
-                "Como Sandra IA 7.0, puedo ayudarte con automatización empresarial, gestión de agentes AI y optimización de sistemas. ¿En qué proyecto estás trabajando?",
-                "ClayTomSystems ofrece soluciones completas de AI para empresas. Nuestro CEO Clay Thomas lidera el desarrollo de tecnologías moleculares. ¿Te interesa algún sector específico?",
-                "Mi función es asistir con consultas sobre ClayTomSystems y sus servicios de AI empresarial. Puedo proporcionar información técnica y comercial. ¿Qué necesitas saber?",
-                "Los sistemas moleculares de ClayTomSystems procesan miles de agentes simultáneamente. Esto es ideal para empresas que necesitan escalabilidad masiva. ¿Manejas proyectos de gran escala?",
-                "Sandra IA 7.0 está integrada en todos los servicios de ClayTomSystems para proporcionar soporte inteligente 24/7. ¿Necesitas implementar algo similar en tu empresa?",
-                "ClayTomSystems ha desarrollado esta arquitectura molecular para optimizar el rendimiento empresarial. ¿Te interesa una demostración técnica?",
-                "Como asistente de ClayTomSystems, puedo ayudarte con información sobre precios, implementación y soporte técnico. ¿Cuál es tu consulta específica?"
-            ];
-            
-            return responses[Math.floor(Math.random() * responses.length)];
-        }
-        
-        // SANDRA VOICE RECOGNITION & SYNTHESIS FUNCTIONALITY
-        function initSandraVoice() {
-            // Initialize Speech Recognition
-            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                sandraRecognition = new SpeechRecognition();
-                sandraRecognition.lang = 'es-ES';
-                sandraRecognition.continuous = true;  // Keep listening
-                sandraRecognition.interimResults = true;
-
-                sandraRecognition.onstart = function() {
-                    sandraListening = true;
-                    updateMicrophoneState();
-                };
-
-                sandraRecognition.onresult = function(event) {
-                    const lastResult = event.results[event.results.length - 1];
-                    if (lastResult.isFinal) {
-                        const transcript = lastResult[0].transcript.trim();
-                        if (transcript) {
-                            // Stop Sandra if she's speaking (barge-in) - ElevenLabs audio
-                            if (sandraCurrentAudio && !sandraCurrentAudio.paused) {
-                                sandraCurrentAudio.pause();
-                                sandraCurrentAudio.currentTime = 0;
-                                sandraInterrupted = true;
-                            }
-                            
-                            // Also stop browser TTS as fallback
-                            if (sandraSpeechSynthesis && sandraSpeechSynthesis.speaking) {
-                                sandraSpeechSynthesis.cancel();
-                                sandraInterrupted = true;
-                            }
-                            
-                            const input = document.getElementById('sandraInput');
-                            input.value = transcript;
-                            sendSandraMessage(true);
-                        }
-                    }
-                };
-
-                sandraRecognition.onend = function() {
-                    // Auto-restart if in voice mode
-                    if (sandraVoiceMode && !sandraInterrupted) {
-                        setTimeout(() => {
-                            if (sandraVoiceMode) {
-                                sandraRecognition.start();
-                            }
-                        }, 100);
-                    } else {
-                        sandraListening = false;
-                        updateMicrophoneState();
-                    }
-                    sandraInterrupted = false;
-                };
-
-                sandraRecognition.onerror = function(event) {
-                    console.log('Error de reconocimiento de voz:', event.error);
-                    if (event.error === 'no-speech' && sandraVoiceMode) {
-                        // Restart if no speech detected but still in voice mode
-                        setTimeout(() => {
-                            if (sandraVoiceMode) {
-                                sandraRecognition.start();
-                            }
-                        }, 1000);
-                    }
-                };
-            }
-
-            // Initialize Speech Synthesis
-            if ('speechSynthesis' in window) {
-                sandraSpeechSynthesis = window.speechSynthesis;
-            }
-        }
-
-        function updateMicrophoneState() {
-            const micBtn = document.getElementById('sandraMicBtn');
-            
-            if (sandraVoiceMode) {
-                micBtn.classList.add('voice-mode');
-                micBtn.classList.remove('recording');
-                micBtn.textContent = '🗣️';
-                micBtn.title = 'Modo conversacional activo - Clic para desactivar';
-                
-                if (sandraListening) {
-                    micBtn.classList.add('recording');
-                }
-            } else {
-                micBtn.classList.remove('voice-mode', 'recording');
-                micBtn.textContent = '🎤';
-                micBtn.title = 'Conversación por voz con Sandra';
-            }
-        }
-
-        function toggleSandraVoice() {
-            if (!sandraRecognition) {
-                initSandraVoice();
-            }
-
-            if (sandraVoiceMode) {
-                // Stop voice mode
-                sandraVoiceMode = false;
-                if (sandraRecognition) {
-                    sandraRecognition.stop();
-                }
-                // Stop ElevenLabs audio
-                if (sandraCurrentAudio && !sandraCurrentAudio.paused) {
-                    sandraCurrentAudio.pause();
-                    sandraCurrentAudio.currentTime = 0;
-                }
-                // Stop browser TTS fallback
-                if (sandraSpeechSynthesis && sandraSpeechSynthesis.speaking) {
-                    sandraSpeechSynthesis.cancel();
-                }
-            } else {
-                // Start voice mode
-                sandraVoiceMode = true;
-                if (sandraRecognition) {
-                    sandraRecognition.start();
-                } else {
-                    alert('Tu navegador no soporta reconocimiento de voz. Usa Chrome, Edge o Safari.');
-                    sandraVoiceMode = false;
-                }
-            }
-            
-            updateMicrophoneState();
-        }
-
-        async function speakSandraResponse(text) {
-            try {
-                // Stop any current audio
-                if (sandraCurrentAudio) {
-                    sandraCurrentAudio.pause();
-                    sandraCurrentAudio.currentTime = 0;
-                }
-
-                // Generate speech with ElevenLabs
-                const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${ELEVENLABS_VOICE_ID}/stream`, {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'audio/mpeg',
-                        'Content-Type': 'application/json',
-                        'xi-api-key': ELEVENLABS_API_KEY
-                    },
-                    body: JSON.stringify({
-                        text: text,
-                        model_id: ELEVENLABS_MODEL_ID,
-                        voice_settings: {
-                            stability: 0.5,
-                            similarity_boost: 0.8,
-                            style: 0.2,
-                            use_speaker_boost: true
-                        }
-                    })
-                });
-
-                if (response.ok) {
-                    const audioBlob = await response.blob();
-                    const audioUrl = URL.createObjectURL(audioBlob);
-                    sandraCurrentAudio = new Audio(audioUrl);
-                    
-                    // Preload and play immediately for low latency
-                    sandraCurrentAudio.preload = 'auto';
-                    
-                    sandraCurrentAudio.onended = function() {
-                        // After Sandra finishes speaking, restart listening if in voice mode
-                        URL.revokeObjectURL(audioUrl);
-                        if (sandraVoiceMode && sandraRecognition) {
-                            setTimeout(() => {
-                                if (sandraVoiceMode && !sandraListening) {
-                                    sandraRecognition.start();
-                                }
-                            }, 200); // Reduced delay for faster response
-                        }
-                    };
-
-                    sandraCurrentAudio.onerror = function() {
-                        console.error('Error playing ElevenLabs audio');
-                        // Fallback to browser TTS
-                        fallbackToNativeTTS(text);
-                    };
-
-                    // Play audio immediately
-                    await sandraCurrentAudio.play();
-                    
-                } else {
-                    console.error('ElevenLabs API error:', response.status);
-                    // Fallback to browser TTS
-                    fallbackToNativeTTS(text);
-                }
-            } catch (error) {
-                console.error('Error with ElevenLabs TTS:', error);
-                // Fallback to browser TTS
-                fallbackToNativeTTS(text);
-            }
-        }
-
-        function fallbackToNativeTTS(text) {
-            if (sandraSpeechSynthesis) {
-                sandraSpeechSynthesis.cancel();
-                
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'es-ES';
-                utterance.rate = 1.2; // Faster rate for lower latency
-                utterance.pitch = 1.1;
-                utterance.volume = 0.8;
-
-                utterance.onend = function() {
-                    if (sandraVoiceMode && sandraRecognition) {
-                        setTimeout(() => {
-                            if (sandraVoiceMode && !sandraListening) {
-                                sandraRecognition.start();
-                            }
-                        }, 200);
-                    }
-                };
-
-                sandraSpeechSynthesis.speak(utterance);
-            }
-        }
-
-        // Initialize voice recognition on page load
-        window.addEventListener('load', function() {
-            initSandraVoice();
-        });
-
-        // Close modal when clicking outside
-        document.getElementById('sandraModal').addEventListener('click', function(event) {
-            if (event.target === this) {
-                toggleSandraChat();
-            }
-        });
     </script>
 </body>
 </html>
