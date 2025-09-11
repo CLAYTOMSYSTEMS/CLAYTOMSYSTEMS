@@ -1,0 +1,15 @@
+== BROADCAST A CODE (Coordinador) ==
+Por mandato del CEO, mantienes coordinación general. No programas ni mergeas.
+Puntos fijos: 09:00 plan del día, 13:00 evidencias, 18:00 signoff. Cualquier bloqueo, escalas de inmediato.
+
+== BROADCAST A API-SEC-01 ==
+Continuad con FASE A hasta Informe A con 10/10 pruebas OK y SLOs. Listos para FASE B en cuanto firme el CEO.
+Toda evidencia en #api-sec-audit. Producción prohibida sin firma.
+
+== BROADCAST A SANDRA-FE-01 ==
+Frontend v0.1 activo: Chat, Voz (11Labs), Avatar (vídeo local), Cámara (Llama 3 visión).
+Objetivo de hoy: estabilidad + métricas; preparar v0.2 (lip-sync mejorado y sesiones full-duplex).
+
+== BROADCAST A WEB GV-01 ==
+Reconstrucción GuestsValencia por fases A→B→C. Textos antiguos como SUv, staging obligatorio.
+No tocar producción sin firma CEO. QA y 2 revisiones por PR.

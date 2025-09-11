@@ -1,0 +1,7 @@
+== PARA API-SEC-01 ==
+Si el Informe A resulta en GO/GO condicional, arrancáis **FASE B** de inmediato siguiendo el Work Order adjunto. 
+Primer hito: dashboards y alertas en 2 h; segundo hito: DAST+Fuzz con fixes en 24 h; tercer hito: idempotencia/cuotas cerradas en 36–48 h.
+
+== PARA CODE ==
+Recoge el Informe A firmado. Si GO, programa kick-off FASE B y asigna propietarios por bloque (Obs/DAST/Idempotencia/SSL/SBOM). 
+Mantén cadencia de reportes 13:00 y 18:00 CEST. Ningún cambio en prod sin firma CEO.

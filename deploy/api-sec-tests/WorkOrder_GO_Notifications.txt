@@ -1,0 +1,9 @@
+== MENSAJE A API-SEC-01 (Lead Seguridad) ==
+Ejecuta el Acid Test Pack en staging hoy. Reúne evidencias (códigos/headers/logs tokenizados/capturas).
+Entrega el "INFORME A" (plantilla incluida) antes de las 18:00 CEST para firma del CEO.
+Si una prueba falla, aplica fix, repite y documenta.
+
+== MENSAJE A CODE (Coordinador; no programa) ==
+Coordina a API-SEC-01. No se toca producción. Recolecta evidencias en #api-sec-audit.
+Cierra hoy pendientes: 13 SSL + 5 config. Reportes 13:00 y 18:00 CEST: Avances/Bloqueos/Próximos/Riesgos.
+Si todas las pruebas pasan, solicita GO FASE A y agenda FASE B para mañana.

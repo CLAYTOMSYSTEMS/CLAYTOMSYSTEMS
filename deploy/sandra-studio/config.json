@@ -1,0 +1,54 @@
+{
+  "apiBase": "https://api-staging.sandra.local/v1",
+  "videoUrl": "https://dam-staging.sandra.local/video/GV_Montanejos_Test_v1.mp4",
+  "phonemesUrl": "https://dam-staging.sandra.local/video/GV_Montanejos_Test_v1_phonemes.vtt",
+  "endpoints": {
+    "chat": "/chat",
+    "voice": "/realtime-voice", 
+    "vision": "/vision",
+    "avatar": "/avatar/phonemes",
+    "telemetry": "/telemetry"
+  },
+  "security": {
+    "corsOrigin": "sandra.local",
+    "httpsRequired": true,
+    "tokenStorage": "server-side-only"
+  },
+  "performance": {
+    "chatLatencyTarget": 800,
+    "ttsStartTarget": 700,
+    "reconnectionThreshold": 2,
+    "lipSyncTolerance": 200
+  },
+  "modules": {
+    "chat": {
+      "enabled": true,
+      "placeholder": "Escribe tu mensaje...",
+      "maxLength": 500
+    },
+    "voice": {
+      "enabled": true,
+      "pttMode": true,
+      "vadEnabled": true,
+      "echoCancellation": true
+    },
+    "avatar": {
+      "enabled": true,
+      "autoLoad": false,
+      "phonemeSync": true,
+      "controls": true
+    },
+    "camera": {
+      "enabled": true,
+      "autoPreview": false,
+      "snapshotInterval": 10000,
+      "visionAnalysis": true
+    }
+  },
+  "ui": {
+    "theme": "clean",
+    "grid": "2x2",
+    "statusBar": true,
+    "elevarLlamada": true
+  }
+}

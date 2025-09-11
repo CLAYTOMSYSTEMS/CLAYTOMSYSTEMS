@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandra Studio v1 - GuestsValencia</title>
+    <link rel="stylesheet" href="css/sandra-studio.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <header class="studio-header">
+        <div class="logo-container">
+            <img src="assets/logo-guestsvalencia.png" alt="GuestsValencia" class="logo">
+            <h1>Sandra Studio v1</h1>
+        </div>
+        <div class="header-status">
+            <span id="connection-status" class="status-indicator">⚡ Connecting...</span>
+        </div>
+    </header>
+
+    <main class="sandra-studio-container">
+        <!-- Grid 2×2 Layout -->
+        <div class="sandra-studio-grid">
+            
+            <!-- Top Left: Chat Module -->
+            <div class="module chat-module" id="chat-module">
+                <div class="module-header">
+                    <h3>💬 Chat</h3>
+                    <div class="module-status" id="chat-status">Ready</div>
+                </div>
+                <div class="chat-container">
+                    <div class="chat-history" id="chat-history">
+                        <div class="chat-message system">
+                            <span class="timestamp">00:00</span>
+                            <span class="message">¡Hola! Soy Sandra, tu asistente de GuestsValencia. ¿En qué puedo ayudarte?</span>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." maxlength="500">
+                        <button id="send-btn" class="primary-btn">Enviar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Top Right: Voice Module -->
+            <div class="module voice-module" id="voice-module">
+                <div class="module-header">
+                    <h3>🎤 Voz</h3>
+                    <div class="module-status" id="voice-status">Ready</div>
+                </div>
+                <div class="voice-container">
+                    <button id="ptt-btn" class="ptt-button">
+                        <span class="ptt-icon">🎤</span>
+                        <span class="ptt-text">Push to Talk</span>
+                    </button>
+                    <div class="voice-controls">
+                        <div class="vad-indicator" id="vad-indicator">
+                            <div class="vad-bar"></div>
+                            <div class="vad-bar"></div>
+                            <div class="vad-bar"></div>
+                            <div class="vad-bar"></div>
+                        </div>
+                        <div class="tts-status" id="tts-status">TTS Ready</div>
+                    </div>
+                    <div class="voice-settings">
+                        <label class="setting-toggle">
+                            <input type="checkbox" id="echo-cancellation" checked>
+                            <span>Echo Cancellation</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Left: Avatar Module -->
+            <div class="module avatar-module" id="avatar-module">
+                <div class="module-header">
+                    <h3>🎭 Avatar</h3>
+                    <div class="module-status" id="avatar-status">Ready</div>
+                </div>
+                <div class="avatar-container">
+                    <div class="video-wrapper">
+                        <video id="avatar-video" controls preload="metadata">
+                            <source src="" type="video/mp4">
+                            <p>Tu navegador no soporta video HTML5.</p>
+                        </video>
+                        <div class="video-overlay">
+                            <div class="phoneme-sync-indicator" id="phoneme-indicator">
+                                <span class="sync-status">Sync: --ms</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="avatar-controls">
+                        <button id="load-video-btn" class="secondary-btn">Cargar Video</button>
+                        <button id="phoneme-sync-btn" class="secondary-btn" disabled>Sync Phonemes</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Right: Camera Module -->
+            <div class="module camera-module" id="camera-module">
+                <div class="module-header">
+                    <h3>📷 Cámara</h3>
+                    <div class="module-status" id="camera-status">Ready</div>
+                </div>
+                <div class="camera-container">
+                    <div class="camera-wrapper">
+                        <video id="camera-preview" autoplay muted playsinline>
+                            <p>Cámara no disponible</p>
+                        </video>
+                        <div class="camera-overlay">
+                            <div class="capture-indicator" id="capture-indicator">📸</div>
+                        </div>
+                    </div>
+                    <div class="camera-controls">
+                        <button id="camera-toggle" class="secondary-btn">Camera ON</button>
+                        <button id="snapshot-btn" class="secondary-btn" disabled>Snapshot</button>
+                    </div>
+                    <div class="vision-results" id="vision-results">
+                        <div class="results-header">Vision Analysis:</div>
+                        <div class="results-content">No analysis yet</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Control Bar -->
+        <div class="control-bar">
+            <div class="control-left">
+                <button id="elevar-llamada" class="call-button">
+                    <span class="call-icon">📞</span>
+                    <span class="call-text">Elevar a llamada</span>
+                </button>
+            </div>
+            <div class="control-center">
+                <div class="status-indicators">
+                    <div class="status-item">
+                        <span class="status-label">Conexión:</span>
+                        <span id="connection-indicator" class="status-value">⚡ Connecting</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Latencia:</span>
+                        <span id="latency-display" class="status-value">--ms</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Errores:</span>
+                        <span id="error-counter" class="status-value">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="control-right">
+                <button id="metrics-toggle" class="metrics-btn">📊 Métricas</button>
+            </div>
+        </div>
+        
+        <!-- Metrics Panel (Hidden by default) -->
+        <div class="metrics-panel" id="metrics-panel" style="display: none;">
+            <div class="metrics-header">
+                <h4>Performance Metrics</h4>
+                <button id="close-metrics" class="close-btn">×</button>
+            </div>
+            <div class="metrics-content">
+                <div class="metric-row">
+                    <span class="metric-label">p95 Chat Latency:</span>
+                    <span id="p95-latency" class="metric-value">--ms</span>
+                    <span class="metric-target">(target: <800ms)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">TTS Start Time:</span>
+                    <span id="tts-start-time" class="metric-value">--ms</span>
+                    <span class="metric-target">(target: <700ms)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Reconnections:</span>
+                    <span id="reconnection-count" class="metric-value">0</span>
+                    <span class="metric-target">(target: <2%)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Avatar FPS:</span>
+                    <span id="avatar-fps" class="metric-value">--</span>
+                    <span class="metric-target">(target: 24-30)</span>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/modules/chat.js"></script>
+    <script src="js/modules/voice.js"></script>
+    <script src="js/modules/avatar.js"></script>
+    <script src="js/modules/camera.js"></script>
+    <script src="js/performance.js"></script>
+    <script src="js/sandra-studio.js"></script>
+</body>
+</html>

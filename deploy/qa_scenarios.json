@@ -1,0 +1,46 @@
+{
+  "scenarios": [
+    {
+      "name": "content_creator.reel_30s_es",
+      "acceptance": [
+        "duración 25-35s",
+        "hook <3s",
+        "CTA claro",
+        "subtítulos"
+      ],
+      "metric_targets": {
+        "engagement_rate": ">=4%"
+      }
+    },
+    {
+      "name": "social_manager.calendar_publish",
+      "acceptance": [
+        "posteos programados",
+        "capciones con hashtags brand-safe"
+      ],
+      "metric_targets": {
+        "on_time_rate": ">=99%"
+      }
+    },
+    {
+      "name": "performance_marketer.roas_lift",
+      "acceptance": [
+        "AB test plan",
+        "p-value <=0.05"
+      ],
+      "metric_targets": {
+        "ROAS_delta": ">=+15%"
+      }
+    },
+    {
+      "name": "audiovisual_producer.short_ad",
+      "acceptance": [
+        "color OK",
+        "audio loudness -14 LUFS ±1"
+      ],
+      "metric_targets": {
+        "first_render_success": ">=95%"
+      }
+    }
+  ]
+}

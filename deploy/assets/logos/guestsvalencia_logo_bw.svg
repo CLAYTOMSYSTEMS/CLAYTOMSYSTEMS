@@ -1,0 +1,36 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="200" cy="200" r="195" fill="none" stroke="#000" stroke-width="5"/>
+  <circle cx="200" cy="200" r="150" fill="#000"/>
+  
+  <!-- Ciudad skyline -->
+  <g fill="#fff">
+    <rect x="80" y="140" width="20" height="60"/>
+    <rect x="110" y="120" width="15" height="80"/>
+    <rect x="130" y="100" width="25" height="100"/>
+    <rect x="160" y="80" width="30" height="120"/>
+    <rect x="195" y="120" width="20" height="80"/>
+    <rect x="220" y="100" width="25" height="100"/>
+    <rect x="250" y="130" width="20" height="70"/>
+    <rect x="275" y="150" width="15" height="50"/>
+    
+    <!-- Ventanas en edificios -->
+    <rect x="165" y="90" width="5" height="8" fill="#000"/>
+    <rect x="175" y="90" width="5" height="8" fill="#000"/>
+    <rect x="165" y="105" width="5" height="8" fill="#000"/>
+    <rect x="175" y="105" width="5" height="8" fill="#000"/>
+    
+    <rect x="135" y="110" width="4" height="6" fill="#000"/>
+    <rect x="145" y="110" width="4" height="6" fill="#000"/>
+    <rect x="135" y="125" width="4" height="6" fill="#000"/>
+    <rect x="145" y="125" width="4" height="6" fill="#000"/>
+  </g>
+  
+  <!-- Texto GUESTS-VALENCIA -->
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000">GUESTS-VALENCIA</text>
+  
+  <!-- Subtítulo -->
+  <text x="200" y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#000">Alojamientos Vacacionales</text>
+  
+  <!-- Línea decorativa -->
+  <rect x="80" y="320" width="240" height="2" fill="#000"/>
+</svg>

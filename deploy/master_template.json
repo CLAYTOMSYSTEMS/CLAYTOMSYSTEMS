@@ -1,0 +1,253 @@
+{
+  "agent_id": "auto",
+  "display_name": "ClayTom Marketing Agent",
+  "version": "1.0.0",
+  "role": "content_creator|social_manager|performance_marketer|audiovisual_producer",
+  "goals": [
+    "crear contenidos multimedia",
+    "gestionar RRSS",
+    "optimizar campañas",
+    "producir audiovisual profesional"
+  ],
+  "policies": {
+    "tone": "corporate|creative",
+    "languages": [
+      "es",
+      "en"
+    ],
+    "escalation_rules": {
+      "to_human_after_minutes": 5,
+      "critical_tags": [
+        "legal",
+        "marca",
+        "pago",
+        "privacidad"
+      ]
+    },
+    "compliance": {
+      "gdpr": true,
+      "marketing_consent_required": true,
+      "data_retention_days": 365
+    }
+  },
+  "knowledge": {
+    "collections": [
+      {
+        "name": "brand_guidelines",
+        "vector_index": "pgvector://brand_v1"
+      },
+      {
+        "name": "voice_tone",
+        "vector_index": "pgvector://voice_v1"
+      },
+      {
+        "name": "product_catalog",
+        "vector_index": "pgvector://catalog_v1"
+      },
+      {
+        "name": "campaign_playbooks",
+        "vector_index": "pgvector://campaigns_v1"
+      },
+      {
+        "name": "compliance_rules",
+        "vector_index": "pgvector://compliance_v1"
+      },
+      {
+        "name": "content_calendar",
+        "vector_index": "pgvector://calendar_v1"
+      }
+    ],
+    "refresh": {
+      "cron": "@hourly",
+      "strategy": "delta"
+    }
+  },
+  "tools": [
+    {
+      "name": "social_api",
+      "type": "http",
+      "auth": "oauth",
+      "scopes": [
+        "read:profile",
+        "read:insights",
+        "write:post",
+        "write:schedule"
+      ]
+    },
+    {
+      "name": "media_pipeline",
+      "type": "orchestration",
+      "scopes": [
+        "video:render",
+        "image:process",
+        "audio:mix"
+      ]
+    },
+    {
+      "name": "asset_library",
+      "type": "storage",
+      "scopes": [
+        "read:assets",
+        "write:assets"
+      ]
+    },
+    {
+      "name": "analytics",
+      "type": "http",
+      "auth": "oauth",
+      "scopes": [
+        "read:ga",
+        "read:ads",
+        "read:tiktok_ads",
+        "read:meta_ads"
+      ]
+    },
+    {
+      "name": "influencer_crm",
+      "type": "http",
+      "auth": "api_key",
+      "scopes": [
+        "read:creators",
+        "write:outreach",
+        "write:contracts"
+      ]
+    },
+    {
+      "name": "caption_gen",
+      "type": "function",
+      "scopes": [
+        "generate:captions"
+      ]
+    },
+    {
+      "name": "transcriber",
+      "type": "function",
+      "scopes": [
+        "audio:transcribe"
+      ]
+    },
+    {
+      "name": "subtitle_tool",
+      "type": "function",
+      "scopes": [
+        "subtitle:generate",
+        "subtitle:burnin"
+      ]
+    },
+    {
+      "name": "ab_testing",
+      "type": "orchestration",
+      "scopes": [
+        "experiment:create",
+        "experiment:analyze"
+      ]
+    }
+  ],
+  "memory": {
+    "short_term_window": 32,
+    "long_term": {
+      "provider": "pgvector",
+      "namespace": "agents_mem",
+      "pii_guard": true
+    }
+  },
+  "routing": {
+    "orchestrator": "skill_router_v3",
+    "skills": [
+      {
+        "name": "ideation",
+        "intent_tags": [
+          "ideas",
+          "brief",
+          "concepto"
+        ]
+      },
+      {
+        "name": "copywriting",
+        "intent_tags": [
+          "copy",
+          "guion"
+        ]
+      },
+      {
+        "name": "scheduler_rrss",
+        "intent_tags": [
+          "calendario",
+          "programar"
+        ]
+      },
+      {
+        "name": "community_mgmt",
+        "intent_tags": [
+          "comentarios",
+          "DMs",
+          "reputación"
+        ]
+      },
+      {
+        "name": "ads_optimization",
+        "intent_tags": [
+          "CPC",
+          "CPA",
+          "ROAS",
+          "campaña"
+        ]
+      },
+      {
+        "name": "influencer_outreach",
+        "intent_tags": [
+          "creadores",
+          "influencers",
+          "UGC"
+        ]
+      },
+      {
+        "name": "video_pipeline",
+        "intent_tags": [
+          "edición",
+          "render",
+          "subtítulos"
+        ]
+      }
+    ],
+    "handoff": {
+      "to_human_channels": [
+        "Slack#marketing",
+        "Zendesk#brand"
+      ],
+      "rules": [
+        "SLA>5m",
+        "critical_tag"
+      ]
+    }
+  },
+  "limits": {
+    "rpm": 150,
+    "tpm": 90000,
+    "max_concurrent_tasks": 10
+  },
+  "observability": {
+    "log_level": "info",
+    "metrics": [
+      "latency_p95",
+      "success_rate",
+      "engagement_rate",
+      "CTR",
+      "CPA",
+      "ROAS",
+      "cost_per_task"
+    ]
+  },
+  "deployment": {
+    "namespace": "prod/agents/marketing",
+    "autoscale": {
+      "min": 0,
+      "max": 2000,
+      "target_cpu": "70%"
+    }
+  },
+  "legal": {
+    "content_disclaimer": true
+  },
+  "status": "deployment_ready"
+}

@@ -1,0 +1,64 @@
+⚡ ACID TEST PACK EXECUTION INITIATED
+
+🎯 TARGET: https://api-staging.sandra.local/v1
+🔑 TOKEN: JWT 5min scope frontend.sandra:chat  
+🕐 TIMELINE: Results by 18:00 CEST
+
+📋 EXECUTING 10 SECURITY TESTS:
+
+🔄 Test 1: Rate Limiting (45 req burst) → RUNNING
+- Expected: 200s + 429s with Retry-After
+- Owner: DevOps Security
+- Evidence: Gateway metrics + headers
+
+🔄 Test 2: Schema Validation → RUNNING  
+- Payload: {message:hola,__hacker:x}
+- Expected: 400 reject unknown fields
+- Owner: Backend Dev #1
+
+🔄 Test 3: Error Sanitization → RUNNING
+- GET /does-not-exist  
+- Expected: Clean 404, no stack trace
+- Owner: Backend Dev #2
+
+🔄 Test 4: JWT Expiration → SCHEDULED (5min wait)
+- Wait token expiry, retry /chat
+- Expected: 401 + Yama-3 refresh flow
+- Owner: Lead Security
+
+🔄 Test 5: CORS Policy → RUNNING
+- Origin: https://malicioso.example
+- Expected: CORS rejection
+- Owner: DevOps Security
+
+🔄 Test 6: mTLS Internal → RUNNING
+- Gateway ↔ microservices verification
+- Expected: Client cert logs OK
+- Owner: DevOps Security
+
+🔄 Test 7: PII Tokenization → RUNNING
+- Message: 'Mi nombre Ana, tel 600123123'
+- Expected: Hashed PII in logs
+- Owner: Observability
+
+🔄 Test 8: Upload Security → RUNNING
+- Valid image vs .exe file
+- Expected: 200 vs 415/400
+- Owner: Backend Dev #1
+
+🔄 Test 9: Idempotency → RUNNING
+- Same request Idempotency-Key: TEST-123
+- Expected: 2nd call no duplicate effect
+- Owner: Backend Dev #2
+
+🔄 Test 10: Telemetry → RUNNING
+- Dashboard p50/p95, error rates, traces
+- Expected: Full observability data
+- Owner: Observability
+
+🚧 PARALLEL: Agent Pendientes
+- 13 SSL certificates → DevOps (ETA 15:00)
+- 5 Yama-3 configs → Backend Dev #1 (ETA 16:00)
+
+⏰ NEXT REPORT: 13:00 CEST status update
+

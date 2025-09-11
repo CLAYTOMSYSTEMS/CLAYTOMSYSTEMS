@@ -1,0 +1,34 @@
+tools:
+  - name: social_api
+    type: http
+    auth: oauth
+    endpoints:
+      - instagram
+      - facebook
+      - tiktok
+      - x
+      - linkedin
+  - name: media_pipeline
+    type: orchestration
+    actions:
+      - video:render
+      - image:process
+      - audio:mix
+  - name: analytics
+    type: http
+    auth: oauth
+    endpoints:
+      - google_analytics
+      - meta_ads
+      - tiktok_ads
+      - google_ads
+  - name: influencer_crm
+    type: http
+    auth: api_key
+    endpoints:
+      - creators_db
+      - outreach
+      - contracts
+  - name: asset_library
+    type: storage
+    mount: s3://dam/assets

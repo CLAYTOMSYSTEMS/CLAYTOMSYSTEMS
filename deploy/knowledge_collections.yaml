@@ -1,0 +1,22 @@
+collections:
+  - name: brand_guidelines
+    source: s3://dam/brand/guidelines.pdf
+    vector_index: pgvector://brand_v1
+  - name: voice_tone
+    source: s3://dam/brand/voice_tone.md
+    vector_index: pgvector://voice_v1
+  - name: product_catalog
+    source: s3://dam/catalog/catalog.csv
+    vector_index: pgvector://catalog_v1
+  - name: campaign_playbooks
+    source: git://repos/marketing/playbooks
+    vector_index: pgvector://campaigns_v1
+  - name: compliance_rules
+    source: git://repos/legal/marketing_compliance
+    vector_index: pgvector://compliance_v1
+  - name: content_calendar
+    source: gsheet://marketing/content_calendar
+    vector_index: pgvector://calendar_v1
+refresh:
+  cron: "@hourly"
+  strategy: delta
