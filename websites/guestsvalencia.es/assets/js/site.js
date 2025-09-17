@@ -1,48 +1,36 @@
-// Inicialización del sitio (opener, status, TTS tests)
 (function(){
+  // WhatsApp cableado para Sandra y contacto
+  const WA = '+34624829117';
+  function waLink(msg){ return 'https://wa.me/'+WA.replace(/\D/g,'') + (msg?('?text='+encodeURIComponent(msg)):''); }
+
   // Opener 3s (opt-in)
   const playBtn = document.getElementById('play-opener');
   const audio = document.getElementById('opener-audio');
-  if (playBtn && audio) {
-    playBtn.addEventListener('click', () => { audio.currentTime = 0; audio.play().catch(()=>{}); });
-  }
+  if (playBtn && audio) playBtn.addEventListener('click', ()=>{ audio.currentTime=0; audio.play().catch(()=>{}); });
 
-  // Status loader
-  async function loadStatus(){
-    const badge = document.getElementById('status-badge');
-    const box = document.getElementById('status-json');
-    if (!badge || !box) return;
-    badge.textContent = 'comprobando…';
-    try{
-      const r = await fetch('/api/status',{cache:'no-store'});
-      const j = await r.json();
-      badge.textContent = j.up ? 'online' : 'offline';
-      badge.className = 'inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold ' + (j.up ? 'bg-emerald-100 text-emerald-700':'bg-rose-100 text-rose-700');
-      box.textContent = JSON.stringify(j, null, 2);
-    }catch(e){
-      badge.textContent = 'offline';
-      badge.className = 'inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold bg-rose-100 text-rose-700';
-      box.textContent = String(e);
-    }
-  }
-  setInterval(loadStatus, 10000); loadStatus();
+  // Barra fija contacto
+  const waBtn = document.getElementById('cta-wa');
+  if (waBtn) waBtn.href = waLink('Hola, quiero reservar.');
 
-  // Botonera de tests TTS
-  const out = document.getElementById('api-out');
-  document.querySelectorAll('#tts-tests button[data-ep]').forEach(btn=>{
-    btn.addEventListener('click', async ()=>{
-      try{
-        const ep = btn.getAttribute('data-ep');
-        const body = JSON.parse(btn.getAttribute('data-body')||'{}');
-        const r = await fetch(ep, {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(body)});
-        const txt = await r.text();
-        if(out) out.textContent = `Status ${r.status}\n${txt}`;
-      }catch(e){ if(out) out.textContent = String(e); }
+  // Barra de búsqueda → /search.html
+  const form = document.getElementById('search-form');
+  if (form){
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const fd = new FormData(form);
+      const qs = new URLSearchParams(Object.fromEntries(fd.entries())).toString();
+      location.href = '/search.html?'+qs;
     });
-  });
+  }
 
-  // Mermaid (por si carga después)
-  if (window.mermaid && window.mermaid.init) {
-    try { window.mermaid.init(); } catch {}
+  // CTA: Buscar con Sandra (abre WhatsApp con filtros)
+  const sandraBtn = document.getElementById('search-sandra');
+  if (sandraBtn && form){
+    sandraBtn.addEventListener('click', ()=>{
+      const fd = new FormData(form);
+      const q = Object.fromEntries(fd.entries());
+      const msg = `Hola Sandra, ayúdame a buscar:\nZona: ${q.q||''}\nHuéspedes: ${q.guests||2}\nHabitaciones: ${q.rooms||1}\nNoches: ${q.nights||1}`;
+      window.open(waLink(msg),'_blank');
+    });
   }
 })();
