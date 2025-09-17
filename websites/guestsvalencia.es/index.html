@@ -1,6 +1,133 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Guests Valencia — PWA</title><link rel="manifest" href="/manifest.json"/><meta name="theme-color" content="#0ea5e9"/>
-<style>body{font-family:system-ui;margin:0;padding:24px;background:#0b1220;color:#e2e8f0}</style></head>
-<body><h1>Sandra IA — Guests Valencia (PWA)</h1><p>Micrófono 3-en-1 listo. HTTPS requerido.</p><button id="talk">Hablar / Detener</button>
-<script>document.getElementById('talk').onclick=()=>alert('Conecta el hook 3-en-1 aquí (WS + VAD + Avatar).');
-if('serviceWorker' in navigator){ navigator.serviceWorker.register('/sw.js'); }</script></body></html>
+<style>body{font-family:system-ui;margin:0;padding:24px;background:#0b1220;color:#e2e8f0}.status-panel{margin:20px 0;padding:20px;border:1px solid #334155;border-radius:12px;background:#1e293b}.status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:16px 0}.status-card{padding:16px;border-radius:8px;border:1px solid}.status-ok{background:#064e3b;border-color:#065f46;color:#a7f3d0}.status-error{background:#7f1d1d;border-color:#991b1b;color:#fca5a5}.btn{padding:8px 16px;margin:4px;border:none;border-radius:6px;cursor:pointer;font-size:14px}.btn-primary{background:#0ea5e9;color:white}.btn-success{background:#10b981;color:white}.btn-warning{background:#f59e0b;color:white}</style></head>
+<body><h1>Sandra IA — Guests Valencia (PWA)</h1><p>Micrófono 3-en-1 listo. HTTPS requerido.</p>
+
+<!-- Panel de estado Sandra -->
+<section id="status-panel" class="status-panel">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <h2 style="margin:0;font-size:18px;">Estado del sistema</h2>
+    <span id="status-up-badge" style="padding:4px 12px;border-radius:20px;font-size:12px;background:#334155;color:#94a3b8;">comprobando…</span>
+  </div>
+  <div class="status-grid" id="status-cards"></div>
+  <div style="margin-top:16px;font-size:12px;color:#64748b;display:flex;align-items:center;gap:8px;">
+    <span>Última actualización:</span>
+    <time id="status-updated">—</time>
+    <button id="status-refresh" class="btn btn-primary" style="margin-left:auto;">Actualizar</button>
+  </div>
+</section>
+
+<!-- Botones de prueba TTS -->
+<div style="margin:20px 0;">
+  <button id="btn-tts" class="btn btn-primary">Probar TTS estándar</button>
+  <button id="btn-lite" class="btn btn-success">Probar speech-lite</button>
+  <button id="btn-ssml" class="btn btn-warning">Probar SSML</button>
+</div>
+
+<button id="talk">Hablar / Detener</button>
+
+<script>
+// Status Panel
+const STATUS_URL = "/.netlify/functions/status";
+const statusCardsEl = document.getElementById("status-cards");
+const statusBadgeEl = document.getElementById("status-up-badge");
+const statusUpdatedEl = document.getElementById("status-updated");
+const statusRefreshBtn = document.getElementById("status-refresh");
+
+function pill(ok) { return ok ? "✅" : "❌"; }
+function cls(ok) { return ok ? "status-card status-ok" : "status-card status-error"; }
+function badge(ok) {
+  statusBadgeEl.textContent = ok ? "online" : "offline";
+  statusBadgeEl.style.background = ok ? "#10b981" : "#dc2626";
+  statusBadgeEl.style.color = "white";
+}
+
+async function loadStatus() {
+  statusBadgeEl.textContent = "comprobando…";
+  statusBadgeEl.style.background = "#334155";
+  statusBadgeEl.style.color = "#94a3b8";
+
+  try {
+    const res = await fetch(STATUS_URL, { cache: "no-store" });
+    const data = await res.json();
+
+    badge(Boolean(data.up));
+    statusUpdatedEl.textContent = new Date(data.at).toLocaleTimeString();
+
+    statusCardsEl.innerHTML = "";
+    (data.results || []).forEach(r => {
+      const card = document.createElement("div");
+      card.className = cls(r.ok);
+      card.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-weight:600;font-size:14px;">${r.name.toUpperCase()}</div>
+          <div style="font-size:18px;">${pill(r.ok)}</div>
+        </div>
+        <div style="margin-top:8px;font-size:12px;">
+          Latencia: <span style="font-family:monospace;">${r.ms} ms</span>
+          ${r.status ? `<span style="margin-left:8px;opacity:0.7;">HTTP ${r.status}</span>` : ""}
+          ${!r.ok && r.error ? `<div style="margin-top:4px;opacity:0.8;">${r.error}</div>` : ""}
+        </div>
+      `;
+      statusCardsEl.appendChild(card);
+    });
+  } catch (e) {
+    badge(false);
+    statusUpdatedEl.textContent = "error";
+    statusCardsEl.innerHTML = `<div class="status-card status-error">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-weight:600;font-size:14px;">STATUS</div>
+        <div style="font-size:18px;">❌</div>
+      </div>
+      <div style="margin-top:8px;font-size:12px;">${(e && e.message) || e}</div>
+    </div>`;
+  }
+}
+
+// TTS Functions
+async function playB64Mp3(b64) {
+  const bytes = atob(b64);
+  const arr = new Uint8Array(bytes.length);
+  for (let i=0;i<bytes.length;i++) arr[i]=bytes.charCodeAt(i);
+  const url = URL.createObjectURL(new Blob([arr], { type: 'audio/mpeg' }));
+  const a = new Audio(url);
+  await a.play().catch(console.error);
+  return url;
+}
+
+async function postJSON(url, data) {
+  const r = await fetch(url, { method: 'POST', headers: {'content-type':'application/json'}, body: JSON.stringify(data) });
+  if (!r.ok) throw new Error(`${url} failed ${r.status}: ${await r.text()}`);
+  return r.text();
+}
+
+// Event Listeners
+statusRefreshBtn?.addEventListener("click", loadStatus);
+setInterval(loadStatus, 10000);
+loadStatus();
+
+document.getElementById('btn-tts')?.addEventListener('click', async () => {
+  try {
+    const b64 = await postJSON('/api/tts', { text: 'Hola Clay, Sandra habla en producción con TTS estándar.' });
+    await playB64Mp3(b64);
+  } catch (e) { alert('Error TTS: ' + e.message); }
+});
+
+document.getElementById('btn-lite')?.addEventListener('click', async () => {
+  try {
+    const b64 = await postJSON('/api/speech-lite', { text: 'Hola, esto es el modo lite de Sandra con menor latencia.' });
+    await playB64Mp3(b64);
+  } catch (e) { alert('Error speech-lite: ' + e.message); }
+});
+
+document.getElementById('btn-ssml')?.addEventListener('click', async () => {
+  try {
+    const ssml = 'Hola Clay. Este es un mensaje con pausas y énfasis en SSML.';
+    const b64 = await postJSON('/api/tts-ssml', { ssml });
+    await playB64Mp3(b64);
+  } catch (e) { alert('Error SSML: ' + e.message); }
+});
+
+document.getElementById('talk').onclick=()=>alert('Conecta el hook 3-en-1 aquí (WS + VAD + Avatar).');
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('/sw.js'); }
+</script></body></html>
