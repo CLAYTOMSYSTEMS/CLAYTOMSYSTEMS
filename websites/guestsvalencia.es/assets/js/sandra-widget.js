@@ -105,14 +105,46 @@
     log('⛔ Parar todo');
   }
 
+  // Avatar integration
+  const avatarContainer = $('#sandra-avatar-container');
+  const avatarToggle = $('#sandra-avatar-toggle');
+  let sandraAvatar = null;
+
+  async function initAvatar() {
+    if (sandraAvatar) return;
+    try {
+      // Load HeyGen integration (when available)
+      if (window.integrateSandraAvatar) {
+        sandraAvatar = window.integrateSandraAvatar('#sandra-avatar-container', {
+          apiKey: window.HEYGEN_API_KEY || 'demo',
+          avatarId: window.HEYGEN_AVATAR_ID || 'sandra_v1'
+        });
+        log('🎭 Avatar conectado nivel Premium');
+      } else {
+        log('⚠️ Avatar Premium no disponible');
+      }
+    } catch (e) {
+      log('Avatar error: ' + e.message);
+    }
+  }
+
   // UI
   btnToggle?.addEventListener('click', ()=>{ panel.classList.toggle('hidden'); if(!open) connect(); });
   btnClose?.addEventListener('click', ()=> panel.classList.add('hidden'));
+  avatarToggle?.addEventListener('click', ()=> {
+    avatarContainer?.classList.toggle('hidden');
+    if (!avatarContainer?.classList.contains('hidden')) {
+      initAvatar();
+    }
+  });
   btnPTT?.addEventListener('mousedown', pttStart);
   btnPTT?.addEventListener('touchstart', (e)=>{e.preventDefault(); pttStart();},{passive:false});
   btnPTT?.addEventListener('mouseup', pttStop);
   btnPTT?.addEventListener('mouseleave', ()=>{ if(mediaRec && mediaRec.state==='recording') pttStop(); });
   btnPTT?.addEventListener('touchend', pttStop);
   btnStop?.addEventListener('click', stopAll);
+
+  // Store WebSocket reference for HeyGen integration
+  window.sandra_ws = ws;
 
 })();
