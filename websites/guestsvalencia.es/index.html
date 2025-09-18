@@ -64,9 +64,64 @@
         </label>
         <div class="flex items-end gap-2">
           <button class="rounded-xl bg-white text-slate-900 px-4 py-2 font-semibold">Buscar</button>
-          <button type="button" id="ai-help" class="rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-4 py-2">
+          <button type="button" id="ai-help" class="rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 transition-all">
             🔎 Búsqueda con IA
           </button>
+        </div>
+
+        <!-- Panel AI Búsqueda (inicialmente oculto) -->
+        <div id="ai-search-panel" class="hidden mt-4 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200">
+          <div class="text-center">
+            <div class="mb-3">
+              <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full">
+                <span class="text-2xl">🎤</span>
+              </div>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Búsqueda Inteligente con Sandra</h3>
+            <p class="text-sm text-gray-600 mb-4">Cuéntame qué buscas y te ayudo a encontrar el alojamiento perfecto</p>
+
+            <div class="flex items-center justify-center gap-3">
+              <button id="ai-speak-btn" class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <span class="text-sm">🎙️ Hablar</span>
+              </button>
+              <button id="ai-type-btn" class="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                <span class="text-sm">✍️ Escribir</span>
+              </button>
+              <button id="ai-close-btn" class="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
+                <span class="text-sm">✕ Cerrar</span>
+              </button>
+            </div>
+
+            <!-- Área de texto para escribir -->
+            <div id="ai-text-area" class="hidden mt-4">
+              <textarea id="ai-text-input" class="w-full p-3 border border-gray-300 rounded-lg" rows="3" placeholder="Ej: Busco un apartamento cerca del puerto para 2 personas, preferiblemente con terraza..."></textarea>
+              <button id="ai-text-send" class="mt-2 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                Enviar consulta
+              </button>
+            </div>
+
+            <!-- Estado de la llamada/grabación -->
+            <div id="ai-status" class="hidden mt-4 p-3 bg-white rounded-lg border">
+              <div class="flex items-center justify-center gap-2">
+                <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                <span class="text-sm font-medium">Sandra está escuchando...</span>
+              </div>
+              <p class="text-xs text-gray-500 mt-1">Describe lo que buscas y Sandra te ayudará</p>
+            </div>
+
+            <!-- Respuesta de Sandra -->
+            <div id="ai-response" class="hidden mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
+              <div class="flex items-start gap-2">
+                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                  <span class="text-sm">🤖</span>
+                </div>
+                <div class="flex-1">
+                  <p class="text-sm font-medium text-green-800">Sandra responde:</p>
+                  <div id="ai-response-text" class="text-sm text-green-700 mt-1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -157,34 +212,138 @@
     © GuestsValencia · ClayTomSystems — <a class="underline" href="/legal.html">Aviso legal & cookies</a>
   </footer>
 
-  <!-- Widget Sandra (WS + barge-in + HeyGen Avatar) -->
+  <!-- Sandra IA Híbrida: Chat + Video + Avatar + Compartir Pantalla -->
   <div id="sandra-widget" class="fixed right-4 bottom-20 z-50">
-    <button id="sandra-toggle" class="rounded-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 shadow-soft">🎤 Hablar con Sandra</button>
-    <div id="sandra-panel" class="hidden mt-3 w-80 rounded-2xl border bg-white p-3 shadow-soft">
-      <div class="flex items-center justify-between">
-        <b class="text-slate-900">Sandra · Asistente IA</b>
+    <button id="sandra-toggle" class="rounded-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 shadow-soft">
+      💬 Sandra IA
+    </button>
+
+    <!-- Panel Principal Híbrido -->
+    <div id="sandra-panel" class="hidden mt-3 w-80 rounded-2xl border bg-white shadow-soft overflow-hidden transition-all duration-300">
+      <!-- Header con controles -->
+      <div class="flex items-center justify-between p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div class="flex items-center gap-2">
+          <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+          <b>Sandra IA 7.0</b>
+        </div>
         <div class="flex gap-1">
-          <button id="sandra-avatar-toggle" class="text-slate-500 hover:text-slate-700" title="Toggle Avatar">👤</button>
-          <button id="sandra-close" class="text-slate-500 hover:text-slate-700">✕</button>
+          <button id="sandra-video-toggle" class="text-white/80 hover:text-white" title="Videollamada">📹</button>
+          <button id="sandra-avatar-toggle" class="text-white/80 hover:text-white" title="Avatar">👤</button>
+          <button id="sandra-fullscreen" class="text-white/80 hover:text-white" title="Pantalla completa">⛶</button>
+          <button id="sandra-share" class="text-white/80 hover:text-white" title="Compartir pantalla">📤</button>
+          <button id="sandra-close" class="text-white/80 hover:text-white">✕</button>
         </div>
       </div>
 
-      <!-- Avatar Container (premium feature) -->
-      <div id="sandra-avatar-container" class="hidden mt-2 w-72 h-48 sandra-avatar-container mx-auto">
-        <div class="sandra-avatar-loading">
-          <div class="text-center">
-            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
-            <p class="text-sm">Conectando avatar...</p>
+      <!-- Área de Video/Avatar (oculta por defecto) -->
+      <div id="sandra-video-area" class="hidden relative bg-gradient-to-b from-slate-900 to-slate-800">
+        <!-- Avatar Container Premium -->
+        <div id="sandra-avatar-container" class="w-full h-64 sandra-avatar-container">
+          <div class="sandra-avatar-loading">
+            <div class="text-center">
+              <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
+              <p class="text-sm text-white">Conectando avatar...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles de Video -->
+        <div class="absolute bottom-3 left-3 right-3 flex justify-center gap-2">
+          <button id="sandra-video-small" class="bg-black/50 text-white px-2 py-1 rounded text-xs">Mini</button>
+          <button id="sandra-video-medium" class="bg-black/50 text-white px-2 py-1 rounded text-xs">Mediano</button>
+          <button id="sandra-video-large" class="bg-black/50 text-white px-2 py-1 rounded text-xs">Grande</button>
+        </div>
+      </div>
+
+      <!-- Chat Area -->
+      <div id="sandra-chat-area" class="flex flex-col">
+        <!-- Mensajes -->
+        <div id="sandra-log" class="h-40 overflow-auto p-3 text-sm space-y-2 bg-gray-50">
+          <div class="text-center text-gray-500 text-xs">
+            Escribe o habla con Sandra IA 💬🎤
+          </div>
+        </div>
+
+        <!-- Input de texto -->
+        <div class="border-t bg-white p-3">
+          <div class="flex gap-2">
+            <input
+              id="sandra-text-input"
+              type="text"
+              placeholder="Escribe tu mensaje..."
+              class="flex-1 rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+            <button id="sandra-send" class="rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-3 py-2">
+              📤
+            </button>
+          </div>
+
+          <!-- Controles de voz -->
+          <div class="mt-2 flex items-center gap-2">
+            <button id="sandra-ptt" class="rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 text-sm">
+              🎙️ Pulsar para hablar
+            </button>
+            <button id="sandra-stop" class="rounded-lg bg-slate-200 text-slate-800 px-3 py-2 text-sm">
+              ⏹️ Parar
+            </button>
           </div>
         </div>
       </div>
 
-      <div id="sandra-log" class="mt-2 h-40 overflow-auto text-sm text-slate-700"></div>
-      <div class="mt-3 flex items-center gap-2">
-        <button id="sandra-ptt" class="rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2">Pulsar para hablar</button>
-        <button id="sandra-stop" class="rounded-lg bg-slate-200 text-slate-800 px-3 py-2">Parar</button>
+      <!-- Status Bar -->
+      <div class="bg-slate-100 px-3 py-2 text-xs text-slate-600 flex justify-between">
+        <span>Barge-in activo | Avatar Premium</span>
+        <span id="sandra-status">Conectado</span>
       </div>
-      <p class="mt-2 text-xs text-slate-500">Barge-In: si hablas mientras reproduce, Sandra se calla. Premium: Avatar con sync labial.</p>
+    </div>
+  </div>
+
+  <!-- Modal Pantalla Completa -->
+  <div id="sandra-fullscreen-modal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center">
+    <div class="w-full h-full max-w-4xl max-h-[90vh] bg-white rounded-lg overflow-hidden">
+      <div class="flex items-center justify-between p-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <h2 class="text-xl font-bold">Sandra IA - Videollamada</h2>
+        <div class="flex gap-2">
+          <button id="sandra-share-screen" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded">
+            📺 Compartir pantalla
+          </button>
+          <button id="sandra-fullscreen-close" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded">
+            ✕ Cerrar
+          </button>
+        </div>
+      </div>
+      <div class="flex h-full">
+        <!-- Video principal -->
+        <div class="flex-1 bg-gradient-to-b from-slate-900 to-slate-800">
+          <div id="sandra-fullscreen-avatar" class="w-full h-full sandra-avatar-container">
+            <div class="sandra-avatar-loading">
+              <div class="text-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+                <p class="text-white">Cargando videollamada...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Chat lateral -->
+        <div class="w-80 border-l bg-white flex flex-col">
+          <div id="sandra-fullscreen-chat" class="flex-1 p-4 overflow-auto space-y-2 text-sm">
+            <!-- Mensajes del chat -->
+          </div>
+          <div class="border-t p-4">
+            <div class="flex gap-2">
+              <input
+                id="sandra-fullscreen-input"
+                type="text"
+                placeholder="Mensaje en videollamada..."
+                class="flex-1 rounded-lg border px-3 py-2 text-sm"
+              >
+              <button id="sandra-fullscreen-send" class="bg-blue-600 text-white px-3 py-2 rounded-lg">
+                📤
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <script defer src="/assets/js/sandra-widget.js"></script>
@@ -235,5 +394,85 @@
     io.observe(vid);
   })();
   </script>
+
+  <!-- Footer Unificado -->
+  <footer class="bg-slate-900 text-white">
+    <div class="mx-auto max-w-6xl px-6 py-10">
+      <div class="grid md:grid-cols-4 gap-8">
+        <!-- Columna 1: Marca -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">GuestsValencia</h3>
+          <p class="text-slate-400 text-sm mb-4">
+            Alojamientos premium en Valencia con llegada autónoma y atención 24/7.
+            Tecnología ClayTom Systems.
+          </p>
+          <div class="flex gap-3">
+            <a href="https://facebook.com/guestsvalencia" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+              <span class="sr-only">Facebook</span>📘
+            </a>
+            <a href="https://instagram.com/guestsvalencia" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+              <span class="sr-only">Instagram</span>📷
+            </a>
+            <a href="https://tiktok.com/@guestsvalencia" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+              <span class="sr-only">TikTok</span>🎵
+            </a>
+          </div>
+        </div>
+
+        <!-- Columna 2: Enlaces rápidos -->
+        <div>
+          <h4 class="font-semibold mb-4">Enlaces rápidos</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/alojamientos.html" class="text-slate-400 hover:text-white transition-colors">Alojamientos</a></li>
+            <li><a href="/search.html" class="text-slate-400 hover:text-white transition-colors">Buscar</a></li>
+            <li><a href="/owners.html" class="text-slate-400 hover:text-white transition-colors">Propietarios</a></li>
+            <li><a href="/contacto.html" class="text-slate-400 hover:text-white transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Servicios -->
+        <div>
+          <h4 class="font-semibold mb-4">Servicios</h4>
+          <ul class="space-y-2 text-sm">
+            <li><span class="text-slate-400">✓ Llegada autónoma</span></li>
+            <li><span class="text-slate-400">✓ Atención 24/7</span></li>
+            <li><span class="text-slate-400">✓ Limpieza incluida</span></li>
+            <li><span class="text-slate-400">✓ WiFi premium</span></li>
+            <li><span class="text-slate-400">✓ Sandra IA asistente</span></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Contacto -->
+        <div>
+          <h4 class="font-semibold mb-4">Contacto</h4>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li>📞 <a href="tel:+34624829117" class="hover:text-white transition-colors">+34 624 829 117</a></li>
+            <li>📧 <a href="mailto:info@guestsvalencia.es" class="hover:text-white transition-colors">info@guestsvalencia.es</a></li>
+            <li>📍 Valencia, España</li>
+            <li>🤖 <button onclick="document.getElementById('sandra-toggle').click()" class="hover:text-white transition-colors cursor-pointer">Chat con Sandra IA</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Separador -->
+      <div class="border-t border-slate-700 mt-8 pt-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
+          <div class="flex flex-wrap gap-4">
+            <span>© 2024 GuestsValencia</span>
+            <span>•</span>
+            <span>ClayTom Systems</span>
+            <span>•</span>
+            <span>Tecnología Cubana Independiente</span>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <a href="/legal.html#aviso" class="hover:text-white transition-colors">Aviso Legal</a>
+            <a href="/legal.html#privacidad" class="hover:text-white transition-colors">Privacidad</a>
+            <a href="/legal.html#cookies" class="hover:text-white transition-colors">Cookies</a>
+            <a href="/legal.html#condiciones" class="hover:text-white transition-colors">Condiciones</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
