@@ -1,0 +1,28 @@
+[build]
+  functions = "websites/guestsvalencia.es/netlify/functions"
+  publish = "websites/guestsvalencia.es"
+  base = "websites/guestsvalencia.es"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.elevenlabs.io https://api.guestsvalencia.es"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = "default-src 'self'; connect-src 'self' https://api.openai.com https://api.elevenlabs.io https://api.guestsvalencia.es blob:; media-src 'self' blob: https://api.elevenlabs.io; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src https://app.heygen.com https://console.heygen.com;"
+    Strict-Transport-Security = "max-age=31536000"
