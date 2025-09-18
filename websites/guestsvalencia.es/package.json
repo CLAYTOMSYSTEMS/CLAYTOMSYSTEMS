@@ -1,0 +1,32 @@
+{
+  "name": "guestsvalencia-website",
+  "version": "2.1.0",
+  "description": "Guests Valencia - Apartamentos en Valencia con Sandra IA",
+  "main": "index.html",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'Static site - no build needed'",
+    "test:e2e": "./ops/test-e2e-complete.sh",
+    "deploy": "netlify deploy --prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GUESTVALENCIA/CLAYTOMSYSTEMS"
+  },
+  "keywords": [
+    "valencia",
+    "apartamentos",
+    "sandra-ia",
+    "guests",
+    "tourism"
+  ],
+  "author": "ClayTom Systems - Clayton Thomas",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
