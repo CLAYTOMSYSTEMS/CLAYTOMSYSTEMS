@@ -1,0 +1,18 @@
+[build]
+base = "websites/guestsvalencia.es"
+publish = "public"
+command = "npm run build || echo static"
+functions = "netlify/functions"
+
+# (opcional) redirecciones legacy
+[[redirects]]
+from = "/legacy/*"
+to = "/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/demo/*"
+to = "/"
+status = 301
+force = true
