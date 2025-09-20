@@ -1,0 +1,18 @@
+{
+  "pr_title": "chore(gpt): aplicar sugerencias automáticas — PR #123",
+  "pr_body": "Este PR aplica las correcciones sugeridas por la integración ChatGPT para mitigar problemas de seguridad y estilo.\n\nChecklist:\n- [ ] Tests añadidos\n- [ ] CI pasa\n- [ ] Revisión humana requerida\n\nReferencias: PR original #123",
+  "branch_name": "gpt-suggest/123/security-fix-20250920",
+  "commits": [
+    {
+      "message": "chore(gpt): fix input validation in src/api/user.ts",
+      "files": [
+        {
+          "path": "src/api/user.ts",
+          "content": "// contenido completo actualizado del archivo con validaciones de entrada\nexport function validateUserInput(input) { /* ... */ }\n"
+        }
+      ]
+    }
+  ],
+  "labels": ["gpt-suggested", "security-fix"],
+  "reviewers": []
+}

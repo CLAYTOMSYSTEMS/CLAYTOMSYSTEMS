@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ReviewFindings",
+  "description": "Esquema AJV para validar salidas de revisiones (seguridad, estilo, bugs).",
+  "type": "object",
+  "required": ["summary", "findings", "ok_to_apply_patch"],
+  "properties": {
+    "summary": {
+      "type": "string",
+      "description": "Resumen breve (1-2 frases) de la revisión."
+    },
+    "findings": {
+      "type": "array",
+      "description": "Lista de hallazgos detectados.",
+      "items": { "$ref": "#/definitions/finding" }
+    },
+    "ok_to_apply_patch": {
+      "type": "boolean",
+      "description": "Si el revisor (AI) considera seguro aplicar automáticamente los parches propuestos."
+    },
+    "patches": {
+      "type": "array",
+      "description": "Parches propuestos (archivo completo por entrada). Opcional; usar junto a ok_to_apply_patch.",
+      "items": { "$ref": "#/definitions/file" }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "finding": {
+      "type": "object",
+      "required": ["id", "title", "severity", "path", "description", "recommendation"],
+      "properties": {
+        "id": { "type": "string", "description": "Identificador único del hallazgo (ej. S-1, STYLE-2)." },
+        "title": { "type": "string", "description": "Título corto del hallazgo." },
+        "severity": {
+          "type": "string",
+          "enum": ["critical", "high", "medium", "low"],
+          "description": "Severidad del hallazgo."
+        },
+        "path": { "type": "string", "description": "Archivo afectado (ruta relativa)." },
+        "line_start": { "type": "integer", "minimum": 1, "description": "Línea inicial afectada (opcional en algunos hallazgos)." },
+        "line_end": { "type": "integer", "minimum": 1, "description": "Línea final afectada (opcional)." },
+        "description": { "type": "string", "description": "Explicación técnica del problema." },
+        "recommendation": { "type": "string", "description": "Cambio concreto recomendado." },
+        "patch": { "$ref": "#/definitions/file", "description": "Opcional: parche sugerido para este hallazgo." }
+      },
+      "additionalProperties": false
+    },
+    "file": {
+      "type": "object",
+      "required": ["path", "content"],
+      "properties": {
+        "path": { "type": "string" },
+        "content": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  }
+}
