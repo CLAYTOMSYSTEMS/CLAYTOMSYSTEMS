@@ -1,0 +1,55 @@
+name: Comment Trigger Extractor
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  trigger-extraction:
+    if: contains(github.event.comment.body, '@extract') || contains(github.event.comment.body, '@chatgpt')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      actions: write
+
+    steps:
+    - name: Parse extraction command
+      id: parse
+      run: |
+        COMMENT="${{ github.event.comment.body }}"
+
+        if [[ "$COMMENT" == *"barge-in"* ]]; then
+          echo "type=barge-in" >> $GITHUB_OUTPUT
+        elif [[ "$COMMENT" == *"proxy"* ]]; then
+          echo "type=proxy-system" >> $GITHUB_OUTPUT
+        elif [[ "$COMMENT" == *"llm"* ]]; then
+          echo "type=llm-config" >> $GITHUB_OUTPUT
+        elif [[ "$COMMENT" == *"full"* ]] || [[ "$COMMENT" == *"todo"* ]]; then
+          echo "type=full-architecture" >> $GITHUB_OUTPUT
+        else
+          echo "type=barge-in" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Trigger extraction workflow
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const extractionType = '${{ steps.parse.outputs.type }}';
+
+          await github.rest.actions.createWorkflowDispatch({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            workflow_id: 'chatgpt-extractor.yml',
+            ref: 'main',
+            inputs: {
+              extraction_type: extractionType
+            }
+          });
+
+          // Responder al comentario
+          await github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `🤖 **Extracción Iniciada**\n\n**Tipo:** ${extractionType}\n**Estado:** En progreso...\n\nRevisando el workflow en [Actions](/${context.repo.owner}/${context.repo.repo}/actions)`
+          });

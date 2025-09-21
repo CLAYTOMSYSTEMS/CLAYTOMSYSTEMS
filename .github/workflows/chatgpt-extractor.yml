@@ -1,0 +1,138 @@
+name: ChatGPT Code Extractor
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created]
+  pull_request:
+    types: [opened, edited]
+  workflow_dispatch:
+    inputs:
+      extraction_type:
+        description: 'Tipo de extracción'
+        required: true
+        default: 'barge-in'
+        type: choice
+        options:
+        - barge-in
+        - proxy-system
+        - llm-config
+        - full-architecture
+
+jobs:
+  extract-code:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: |
+        npm install
+        npm install @octokit/rest openai
+
+    - name: Extract with ChatGPT
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: |
+        cat << 'EOF' > extract.js
+        const { Octokit } = require('@octokit/rest');
+        const OpenAI = require('openai');
+
+        const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+        const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+        async function extractCode() {
+          const prompts = {
+            'barge-in': `Dame el sistema Barge-In completo que desarrollamos antes.
+                        Necesito toda la lógica de WebRTC, VAD y manejo de interrupciones.
+                        Devuelve SOLO el código, sin explicaciones.`,
+            'proxy-system': `Muéstrame el sistema de proxy completo con todos los endpoints
+                           y configuraciones que ya implementamos. SOLO código.`,
+            'llm-config': `Dame la configuración completa de la LLM personalizada con
+                         todos los parámetros de entrenamiento. SOLO código.`,
+            'full-architecture': `Necesito la arquitectura completa de Sandra IA 7.0
+                                con todos los componentes y conexiones. SOLO código.`
+          };
+
+          const extractionType = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch'
+            ? '${{ github.event.inputs.extraction_type }}'
+            : 'barge-in';
+
+          const prompt = prompts[extractionType];
+
+          try {
+            const completion = await openai.chat.completions.create({
+              model: "gpt-4-turbo",
+              messages: [
+                {
+                  role: "system",
+                  content: "Eres un desarrollador experto. Devuelve SOLO código funcional, sin explicaciones ni markdown."
+                },
+                {
+                  role: "user",
+                  content: prompt
+                }
+              ],
+              max_tokens: 4000,
+              temperature: 0.3
+            });
+
+            const extractedCode = completion.choices[0].message.content;
+
+            // Guardar código extraído
+            const fs = require('fs');
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            const filename = `extracted-${extractionType}-${timestamp}.txt`;
+
+            fs.writeFileSync(filename, extractedCode);
+            console.log(`✅ Código extraído guardado en: ${filename}`);
+            console.log(`📝 Contenido (primeros 500 chars):`);
+            console.log(extractedCode.substring(0, 500) + '...');
+
+            // Crear issue con el código extraído
+            const { data: issue } = await octokit.issues.create({
+              owner: '${{ github.repository_owner }}',
+              repo: '${{ github.event.repository.name }}',
+              title: `🤖 Código Extraído: ${extractionType}`,
+              body: `## 🔥 Extracción Exitosa\n\n**Tipo:** ${extractionType}\n**Timestamp:** ${timestamp}\n\n### 📄 Código Extraído:\n\n\`\`\`javascript\n${extractedCode}\n\`\`\`\n\n---\n*Generado automáticamente por Sandra IA Extractor*`
+            });
+
+            console.log(`📋 Issue creada: ${issue.html_url}`);
+
+          } catch (error) {
+            console.error('❌ Error en extracción:', error);
+            process.exit(1);
+          }
+        }
+
+        extractCode();
+        EOF
+
+        node extract.js
+
+    - name: Upload extracted files
+      uses: actions/upload-artifact@v4
+      with:
+        name: extracted-code-${{ github.run_number }}
+        path: extracted-*.txt
+        retention-days: 30
+
+    - name: Commit extracted code
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "ChatGPT Extractor"
+        git add extracted-*.txt 2>/dev/null || true
+        git commit -m "🤖 Auto-extracted code from ChatGPT" || true
+        git push || true
