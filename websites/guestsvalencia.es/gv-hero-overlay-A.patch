@@ -1,0 +1,182 @@
+diff --git a/public/index.html b/public/index.html
+index 1234567..abcdefg 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -28,16 +28,20 @@
+   </div>
+
+   <header class="relative isolate overflow-hidden text-white">
+-    <!-- VIDEO de fondo (silenciado = autoplay garantizado) -->
+-    <video id="hero-video" class="absolute inset-0 -z-20 w-full h-full object-cover"
+-           autoplay muted loop playsinline
+-           poster="/media/valencia-hero-poster.jpg"
+-           preload="metadata">
+-      <source src="/media/valencia-hero.mp4" type="video/mp4">
+-      <source src="/media/valencia-hero.webm" type="video/webm">
+-    </video>
++    <!-- HERO PHOTO with responsive picture element -->
++    <picture class="absolute inset-0 -z-20">
++      <source media="(min-width: 768px)"
++              srcset="/assets/images/valencia-window-hero-lg.webp 1920w, /assets/images/valencia-window-hero-md.webp 1280w"
++              sizes="100vw"
++              type="image/webp">
++      <source media="(max-width: 767px)"
++              srcset="/assets/images/valencia-window-hero-sm.webp 768w, /assets/images/valencia-window-hero-xs.webp 480w"
++              sizes="100vw"
++              type="image/webp">
++      <img src="/assets/images/valencia-window-hero-lg.jpg"
++           alt="Vista panorámica de Valencia desde una ventana moderna"
++           class="w-full h-full object-cover" loading="eager">
++    </picture>
+
+-    <!-- Gradiente + halo para legibilidad -->
+-    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--bg-top)/90] to-[var(--bg-bottom)/92]"></div>
+-    <div class="absolute inset-0 -z-10 halo-hero"></div>
++    <!-- Soft overlay for readability -->
++    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900/70"></div>
++    <div class="absolute inset-0 -z-10 hero-photo-overlay"></div>
+
+     <div class="mx-auto max-w-6xl px-6 py-16">
+@@ -94,6 +98,35 @@
+     </div>
+   </header>
+
++  <!-- QUOTE BAR with photo background -->
++  <section class="relative py-12 text-white overflow-hidden">
++    <!-- Quote bar background photo -->
++    <picture class="absolute inset-0 -z-20">
++      <source media="(min-width: 768px)"
++              srcset="/assets/images/valencia-quote-bg-lg.webp 1920w"
++              type="image/webp">
++      <source media="(max-width: 767px)"
++              srcset="/assets/images/valencia-quote-bg-sm.webp 768w"
++              type="image/webp">
++      <img src="/assets/images/valencia-quote-bg-lg.jpg"
++           alt="Valencia cityscape background"
++           class="w-full h-full object-cover" loading="lazy">
++    </picture>
++
++    <!-- Quote bar overlay -->
++    <div class="absolute inset-0 -z-10 bg-slate-900/75"></div>
++
++    <div class="relative mx-auto max-w-4xl px-6 text-center">
++      <blockquote class="text-xl md:text-2xl font-light italic mb-8">
++        "Valencia te espera con apartamentos únicos y la mejor experiencia de alojamiento autónomo"
++      </blockquote>
++      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
++        <a href="https://wa.me/34600000000" class="cta-button cta-whatsapp">📱 WhatsApp</a>
++        <a href="/contacto.html" class="cta-button cta-contact">📧 Contacto</a>
++        <button id="install-pwa" class="cta-button cta-pwa hidden">📲 Instalar App</button>
++      </div>
++    </div>
++  </section>
++
+   <!-- APARTAMENTOS destacados -->
+   <section class="py-12">
+     <div class="mx-auto max-w-6xl px-6">
+diff --git a/public/assets/css/styles.css b/public/assets/css/styles.css
+index 1234567..abcdefg 100644
+--- a/public/assets/css/styles.css
++++ b/public/assets/css/styles.css
+@@ -8,4 +8,27 @@
+ .badge{display:inline-flex;align-items:center;font-size:.75rem;padding:.25rem .6rem;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.10);backdrop-filter:blur(10px)}
+ .pill{display:inline-flex;align-items:center;font-size:.70rem;padding:.2rem .5rem;border-radius:999px;background:#d1fae5;color:#065f46}
+ .halo-hero{background:radial-gradient(1200px 600px at 30% -10%,rgba(37,99,235,.28),transparent)}
+-.halo-sub{background:radial-gradient(900px 450px at 20% -10%,rgba(37,99,235,.22),transparent)}
+\ No newline at end of file
++.halo-sub{background:radial-gradient(900px 450px at 20% -10%,rgba(37,99,235,.22),transparent)}
++
++/* Hero photo overlay */
++.hero-photo-overlay{
++  background:radial-gradient(ellipse 80% 50% at 50% 20%,rgba(59,130,246,.15),transparent);
++}
++
++/* CTA Button styles */
++.cta-button{
++  display:inline-flex;
++  align-items:center;
++  padding:.75rem 1.5rem;
++  border-radius:.75rem;
++  font-weight:600;
++  text-decoration:none;
++  transition:all .3s ease;
++  border:2px solid transparent;
++}
++.cta-whatsapp{background:#25d366;color:white}.cta-whatsapp:hover{background:#1da851;transform:translateY(-2px)}
++.cta-contact{background:#3b82f6;color:white}.cta-contact:hover{background:#2563eb;transform:translateY(-2px)}
++.cta-pwa{background:rgba(255,255,255,.1);color:white;border-color:rgba(255,255,255,.3)}.cta-pwa:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
++
++/* Responsive picture optimization */
++picture{display:block}picture img{transition:opacity .3s ease}
+diff --git a/public/manifest.json b/public/manifest.json
+index 1234567..abcdefg 100644
+--- a/public/manifest.json
++++ b/public/manifest.json
+@@ -1,5 +1,27 @@
+ {
+   "name": "GuestsValencia",
+   "short_name": "GuestsValencia",
+-  "start_url": "/"
+-}
+\ No newline at end of file
++  "start_url": "/",
++  "display": "standalone",
++  "background_color": "#0f172a",
++  "theme_color": "#0b1020",
++  "description": "Apartamentos en Valencia - Llegada autónoma y soporte inmediato",
++  "orientation": "portrait-primary",
++  "icons": [
++    {
++      "src": "/assets/images/icon-192.png",
++      "sizes": "192x192",
++      "type": "image/png"
++    },
++    {
++      "src": "/assets/images/icon-512.png",
++      "sizes": "512x512",
++      "type": "image/png"
++    }
++  ],
++  "categories": ["travel", "lifestyle"],
++  "lang": "es",
++  "scope": "/",
++  "prefer_related_applications": false
++}
+diff --git a/public/assets/js/site.js b/public/assets/js/site.js
+index 1234567..abcdefg 100644
+--- a/public/assets/js/site.js
++++ b/public/assets/js/site.js
+@@ -40,6 +40,32 @@ window.addEventListener('DOMContentLoaded', () => {
+   }
+ });
+
++// PWA Installation
++let deferredPrompt;
++
++window.addEventListener('beforeinstallprompt', (e) => {
++  e.preventDefault();
++  deferredPrompt = e;
++  const installButton = document.getElementById('install-pwa');
++  if (installButton) {
++    installButton.classList.remove('hidden');
++  }
++});
++
++document.addEventListener('DOMContentLoaded', () => {
++  const installButton = document.getElementById('install-pwa');
++  if (installButton) {
++    installButton.addEventListener('click', async () => {
++      if (deferredPrompt) {
++        deferredPrompt.prompt();
++        const { outcome } = await deferredPrompt.userChoice;
++        console.log(`PWA installation ${outcome}`);
++        deferredPrompt = null;
++        installButton.classList.add('hidden');
++      }
++    });
++  }
++});
++
+ // ===== CONVERSIÓN =====
+
+ // Búsqueda + Modal IA (mantiene funcionalidad existente)
