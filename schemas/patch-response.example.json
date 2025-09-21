@@ -1,0 +1,18 @@
+{
+  "action": "modify",
+  "file_path": "src/components/ChatInterface.tsx",
+  "content": "import React, { useState, useEffect } from 'react';\n\ninterface ChatMessage {\n  id: string;\n  content: string;\n  role: 'user' | 'assistant';\n  timestamp: Date;\n}\n\nconst ChatInterface: React.FC = () => {\n  const [messages, setMessages] = useState<ChatMessage[]>([]);\n  const [input, setInput] = useState('');\n  const [isLoading, setIsLoading] = useState(false);\n\n  const sendMessage = async () => {\n    if (!input.trim()) return;\n    \n    setIsLoading(true);\n    const userMessage: ChatMessage = {\n      id: Date.now().toString(),\n      content: input,\n      role: 'user',\n      timestamp: new Date()\n    };\n    \n    setMessages(prev => [...prev, userMessage]);\n    setInput('');\n    \n    try {\n      const response = await fetch('/api/chat', {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify({ message: input })\n      });\n      \n      const data = await response.json();\n      const assistantMessage: ChatMessage = {\n        id: (Date.now() + 1).toString(),\n        content: data.response,\n        role: 'assistant',\n        timestamp: new Date()\n      };\n      \n      setMessages(prev => [...prev, assistantMessage]);\n    } catch (error) {\n      console.error('Error sending message:', error);\n    } finally {\n      setIsLoading(false);\n    }\n  };\n\n  return (\n    <div className=\"chat-interface\">\n      <div className=\"messages\">\n        {messages.map(msg => (\n          <div key={msg.id} className={`message ${msg.role}`}>\n            <span className=\"content\">{msg.content}</span>\n            <span className=\"timestamp\">{msg.timestamp.toLocaleTimeString()}</span>\n          </div>\n        ))}\n      </div>\n      <div className=\"input-area\">\n        <input\n          type=\"text\"\n          value={input}\n          onChange={(e) => setInput(e.target.value)}\n          onKeyPress={(e) => e.key === 'Enter' && sendMessage()}\n          disabled={isLoading}\n          placeholder=\"Type your message...\"\n        />\n        <button onClick={sendMessage} disabled={isLoading || !input.trim()}>\n          {isLoading ? 'Sending...' : 'Send'}\n        </button>\n      </div>\n    </div>\n  );\n};\n\nexport default ChatInterface;",
+  "diff": "@@ -1,5 +1,7 @@\n import React, { useState } from 'react';\n+import { useEffect } from 'react';\n \n interface ChatMessage {\n   id: string;\n   content: string;\n   role: 'user' | 'assistant';\n+  timestamp: Date;\n }",
+  "confidence": 0.95,
+  "reasoning": "Added timestamp field to ChatMessage interface and proper error handling to the chat interface component. Improved user experience with loading states and input validation.",
+  "security_analysis": {
+    "safe": true,
+    "concerns": [],
+    "risk_level": "low"
+  },
+  "metadata": {
+    "timestamp": "2025-09-21T00:30:00Z",
+    "model": "gpt-4-turbo",
+    "version": "2025.1"
+  }
+}
