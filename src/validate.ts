@@ -217,7 +217,7 @@ class ChatGPTValidator {
     totalPatches: number;
     validPatches: number;
     safePatches: number;
-    results: ReturnType<typeof this.validateAndSecurePatch>[];
+    results: Array<ReturnType<ChatGPTValidator['validateAndSecurePatch']>>;
   } {
     const results = patches.map(patch => this.validateAndSecurePatch(patch));
 

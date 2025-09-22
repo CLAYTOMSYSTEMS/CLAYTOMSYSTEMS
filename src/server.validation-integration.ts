@@ -247,9 +247,9 @@ class ChatGPTValidationServer {
         })
       });
 
-      const data = await response.json();
+      const data: any = await response.json();
       res.json({
-        analysis: data.choices[0]?.message?.content || 'No analysis generated',
+        analysis: data.choices?.[0]?.message?.content || 'No analysis generated',
         usage: data.usage,
         timestamp: new Date().toISOString()
       });
@@ -288,7 +288,7 @@ class ChatGPTValidationServer {
         })
       });
 
-      const data = await response.json();
+      const data: any = await response.json();
       const reviewText = data.choices[0]?.message?.content;
 
       try {
@@ -346,7 +346,7 @@ class ChatGPTValidationServer {
         })
       });
 
-      const data = await response.json();
+      const data: any = await response.json();
       const patchText = data.choices[0]?.message?.content;
 
       try {

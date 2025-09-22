@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Admin Clusters - GuestsValencia</title>
+  <meta name="theme-color" content="#0b1020">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/chart.js@4.4.0/dist/chart.min.js"></script>
+  <script src="https://unpkg.com/@chartjs/adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <style>
+    .cluster-node {
+      transition: all 0.3s ease;
+      cursor: move;
+    }
+    .cluster-node:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .dragging {
+      z-index: 1000;
+      transform: rotate(5deg) scale(1.1);
+    }
+    .drop-zone {
+      border: 2px dashed #3b82f6;
+      background: rgba(59, 130, 246, 0.1);
+    }
+    .analytics-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .metric-card {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    .performance-card {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+<!-- ARSENAL T) PANEL ADMIN CLUSTERS - UI COMPLETA GESTIÓN VISUAL -->
+<!-- ¡¡¡DOMINANDO CLUSTERS CON INTERFAZ BRUTAL!!! -->
+
+<!-- NAVBAR ADMIN -->
+<div class="bg-slate-900 text-white">
+  <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <a href="/index.html" class="text-lg font-bold">GuestsValencia</a>
+      <span class="text-blue-400">→</span>
+      <span class="text-sm bg-blue-600 px-3 py-1 rounded-full">Panel Admin Clusters</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <button id="saveConfig" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-medium">
+        💾 Guardar Config
+      </button>
+      <button id="exportData" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium">
+        📊 Exportar Datos
+      </button>
+      <button id="realTimeToggle" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg font-medium">
+        🔄 Tiempo Real: ON
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD PRINCIPAL -->
+<div class="mx-auto max-w-7xl px-6 py-8">
+
+  <!-- MÉTRICAS PRINCIPALES -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+    <!-- Total Clusters -->
+    <div class="analytics-card text-white p-6 rounded-xl">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-blue-100 text-sm">Total Clusters</p>
+          <p id="totalClusters" class="text-3xl font-bold">0</p>
+        </div>
+        <div class="text-4xl opacity-80">🧠</div>
+      </div>
+    </div>
+
+    <!-- Vectores Activos -->
+    <div class="metric-card text-white p-6 rounded-xl">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-pink-100 text-sm">Vectores Activos</p>
+          <p id="activeVectors" class="text-3xl font-bold">0</p>
+        </div>
+        <div class="text-4xl opacity-80">⚡</div>
+      </div>
+    </div>
+
+    <!-- Performance Score -->
+    <div class="performance-card text-white p-6 rounded-xl">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-cyan-100 text-sm">Performance Score</p>
+          <p id="performanceScore" class="text-3xl font-bold">94%</p>
+        </div>
+        <div class="text-4xl opacity-80">🚀</div>
+      </div>
+    </div>
+
+    <!-- A/B Tests Activos -->
+    <div class="bg-gradient-to-br from-green-500 to-teal-600 text-white p-6 rounded-xl">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-green-100 text-sm">A/B Tests Activos</p>
+          <p id="activeABTests" class="text-3xl font-bold">3</p>
+        </div>
+        <div class="text-4xl opacity-80">🧪</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL PRINCIPAL SPLIT -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+    <!-- VISUALIZACIÓN CLUSTERS -->
+    <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-gray-800">🎯 Gestión Visual de Clusters</h2>
+        <div class="flex gap-2">
+          <button id="addCluster" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm">
+            ➕ Nuevo Cluster
+          </button>
+          <button id="autoOptimize" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm">
+            🤖 Auto-Optimizar
+          </button>
+        </div>
+      </div>
+
+      <!-- DRAG & DROP WORKSPACE -->
+      <div id="clusterWorkspace" class="relative bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 min-h-96 p-4">
+        <!-- Los clusters se renderizan dinámicamente aquí -->
+      </div>
+
+      <!-- CONTROLES DE VISUALIZACIÓN -->
+      <div class="mt-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" id="showConnections" checked class="rounded">
+            Mostrar conexiones
+          </label>
+          <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" id="showLabels" checked class="rounded">
+            Mostrar etiquetas
+          </label>
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+          <span>Zoom:</span>
+          <input type="range" id="zoomSlider" min="50" max="200" value="100" class="w-20">
+          <span id="zoomValue">100%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL DE CONTROL -->
+    <div class="space-y-6">
+
+      <!-- CONFIGURACIÓN CLUSTER SELECCIONADO -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">⚙️ Configuración Cluster</h3>
+
+        <div id="clusterConfig" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre del Cluster</label>
+            <input type="text" id="clusterName" class="w-full border border-gray-300 rounded-lg px-3 py-2" placeholder="Selecciona un cluster">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Peso de Similitud</label>
+            <input type="range" id="similarityWeight" min="0" max="1" step="0.1" value="0.8" class="w-full">
+            <span id="similarityValue" class="text-sm text-gray-500">0.8</span>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Umbral de Inclusión</label>
+            <input type="range" id="inclusionThreshold" min="0.1" max="1" step="0.05" value="0.7" class="w-full">
+            <span id="thresholdValue" class="text-sm text-gray-500">0.7</span>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Color del Cluster</label>
+            <div class="grid grid-cols-6 gap-2">
+              <div class="w-8 h-8 bg-blue-500 rounded cursor-pointer cluster-color" data-color="#3b82f6"></div>
+              <div class="w-8 h-8 bg-red-500 rounded cursor-pointer cluster-color" data-color="#ef4444"></div>
+              <div class="w-8 h-8 bg-green-500 rounded cursor-pointer cluster-color" data-color="#10b981"></div>
+              <div class="w-8 h-8 bg-purple-500 rounded cursor-pointer cluster-color" data-color="#8b5cf6"></div>
+              <div class="w-8 h-8 bg-yellow-500 rounded cursor-pointer cluster-color" data-color="#f59e0b"></div>
+              <div class="w-8 h-8 bg-pink-500 rounded cursor-pointer cluster-color" data-color="#ec4899"></div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t">
+            <button id="updateCluster" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg">
+              Actualizar Cluster
+            </button>
+            <button id="deleteCluster" class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg mt-2">
+              Eliminar Cluster
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÉTRICAS CLUSTER -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">📊 Métricas del Cluster</h3>
+
+        <div id="clusterMetrics" class="space-y-3">
+          <div class="flex justify-between">
+            <span class="text-sm text-gray-600">Vectores:</span>
+            <span id="metricVectors" class="font-medium">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-sm text-gray-600">Cohesión:</span>
+            <span id="metricCohesion" class="font-medium">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-sm text-gray-600">Separación:</span>
+            <span id="metricSeparation" class="font-medium">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-sm text-gray-600">Conversiones:</span>
+            <span id="metricConversions" class="font-medium">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACCIONES RÁPIDAS -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">⚡ Acciones Rápidas</h3>
+
+        <div class="space-y-2">
+          <button id="quickBackup" class="w-full bg-gray-600 hover:bg-gray-700 text-white py-2 rounded-lg text-sm">
+            💾 Backup Rápido
+          </button>
+          <button id="quickRestore" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-2 rounded-lg text-sm">
+            🔄 Restaurar Backup
+          </button>
+          <button id="quickOptimize" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg text-sm">
+            🚀 Optimizar Ahora
+          </button>
+          <button id="quickAnalytics" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg text-sm">
+            📈 Analytics Completo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYTICS AVANZADA -->
+  <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+    <!-- GRÁFICO PERFORMANCE -->
+    <div class="bg-white rounded-xl shadow-lg p-6">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">📈 Performance en Tiempo Real</h3>
+      <canvas id="performanceChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- DISTRIBUCIÓN CLUSTERS -->
+    <div class="bg-white rounded-xl shadow-lg p-6">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">🎯 Distribución de Clusters</h3>
+      <canvas id="clusterDistribution" width="400" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- LOGS Y ACTIVIDAD -->
+  <div class="mt-8 bg-white rounded-xl shadow-lg p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg font-bold text-gray-800">📋 Log de Actividad</h3>
+      <button id="clearLogs" class="text-red-600 hover:text-red-700 text-sm">
+        Limpiar logs
+      </button>
+    </div>
+
+    <div id="activityLog" class="bg-gray-50 rounded-lg p-4 h-48 overflow-y-auto font-mono text-sm">
+      <!-- Los logs se agregan dinámicamente -->
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CREAR CLUSTER -->
+<div id="createClusterModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-xl p-6 w-96 max-w-90vw">
+    <h3 class="text-xl font-bold text-gray-800 mb-4">➕ Crear Nuevo Cluster</h3>
+
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+        <input type="text" id="newClusterName" class="w-full border border-gray-300 rounded-lg px-3 py-2" placeholder="Mi Cluster">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
+        <select id="newClusterType" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+          <option value="property">Propiedades</option>
+          <option value="user_behavior">Comportamiento Usuario</option>
+          <option value="search_patterns">Patrones Búsqueda</option>
+          <option value="custom">Personalizado</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Posición X</label>
+        <input type="number" id="newClusterX" class="w-full border border-gray-300 rounded-lg px-3 py-2" value="100">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Posición Y</label>
+        <input type="number" id="newClusterY" class="w-full border border-gray-300 rounded-lg px-3 py-2" value="100">
+      </div>
+    </div>
+
+    <div class="flex gap-3 mt-6">
+      <button id="confirmCreateCluster" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg">
+        Crear
+      </button>
+      <button id="cancelCreateCluster" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-2 rounded-lg">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="/assets/js/admin-clusters.js"></script>
+
+</body>
+</html>
