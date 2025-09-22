@@ -1,10 +1,12 @@
 [build]
-base = "websites/guestsvalencia.es"
-publish = "public"
-command = "npm run build || echo static"
+publish = "."
+command = "echo static site"
 functions = "netlify/functions"
 
-# (opcional) redirecciones legacy
+[context.production]
+environment = { GIT_FETCH_DEPTH = "0" }
+
+# Redirects legacy
 [[redirects]]
 from = "/legacy/*"
 to = "/"
