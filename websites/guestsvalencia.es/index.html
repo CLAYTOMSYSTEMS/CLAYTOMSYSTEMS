@@ -73,9 +73,17 @@
 </head>
 <body class="bg-gray-50 text-slate-800 min-h-full flex flex-col">
   <!-- NAVBAR -->
-  <nav aria-label="Principal" class="bg-slate-900 text-white">
+  <nav aria-label="Principal" class="bg-slate-900 text-white fixed top-0 left-0 right-0 z-50">
     <div class="mx-auto max-w-6xl px-6 py-3 flex items-center justify-between">
-      <a href="/" class="text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500">GuestsValencia</a>
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <input type="file" id="logo-upload" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" title="Cambiar logo">
+          <a href="/" class="text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2">
+            <img id="site-logo" src="/icons/icon-32.png" alt="Logo" class="w-6 h-6 object-contain">
+            GuestsValencia
+          </a>
+        </div>
+      </div>
       <div class="flex items-center gap-4 text-sm">
         <a href="/index.html"        class="hover:underline focus:ring-2 focus:ring-blue-500 rounded">Inicio</a>
         <a href="/alojamientos.html" class="hover:underline focus:ring-2 focus:ring-blue-500 rounded">Alojamientos</a>
@@ -89,7 +97,7 @@
     </div>
   </nav>
 
-  <header class="relative isolate overflow-hidden text-white">
+  <header class="relative isolate overflow-hidden text-white mt-16">
     <video id="hero-video" class="absolute inset-0 -z-20 w-full h-full object-cover" autoplay muted loop playsinline
       poster="/media/valencia-hero-poster.jpg" preload="metadata">
       <source src="/media/valencia-hero.webm" type="video/webm">
@@ -234,7 +242,6 @@
           </a>
         </article>
 
-        <!-- Repetir patrón (ejemplos abreviados) -->
         <article class="group rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
           <a href="/alojamientos.html?pref=APT01" class="block focus:outline-none focus:ring-2 focus:ring-blue-500">
             <div class="relative">
@@ -251,8 +258,117 @@
           </a>
         </article>
 
-        <!-- (Añadir las restantes siguiendo patrón original con alt y lazy) -->
-        <!-- ... -->
+        <article class="group rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
+          <a href="/alojamientos.html?pref=APT02" class="block focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="relative">
+              <img src="/images/apt2_1.jpg" alt="Apartamento céntrico 2 una habitación hasta 2 personas"
+                   loading="lazy" width="400" height="176" class="w-full h-44 object-cover">
+            </div>
+            <div class="p-4">
+              <h3 class="text-slate-900 font-semibold text-sm">Apartamento céntrico 2</h3>
+              <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-slate-600">1 hab · hasta 2</span>
+                <span class="text-blue-700 font-bold">€65</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="group rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
+          <a href="/alojamientos.html?pref=APT03" class="block focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="relative">
+              <img src="/images/apt3_1.jpg" alt="Apartamento céntrico 3 dos habitaciones hasta 4 personas"
+                   loading="lazy" width="400" height="176" class="w-full h-44 object-cover">
+            </div>
+            <div class="p-4">
+              <h3 class="text-slate-900 font-semibold text-sm">Apartamento céntrico 3</h3>
+              <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-slate-600">2 hab · hasta 4</span>
+                <span class="text-blue-700 font-bold">€75</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="group rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
+          <a href="/alojamientos.html?pref=APT04" class="block focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="relative">
+              <img src="/images/apt4_1.jpg" alt="Apartamento céntrico 4 una habitación hasta 3 personas"
+                   loading="lazy" width="400" height="176" class="w-full h-44 object-cover">
+            </div>
+            <div class="p-4">
+              <h3 class="text-slate-900 font-semibold text-sm">Apartamento céntrico 4</h3>
+              <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-slate-600">1 hab · hasta 3</span>
+                <span class="text-blue-700 font-bold">€70</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="group rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
+          <a href="/alojamientos.html?pref=APT05" class="block focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="relative">
+              <img src="/images/apt5_1.jpg" alt="Apartamento céntrico 5 dos habitaciones hasta 5 personas"
+                   loading="lazy" width="400" height="176" class="w-full h-44 object-cover">
+            </div>
+            <div class="p-4">
+              <h3 class="text-slate-900 font-semibold text-sm">Apartamento céntrico 5</h3>
+              <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-slate-600">2 hab · hasta 5</span>
+                <span class="text-blue-700 font-bold">€90</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="group rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
+          <a href="/alojamientos.html?pref=APT06" class="block focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="relative">
+              <img src="/images/apt6_1.jpg" alt="Apartamento céntrico 6 una habitación hasta 2 personas"
+                   loading="lazy" width="400" height="176" class="w-full h-44 object-cover">
+            </div>
+            <div class="p-4">
+              <h3 class="text-slate-900 font-semibold text-sm">Apartamento céntrico 6</h3>
+              <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-slate-600">1 hab · hasta 2</span>
+                <span class="text-blue-700 font-bold">€60</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="group rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
+          <a href="/alojamientos.html?pref=APT07" class="block focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="relative">
+              <img src="/images/apt7_1.jpg" alt="Apartamento céntrico 7 tres habitaciones hasta 6 personas"
+                   loading="lazy" width="400" height="176" class="w-full h-44 object-cover">
+            </div>
+            <div class="p-4">
+              <h3 class="text-slate-900 font-semibold text-sm">Apartamento céntrico 7</h3>
+              <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-slate-600">3 hab · hasta 6</span>
+                <span class="text-blue-700 font-bold">€110</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="group rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
+          <a href="/alojamientos.html?pref=APT08" class="block focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="relative">
+              <img src="/images/apt8_1.jpg" alt="Apartamento céntrico 8 dos habitaciones hasta 4 personas"
+                   loading="lazy" width="400" height="176" class="w-full h-44 object-cover">
+            </div>
+            <div class="p-4">
+              <h3 class="text-slate-900 font-semibold text-sm">Apartamento céntrico 8</h3>
+              <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-slate-600">2 hab · hasta 4</span>
+                <span class="text-blue-700 font-bold">€80</span>
+              </div>
+            </div>
+          </a>
+        </article>
       </div>
     </section>
 
@@ -295,7 +411,7 @@
           <h3 class="text-xl font-bold mb-4">GuestsValencia</h3>
             <p class="text-slate-400 text-sm mb-4">
               Alojamientos premium en Valencia con llegada autónoma y atención 24/7.
-              Tecnología ClayTom Systems.
+              Servicio premium de alojamientos.
             </p>
             <div class="flex gap-3">
               <a href="https://facebook.com/guestsvalencia" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white">📘<span class="sr-only">Facebook</span></a>
@@ -336,7 +452,7 @@
       <div class="border-t border-slate-700 mt-8 pt-6">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
           <div class="flex flex-wrap gap-4">
-            <span>© 2024 GuestsValencia</span><span>•</span><span>ClayTom Systems</span><span>•</span><span>Tecnología Cubana Independiente</span>
+            <span>© 2024 GuestsValencia</span><span>•</span><span>Valencia, España</span>
           </div>
           <div class="flex flex-wrap gap-4">
             <a href="/legal.html#aviso" class="hover:text-white">Aviso Legal</a>
