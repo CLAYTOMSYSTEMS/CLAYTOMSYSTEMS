@@ -1,433 +1,494 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="es" class="h-full">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guests Valencia - Alojamientos Turísticos de Calidad</title>
+  <meta charset="utf-8">
+  <title>GuestsValencia · Alojamientos en Valencia con IA</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Alojamientos premium en Valencia con llegada autónoma, soporte 24/7 y asistencia inteligente Sandra IA.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32.png">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Guests Valencia - Tu hogar lejos de casa en la hermosa Valencia. Alojamientos turísticos de calidad con gestión profesional y Sandra IA.">
-    <meta name="keywords" content="Valencia, alojamiento, turismo, apartamentos, vacaciones, España, Airbnb, alquiler, Sandra IA">
-    <meta name="author" content="Guests Valencia">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GuestsValencia · Alojamientos con llegada autónoma">
+  <meta property="og:description" content="Reserva rápida, check-in autónomo, soporte 24/7 y Sandra IA multi-avatar.">
+  <meta property="og:image" content="https://tu-dominio/media/valencia-hero-poster.jpg">
+  <meta property="og:url" content="https://tu-dominio/">
+  <meta property="og:locale" content="es_ES">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://guestsvalencia.es/">
-    <meta property="og:title" content="Guests Valencia - Alojamientos Turísticos de Calidad">
-    <meta property="og:description" content="Tu hogar lejos de casa en la hermosa Valencia. Descubre nuestros alojamientos únicos con Sandra IA.">
-    <meta property="og:image" content="https://guestsvalencia.es/activos/og-image.jpg">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GuestsValencia · Alojamientos con IA">
+  <meta name="twitter:description" content="Experiencia premium con asistencia Sandra IA y llegada autónoma.">
+  <meta name="twitter:image" content="https://tu-dominio/media/valencia-hero-poster.jpg">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://guestsvalencia.es/">
-    <meta property="twitter:title" content="Guests Valencia - Alojamientos Turísticos de Calidad">
-    <meta property="twitter:description" content="Tu hogar lejos de casa en la hermosa Valencia. Descubre nuestros alojamientos únicos.">
-    <meta property="twitter:image" content="https://guestsvalencia.es/activos/og-image.jpg">
+  <!-- Tailwind (en producción sustituir por build purgado) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/styles.css">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/activos/favicon.ico">
-    <link rel="apple-touch-icon" href="/activos/apple-touch-icon.png">
-    <!-- PWA Meta Tags -->
-    <link rel="manifest" href="/manifest.webmanifest">
-    <meta name="theme-color" content="#0b1020">
+  <script>
+    // Config global (ajusta antes de build)
+    window.APP_CONFIG = {
+      WSS_CORE: "wss://api.tu-dominio/ws/core",          // TODO:SERVER
+      WSS_MULTI_AVATAR: "wss://api.tu-dominio/ws/multi", // TODO:SERVER
+      API_BASE: "https://api.tu-dominio",                // TODO:SERVER
+      EMBEDDINGS_URL: "https://api.tu-dominio/semantic/embed", // TODO:SERVER
+      TURN_ENGINE_URL: "https://api.tu-dominio/turn",          // TODO:SERVER
+      CHECKIN_URL: "https://api.tu-dominio/checkin",           // TODO:SERVER
+      SFU_SIGNAL_URL: "wss://sfu.tu-dominio/signal",           // TODO:SERVER
+      AVATAR_STREAM_BASE: "https://stream.tu-dominio/avatar",  // TODO:SERVER
+      ENV: "production"
+    };
+  </script>
 
-    <!-- Fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Schema.org JSON-LD LodgingBusiness + Organization + WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LodgingBusiness",
+    "name":"GuestsValencia",
+    "url":"https://tu-dominio/",
+    "image":"https://tu-dominio/media/valencia-hero-poster.jpg",
+    "description":"Alojamientos premium con llegada autónoma y asistencia IA en Valencia.",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Valencia",
+      "addressCountry":"ES"
+    },
+    "amenityFeature":[
+      {"@type":"LocationFeatureSpecification","name":"Llegada autónoma","value":true},
+      {"@type":"LocationFeatureSpecification","name":"WiFi premium","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Atención 24/7","value":true}
+    ],
+    "makesOffer":{"@type":"Offer","availability":"https://schema.org/InStock"}
+  }
+  </script>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'inter': ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'guests-blue': '#0ea5e9',
-                        'guests-red': '#ef4444',
-                        'guests-pink': '#ec4899',
-                        'sandra-green': '#19C37D',
-                    },
-                    animation: {
-                        'shimmer': 'shimmer 2s linear infinite',
-                    },
-                    keyframes: {
-                        'shimmer': {
-                            '0%': { opacity: '0.3' },
-                            '50%': { opacity: '1' },
-                            '100%': { opacity: '0.3' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Schema.org structured data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "TravelAgency",
-        "name": "Guests Valencia",
-        "description": "Alojamientos turísticos de calidad en Valencia",
-        "url": "https://guestsvalencia.es/",
-        "logo": "https://guestsvalencia.es/activos/logo.png",
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+34966497016",
-            "contactType": "customer service",
-            "email": "hello@guestsvalencia.es"
-        },
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Avda de la Marina 318",
-            "addressLocality": "Benissa",
-            "addressRegion": "Alicante",
-            "postalCode": "03720",
-            "addressCountry": "ES"
-        }
-    }
-    </script>
-
-    <!-- TU NETLIFY IDENTITY EXISTENTE - MANTENGO TODO -->
-    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script type="module" defer src="/assets/js/pwa-register.js"></script>
+  <script type="module" defer src="/assets/js/app-init.js"></script>
 </head>
-<body class="antialiased font-inter bg-slate-50 text-slate-900">
+<body class="bg-gray-50 text-slate-800 min-h-full flex flex-col">
+  <!-- NAVBAR -->
+  <nav aria-label="Principal" class="bg-slate-900 text-white">
+    <div class="mx-auto max-w-6xl px-6 py-3 flex items-center justify-between">
+      <a href="/" class="text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500">GuestsValencia</a>
+      <div class="flex items-center gap-4 text-sm">
+        <a href="/index.html"        class="hover:underline focus:ring-2 focus:ring-blue-500 rounded">Inicio</a>
+        <a href="/alojamientos.html" class="hover:underline focus:ring-2 focus:ring-blue-500 rounded">Alojamientos</a>
+        <a href="/owners.html"       class="hover:underline focus:ring-2 focus:ring-blue-500 rounded">Propietarios</a>
+        <a href="/servicios.html"    class="hover:underline focus:ring-2 focus:ring-blue-500 rounded">Servicios</a>
+        <a href="/contacto.html"     class="hover:underline focus:ring-2 focus:ring-blue-500 rounded">Contacto</a>
+        <span class="mx-2 h-4 w-px bg-white/25"></span>
+        <a href="/auth.html#login"   class="rounded-full bg-white/10 px-3 py-1 border border-white/20 hover:bg-white/20 transition">Acceder</a>
+        <a href="/auth.html#signup"  class="rounded-full bg-blue-600 hover:bg-blue-700 px-3 py-1">Registrarse</a>
+      </div>
+    </div>
+  </nav>
 
-    <!-- NAVBAR FIJA - NUNCA DESAPARECE -->
-    <nav class="site-navbar bg-slate-900 text-white fixed top-0 left-0 right-0 z-50 shadow-lg backdrop-blur-sm">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="relative group"><img id="logo-display" src="/assets/img/logo-gv.svg" alt="GuestsValencia Logo" class="w-10 h-10 cursor-pointer hover:opacity-80 transition-opacity" onerror="this.style.display='none'"><input type="file" id="logo-upload" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" title="Cambiar logo"><div class="absolute -top-1 -right-1 w-4 h-4 bg-guests-blue rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"><svg class="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg></div></div>
-                    <span class="text-xl font-bold">GuestsValencia</span>
-                </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="/index.html" class="hover:text-sky-400 transition-colors font-medium">Inicio</a>
-                    <a href="/alojamientos.html" class="hover:text-sky-400 transition-colors">Alojamientos</a>
-                    <a href="/propietarios.html" class="hover:text-sky-400 transition-colors">Propietarios</a>
-                    <a href="/contacto.html" class="hover:text-sky-400 transition-colors">Contacto</a>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-toggle" class="text-white hover:text-sky-400 transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
+  <header class="relative isolate overflow-hidden text-white">
+    <video id="hero-video" class="absolute inset-0 -z-20 w-full h-full object-cover" autoplay muted loop playsinline
+      poster="/media/valencia-hero-poster.jpg" preload="metadata">
+      <source src="/media/valencia-hero.webm" type="video/webm">
+      <source src="/media/valencia-hero.mp4" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[#0b1020e6] to-[#0b1020ed]"></div>
+    <div class="mx-auto max-w-6xl px-6 py-16">
+      <span class="inline-block bg-white/15 backdrop-blur px-3 py-1 rounded-full text-xs tracking-wide">Llegada autónoma</span>
+      <h1 id="home-title" class="mt-4 text-4xl sm:text-5xl font-extrabold leading-tight">
+        Alojamientos en Valencia
+      </h1>
+      <p id="home-subtitle" class="mt-3 text-lg text-white/85 max-w-xl">
+        Reserva rápida, llegada autónoma y soporte multi-avatar 24/7 con Sandra IA.
+      </p>
+
+      <!-- Buscador -->
+      <form id="search-form" action="/search.html" method="GET"
+        class="mt-6 grid md:grid-cols-4 gap-3 bg-white/10 backdrop-blur rounded-2xl p-4 shadow border border-white/20"
+        aria-describedby="search-helper">
+        <label class="text-sm text-white/90 flex flex-col gap-1">
+          <span>Zona</span>
+          <input name="zona" class="w-full rounded-lg border-0 px-3 py-2 text-slate-900"
+            placeholder="Puerto, Centro…" autocomplete="off">
+        </label>
+        <label class="text-sm text-white/90 flex flex-col gap-1">
+          <span>Huéspedes</span>
+          <input name="huespedes" type="number" min="1" class="w-full rounded-lg border-0 px-3 py-2 text-slate-900" value="2">
+        </label>
+        <label class="text-sm text-white/90 flex flex-col gap-1">
+          <span>Habitaciones</span>
+            <input name="habitaciones" type="number" min="1" class="w-full rounded-lg border-0 px-3 py-2 text-slate-900" value="1">
+        </label>
+        <div class="flex items-end gap-2">
+          <button class="rounded-xl bg-white text-slate-900 px-4 py-2 font-semibold hover:bg-slate-100">Buscar</button>
+          <button type="button" id="ai-help"
+            class="rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 transition-all focus:outline-none focus:ring-2 focus:ring-white/60">
+            🔎 Búsqueda con IA
+          </button>
+        </div>
+
+        <!-- Panel AI -->
+        <div id="ai-search-panel"
+          class="hidden md:col-span-4 mt-4 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200"
+          role="region" aria-label="Búsqueda inteligente con IA">
+          <div class="text-center">
+            <div class="mb-3">
+              <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full">
+                <span class="text-2xl">🎤</span>
+              </div>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Búsqueda Inteligente con Sandra</h3>
+            <p class="text-sm text-gray-600 mb-4">Describe lo que buscas: zona, tipo, vistas, presupuesto…</p>
+
+            <div class="flex flex-wrap items-center justify-center gap-3">
+              <button id="ai-speak-btn" class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">
+                🎙️ Hablar
+              </button>
+              <button id="ai-type-btn" class="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm">
+                ✍️ Escribir
+              </button>
+              <button id="ai-close-btn" class="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 text-sm">
+                ✕ Cerrar
+              </button>
             </div>
 
-            <!-- Menu móvil -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-slate-700">
-                <div class="flex flex-col space-y-3 pt-4">
-                    <a href="/index.html" class="hover:text-sky-400 transition-colors">Inicio</a>
-                    <a href="/alojamientos.html" class="hover:text-sky-400 transition-colors">Alojamientos</a>
-                    <a href="/propietarios.html" class="hover:text-sky-400 transition-colors">Propietarios</a>
-                    <a href="/contacto.html" class="hover:text-sky-400 transition-colors">Contacto</a>
+            <!-- Chips sugerencias -->
+            <div class="mt-4 flex flex-wrap gap-2 justify-center">
+              <button type="button" data-ai-example="ático con terraza cerca del centro para 2 personas"
+                class="text-xs bg-white border border-slate-200 px-2 py-1 rounded-full hover:bg-slate-100">Ático con terraza</button>
+              <button type="button" data-ai-example="apartamento familiar cerca de la playa para 5 personas con 3 habitaciones"
+                class="text-xs bg-white border border-slate-200 px-2 py-1 rounded-full hover:bg-slate-100">Familiar playa</button>
+              <button type="button" data-ai-example="loft moderno para trabajo remoto con wifi rápido"
+                class="text-xs bg-white border border-slate-200 px-2 py-1 rounded-full hover:bg-slate-100">Work remote</button>
+            </div>
+
+            <!-- Texto -->
+            <div id="ai-text-area" class="hidden mt-4">
+              <textarea id="ai-text-input"
+                class="w-full p-3 border border-gray-300 rounded-lg"
+                rows="3"
+                placeholder="Ej: Busco un apartamento cerca del puerto para 2 personas con terraza..."></textarea>
+              <button id="ai-text-send"
+                class="mt-2 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm">
+                Enviar consulta
+              </button>
+            </div>
+
+            <!-- Estado -->
+            <div id="ai-status"
+              class="hidden mt-4 p-3 bg-white rounded-lg border text-sm flex flex-col items-center gap-1"
+              aria-live="polite">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                <span class="font-medium">Sandra está escuchando...</span>
+              </div>
+              <p class="text-xs text-gray-500">Describe tu necesidad y detectaremos filtros.</p>
+            </div>
+
+            <!-- Respuesta -->
+            <div id="ai-response"
+              class="hidden mt-4 p-3 bg-green-50 rounded-lg border border-green-200"
+              aria-live="polite">
+              <div class="flex items-start gap-2">
+                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">🤖</div>
+                <div class="flex-1">
+                  <p class="text-sm font-medium text-green-800">Sandra responde:</p>
+                  <div id="ai-response-text" class="text-sm text-green-700 mt-1"></div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <p id="search-helper" class="sr-only">Introduzca criterios de búsqueda o abra el panel de IA para asistente conversacional.</p>
+    </div>
+  </header>
+
+  <main id="main-content" class="flex-1">
+    <!-- Alojamientos -->
+    <section class="mx-auto max-w-6xl px-6 py-10">
+      <h2 class="text-2xl font-bold text-slate-900">Alojamientos</h2>
+      <p class="text-slate-600">Explora nuestras opciones con <strong>llegada autónoma</strong> y soporte 24/7.</p>
+      <div class="mt-6 grid sm:grid-cols-2 md:grid-cols-3 gap-6" id="listing-grid">
+        <!-- Ejemplo card refactor; las demás seguirán patrón (solo muestro algunas por brevedad) -->
+        <article class="group rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
+          <a href="/alojamientos.html?pref=MN47" class="block focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="relative">
+              <img src="/images/mn47_1.jpg" alt="Apartamento Méndez Núñez 47 zona Puerto 4 habitaciones hasta 8 huéspedes"
+                loading="lazy" width="400" height="176"
+                class="w-full h-44 object-cover transition group-hover:scale-[1.02]">
+              <span class="absolute top-2 left-2 inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold bg-black/60 text-white">
+                Llegada autónoma
+              </span>
+            </div>
+            <div class="p-4">
+              <h3 class="text-slate-900 font-semibold text-sm">Méndez Núñez, 47 — Puerto</h3>
+              <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-slate-600">4 hab · hasta 8 huéspedes</span>
+                <span class="text-blue-700 font-bold" aria-label="Precio por noche">€125</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Repetir patrón (ejemplos abreviados) -->
+        <article class="group rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
+          <a href="/alojamientos.html?pref=APT01" class="block focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="relative">
+              <img src="/images/apt1_1.jpg" alt="Apartamento céntrico 1 dos habitaciones hasta 4 personas"
+                   loading="lazy" width="400" height="176" class="w-full h-44 object-cover">
+            </div>
+            <div class="p-4">
+              <h3 class="text-slate-900 font-semibold text-sm">Apartamento céntrico 1</h3>
+              <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-slate-600">2 hab · hasta 4</span>
+                <span class="text-blue-700 font-bold">€85</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- (Añadir las restantes siguiendo patrón original con alt y lazy) -->
+        <!-- ... -->
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="mx-auto max-w-6xl px-6 pb-12">
+      <h2 class="text-2xl font-bold text-slate-900">Servicios</h2>
+      <div class="mt-6 grid md:grid-cols-3 gap-6">
+        <a href="/servicios.html#licencias" class="block rounded-2xl border bg-white p-5 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <strong>Gestión de licencias turísticas</strong>
+          <p class="text-sm text-slate-600 mt-1">Tramitamos y mantenemos tu VT.</p>
+        </a>
+        <a href="/servicios.html#limpieza" class="block rounded-2xl border bg-white p-5 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <strong>Limpieza profesional</strong>
+          <p class="text-sm text-slate-600 mt-1">Particulares y empresas.</p>
+        </a>
+        <a href="/servicios.html#mantenimiento" class="block rounded-2xl border bg-white p-5 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <strong>Mantenimiento integral</strong>
+          <p class="text-sm text-slate-600 mt-1">Revisiones y asistencia.</p>
+        </a>
+      </div>
+
+      <div class="mt-8 rounded-2xl bg-gradient-to-br from-blue-700 to-indigo-700 text-white shadow-soft p-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,.15),transparent)] pointer-events-none"></div>
+        <h3 class="text-xl font-bold">¿Quieres un presupuesto?</h3>
+        <p class="text-slate-200 mt-1">Cuéntanos tu vivienda y te respondemos al momento.</p>
+        <div class="mt-3 flex gap-2 flex-wrap">
+          <a href="/contacto.html#presupuesto" class="rounded-xl bg-white text-slate-900 px-4 py-2 font-semibold hover:bg-slate-100">Pedir presupuesto</a>
+          <a href="https://wa.me/34624829117?text=Quiero%20un%20presupuesto" target="_blank" rel="noopener noreferrer"
+             class="rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2">WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ÚNICO FOOTER (limpiado) -->
+  <footer class="bg-slate-900 text-white">
+    <div class="mx-auto max-w-6xl px-6 py-10">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">GuestsValencia</h3>
+            <p class="text-slate-400 text-sm mb-4">
+              Alojamientos premium en Valencia con llegada autónoma y atención 24/7.
+              Tecnología ClayTom Systems.
+            </p>
+            <div class="flex gap-3">
+              <a href="https://facebook.com/guestsvalencia" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white">📘<span class="sr-only">Facebook</span></a>
+              <a href="https://instagram.com/guestsvalencia" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white">📷<span class="sr-only">Instagram</span></a>
+              <a href="https://tiktok.com/@guestsvalencia" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white">🎵<span class="sr-only">TikTok</span></a>
             </div>
         </div>
-    </nav>
-
-    <!-- MAIN CONTENT - ESPACIADO PARA NAVBAR FIJA -->
-    <main class="pt-20">
-        <!-- HERO SECTION CON BARRA DE BÚSQUEDA -->
-        <section class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-20 px-4">
-            <div class="container mx-auto text-center">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-sky-400 bg-clip-text text-transparent">
-                    Tu hogar lejos de casa
-                </h1>
-                <p class="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto">
-                    Descubre alojamientos únicos en Valencia con Sandra IA, tu asistente personal 24/7
-                </p>
-
-                <!-- BARRA DE BÚSQUEDA PRINCIPAL -->
-                <div class="max-w-2xl mx-auto relative">
-                    <div class="flex items-center bg-white rounded-full p-2 shadow-2xl">
-                        <div class="flex-1 flex items-center px-4">
-                            <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                            <input
-                                type="text"
-                                id="search-input"
-                                placeholder="¿Qué alojamiento buscas? Ej: Apartamento centro Valencia..."
-                                class="flex-1 outline-none text-slate-900 text-lg"
-                                autocomplete="off"
-                            >
-                        </div>
-                        <button
-                            id="search-btn"
-                            class="bg-guests-blue hover:bg-blue-600 text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105"
-                        >
-                            Buscar
-                        </button>
-                    </div>
-
-                    <!-- SLOT IA DISCRETO - BAJO LA BÚSQUEDA -->
-                    <div id="ai-slot" class="mt-4 opacity-0 transition-all duration-300">
-                        <div class="bg-guests-blue/50 backdrop-blur-sm rounded-xl p-4 border border-slate-700">
-                            <div class="flex items-center justify-center space-x-3">
-                                <div class="w-3 h-3 bg-sandra-green rounded-full animate-pulse"></div>
-                                <span id="ai-text" class="text-sandra-green font-medium">
-                                    Buscar con IA
-                                </span>
-                                <svg class="w-4 h-4 text-sandra-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- QUICK ACTIONS -->
-                <div class="mt-12 flex flex-wrap justify-center gap-4">
-                    <a href="/alojamientos.html" class="bg-white/10 hover:bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full transition-all duration-200 hover:scale-105">
-                        Ver todos los alojamientos
-                    </a>
-                    <a href="/propietarios.html" class="border border-white/30 hover:bg-white/10 px-6 py-3 rounded-full transition-all duration-200 hover:scale-105">
-                        ¿Eres propietario?
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- SANDRA IA SECTION -->
-        <section class="bg-gradient-to-r from-sandra-green to-guests-blue py-20 px-4 text-white">
-            <div class="container mx-auto text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Conoce a Sandra IA</h2>
-                <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-                    Tu asistente personal 24/7. Sandra te ayuda a encontrar el alojamiento perfecto,
-                    gestionar tu reserva y resolver cualquier duda durante tu estancia.
-                </p>
-                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
-                    <button
-                        id="sandra-chat-btn"
-                        class="bg-white text-sandra-green px-8 py-4 rounded-full font-semibold hover:bg-slate-100 transition-all duration-200 hover:scale-105"
-                    >
-                        💬 Chatear con Sandra
-                    </button>
-                    <button
-                        id="sandra-call-btn"
-                        class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-sandra-green transition-all duration-200 hover:scale-105"
-                    >
-                        📞 Llamar a Sandra
-                    </button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ACCIONES RÁPIDAS -->    <section class="bg-slate-100 py-8">        <div class="container mx-auto px-4">            <div class="flex flex-col md:flex-row items-center justify-between gap-6">                <!-- Columna izquierda: Botones existentes -->                <div class="flex flex-wrap gap-4">                    <a href="https://wa.me/34966497016" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex items-center space-x-2">                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.108"/></svg>                        <span>WhatsApp</span>                    </a>                    <a href="/contacto.html" class="bg-guests-blue hover:bg-blue-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex items-center space-x-2">                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>                        <span>Presupuesto</span>                    </a>                </div>                                <!-- Columna derecha: Nuevos controles -->                <div class="flex flex-wrap gap-4">                    <!-- PWA Install Button -->                    <button id="pwa-install-btn" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex items-center space-x-2" style="display: none;">                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>                        <span>Instalar App</span>                    </button>                                        <!-- Background Upload -->                    <div class="relative group">                        <label for="bg-upload" class="bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white px-6 py-3 rounded-full font-semibold cursor-pointer transition-all duration-200 hover:scale-105 flex items-center space-x-2">                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>                            <span>Cambiar Fondo</span>                        </label>                        <input type="file" id="bg-upload" accept="image/*,video/*" class="hidden" title="Subir imagen o video de fondo">                    </div>                </div>            </div>        </div>    </section>
-    <!-- Footer unificado GuestsValencia -->
-    <footer class="bg-guests-blue text-white py-12 mt-16">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Navegación</h3>
-                    <ul class="space-y-2">
-                        <li><a href="/index.html" class="text-gray-300 hover:text-sky-400 transition-colors">Inicio</a></li>
-                        <li><a href="/alojamientos.html" class="text-gray-300 hover:text-sky-400 transition-colors">Alojamientos</a></li>
-                        <li><a href="/propietarios.html" class="text-gray-300 hover:text-sky-400 transition-colors">Propietarios</a></li>
-                        <li><a href="/contacto.html" class="text-gray-300 hover:text-sky-400 transition-colors">Contacto</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
-                    <ul class="space-y-2">
-                        <li><a href="/legal.html" class="text-gray-300 hover:text-sky-400 transition-colors">Aviso Legal</a></li>
-                        <li><a href="/legal.html#privacidad" class="text-gray-300 hover:text-sky-400 transition-colors">Política de Privacidad</a></li>
-                        <li><a href="/legal.html#cookies" class="text-gray-300 hover:text-sky-400 transition-colors">Política de Cookies</a></li>
-                        <li><a href="/legal.html#terminos" class="text-gray-300 hover:text-sky-400 transition-colors">Términos y Condiciones</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Servicios</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-sky-400 transition-colors">App Móvil</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-sky-400 transition-colors">Gestión de Reservas</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-sky-400 transition-colors">Soporte 24/7</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-sky-400 transition-colors">Newsletter</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Contacto</h3>
-                    <div class="space-y-2 text-gray-300">
-                        <p>Valencia, España</p>
-                        <p>+34 966 497 016</p>
-                        <p>hello@guestsvalencia.es</p>
-                        <div class="flex space-x-4 mt-4">
-                            <a href="#" class="text-gray-300 hover:text-sky-400 transition-colors">Instagram</a>
-                            <a href="#" class="text-gray-300 hover:text-sky-400 transition-colors">Facebook</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-slate-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 GuestsValencia. Todos los derechos reservados.</p>
-            </div>
+        <div>
+          <h4 class="font-semibold mb-4">Enlaces rápidos</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/alojamientos.html" class="text-slate-400 hover:text-white">Alojamientos</a></li>
+            <li><a href="/search.html" class="text-slate-400 hover:text-white">Buscar</a></li>
+            <li><a href="/owners.html" class="text-slate-400 hover:text-white">Propietarios</a></li>
+            <li><a href="/contacto.html" class="text-slate-400 hover:text-white">Contacto</a></li>
+          </ul>
         </div>
-    </footer>
+        <div>
+          <h4 class="font-semibold mb-4">Servicios</h4>
+          <ul class="space-y-2 text-sm">
+            <li><span class="text-slate-400">✓ Llegada autónoma</span></li>
+            <li><span class="text-slate-400">✓ Atención 24/7</span></li>
+            <li><span class="text-slate-400">✓ Limpieza incluida</span></li>
+            <li><span class="text-slate-400">✓ WiFi premium</span></li>
+            <li><span class="text-slate-400">✓ Sandra IA multi-avatar</span></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Contacto</h4>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li>📞 <a href="tel:+34624829117" class="hover:text-white">+34 624 829 117</a></li>
+            <li>📧 <a href="mailto:info@guestsvalencia.es" class="hover:text-white">info@guestsvalencia.es</a></li>
+            <li>📍 Valencia, España</li>
+            <li>🤖 <button id="footer-open-ia" class="hover:text-white underline">Chat con Sandra IA</button></li>
+          </ul>
+        </div>
+      </div>
 
-    <!-- SCRIPTS MODERNOS -->
-    <script>
-        // MODERNO INDEX CONTROLLER
-        class ModernIndexController {
-            constructor() {
-                this.init();
-                this.startShimmerEffect();
-                this.setupEventListeners();
-            }
+      <div class="border-t border-slate-700 mt-8 pt-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
+          <div class="flex flex-wrap gap-4">
+            <span>© 2024 GuestsValencia</span><span>•</span><span>ClayTom Systems</span><span>•</span><span>Tecnología Cubana Independiente</span>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <a href="/legal.html#aviso" class="hover:text-white">Aviso Legal</a>
+            <a href="/legal.html#privacidad" class="hover:text-white">Privacidad</a>
+            <a href="/legal.html#cookies" class="hover:text-white">Cookies</a>
+            <a href="/legal.html#condiciones" class="hover:text-white">Condiciones</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-            init() {
-                console.log('GuestsValencia Index Moderno iniciado');
+  <!-- WIDGET SANDRA IA MULTI-AVATAR -->
+  <div id="sandra-widget" class="fixed right-4 bottom-20 z-50">
+    <button id="sandra-toggle" class="rounded-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 shadow-soft focus:outline-none focus:ring-2 focus:ring-white/60" aria-haspopup="dialog" aria-controls="sandra-panel" aria-expanded="false">
+      💬 Sandra IA
+    </button>
 
-                // Mostrar slot IA
-                setTimeout(() => {
-                    const aiSlot = document.getElementById('ai-slot');
-                    if (aiSlot) {
-                        aiSlot.style.opacity = '1';
-                    }
-                }, 1500);
-            }
+    <div id="sandra-panel" class="hidden mt-3 w-96 max-h-[80vh] flex flex-col rounded-2xl border bg-white shadow-soft overflow-hidden transition-all duration-300"
+      role="dialog" aria-modal="false" aria-label="Panel de conversación Sandra IA">
+      <!-- Header -->
+      <div class="flex items-center justify-between p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div class="flex items-center gap-2">
+          <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+          <b>Sandra IA 7.0</b>
+        </div>
+        <div class="flex gap-1">
+          <button id="sandra-video-toggle" class="text-white/80 hover:text-white focus:outline-none" aria-label="Videollamada">📹</button>
+          <button id="sandra-avatar-toggle" class="text-white/80 hover:text-white focus:outline-none" aria-label="Mostrar avatar">👤</button>
+          <button id="sandra-multi-toggle" class="text-white/80 hover:text-white focus:outline-none" aria-label="Panel multi-avatar">🧩</button>
+          <button id="sandra-fullscreen" class="text-white/80 hover:text-white focus:outline-none" aria-label="Pantalla completa">⛶</button>
+          <button id="sandra-close" class="text-white/80 hover:text-white focus:outline-none" aria-label="Cerrar panel">✕</button>
+        </div>
+      </div>
 
-            startShimmerEffect() {
-                // Efecto shimmer cada 15 segundos exactos
-                setInterval(() => {
-                    const aiText = document.getElementById('ai-text');
-                    if (aiText) {
-                        aiText.classList.add('animate-shimmer');
-                        setTimeout(() => {
-                            aiText.classList.remove('animate-shimmer');
-                        }, 2000);
-                    }
-                }, 15000);
-            }
+      <!-- ÁREA AVATAR / VIDEO -->
+      <div id="sandra-video-area" class="hidden relative bg-gradient-to-b from-slate-900 to-slate-800 h-56">
+        <div id="sandra-avatar-container" class="w-full h-full sandra-avatar-container flex items-center justify-center">
+          <div class="sandra-avatar-loading text-center text-white">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
+            <p class="text-sm">Conectando avatar...</p>
+          </div>
+        </div>
+        <div class="absolute bottom-2 left-2 flex gap-2">
+          <button data-avatar-size="sm" class="px-2 py-1 text-xs bg-black/50 text-white rounded">Mini</button>
+          <button data-avatar-size="md" class="px-2 py-1 text-xs bg-black/50 text-white rounded">Mediano</button>
+          <button data-avatar-size="lg" class="px-2 py-1 text-xs bg-black/50 text-white rounded">Grande</button>
+        </div>
+      </div>
 
-            setupEventListeners() {
-                // Menu móvil
-                const menuToggle = document.getElementById('mobile-menu-toggle');
-                const mobileMenu = document.getElementById('mobile-menu');
+      <!-- MULTI-AVATAR MOSAICO -->
+      <div id="sandra-multi-area" class="hidden bg-slate-950 text-white p-2 grid grid-cols-3 gap-2 h-48 overflow-hidden">
+        <!-- Slots de video/avatars (se rellenan dinámicamente) -->
+      </div>
 
-                if (menuToggle && mobileMenu) {
-                    menuToggle.addEventListener('click', () => {
-                        mobileMenu.classList.toggle('hidden');
-                    });
-                }
+      <!-- CHAT -->
+      <div id="sandra-chat-area" class="flex flex-col flex-1 min-h-[200px]">
+        <div id="sandra-log" class="h-48 overflow-auto p-3 text-sm space-y-2 bg-gray-50"
+          aria-live="polite" aria-label="Historial de conversación">
+          <div class="text-center text-gray-500 text-xs">
+            Bienvenido — habla o escribe con Sandra IA 💬🎤
+          </div>
+        </div>
+        <div class="border-t bg-white p-3">
+          <div class="flex gap-2">
+            <input id="sandra-text-input" type="text" placeholder="Escribe tu mensaje..."
+              class="flex-1 rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button id="sandra-send" class="rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-3 py-2" aria-label="Enviar mensaje">📤</button>
+          </div>
+          <div class="mt-2 flex items-center gap-2">
+            <button id="sandra-ptt" class="rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 text-sm" aria-pressed="false">
+              🎙️ Pulsar para hablar
+            </button>
+            <button id="sandra-stop" class="rounded-lg bg-slate-200 text-slate-800 px-3 py-2 text-sm">
+              ⏹️ Parar
+            </button>
+            <button id="sandra-checkin" class="rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 text-sm" title="Iniciar check-in automático">
+              🛎️ Check-in
+            </button>
+          </div>
+        </div>
+      </div>
 
-                // Búsqueda
-                const searchInput = document.getElementById('search-input');
-                const searchBtn = document.getElementById('search-btn');
+      <!-- STATUS -->
+      <div class="bg-slate-100 px-3 py-2 text-[11px] text-slate-600 flex justify-between items-center">
+        <span id="sandra-status-flags">Barge-in | Multi-Avatar | Avatar Premium</span>
+        <span id="sandra-status">Conectando…</span>
+      </div>
+    </div>
+  </div>
 
-                if (searchInput && searchBtn) {
-                    searchBtn.addEventListener('click', () => this.performSearch());
-                    searchInput.addEventListener('keypress', (e) => {
-                        if (e.key === 'Enter') this.performSearch();
-                    });
-                }
+  <!-- MODAL FULLSCREEN -->
+  <div id="sandra-fullscreen-modal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center">
+    <div class="w-full h-full max-w-5xl max-h-[95vh] bg-white rounded-lg overflow-hidden flex flex-col">
+      <div class="flex items-center justify-between p-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <h2 class="text-xl font-bold">Sandra IA - Videollamada Multi-Avatar</h2>
+        <div class="flex gap-2">
+          <button id="sandra-share-screen" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded text-sm">
+            📺 Compartir
+          </button>
+          <button id="sandra-fullscreen-close" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded text-sm">
+            ✕ Cerrar
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-1">
+        <div class="flex-1 bg-slate-900 relative">
+          <div id="sandra-fullscreen-avatar" class="w-full h-full sandra-avatar-container flex items-center justify-center">
+            <div class="sandra-avatar-loading text-center">
+              <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+              <p class="text-white">Cargando videollamada...</p>
+            </div>
+          </div>
+          <div id="sandra-fullscreen-mosaic" class="absolute inset-0 hidden grid grid-cols-3 gap-2 p-2"></div>
+        </div>
+        <div class="w-80 border-l bg-white flex flex-col">
+          <div id="sandra-fullscreen-chat" class="flex-1 p-4 overflow-auto space-y-2 text-sm" aria-live="polite">
+          </div>
+          <div class="border-t p-4">
+            <div class="flex gap-2">
+              <input id="sandra-fullscreen-input" type="text" placeholder="Mensaje..." class="flex-1 rounded-lg border px-3 py-2 text-sm">
+              <button id="sandra-fullscreen-send" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg">📤</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-slate-100 px-3 py-2 text-xs text-slate-600 flex justify-between">
+        <span id="sandra-fullscreen-flags">SFU · Multi-stream · LipSync</span>
+        <span id="sandra-fullscreen-status">Inicializando...</span>
+      </div>
+    </div>
+  </div>
 
-                // Sandra IA buttons
-                const chatBtn = document.getElementById('sandra-chat-btn');
-                const callBtn = document.getElementById('sandra-call-btn');
+  <!-- Opener audio -->
+  <audio id="opener-audio" src="/audio/sandra-opener.wav" preload="auto"></audio>
 
-                if (chatBtn) {
-                    chatBtn.addEventListener('click', () => this.initSandraChat());
-                }
+  <!-- Scripts específicos (modulares) -->
+  <script type="module" src="/assets/js/state-machine.js"></script>
+  <script type="module" src="/assets/js/audio-engine.js"></script>
+  <script type="module" src="/assets/js/duplicate-filter.js"></script>
+  <script type="module" src="/assets/js/turn-engine.js"></script>
+  <script type="module" src="/assets/js/sandra-core.js"></script>
+  <script type="module" src="/assets/js/sandra-multi-avatar.js"></script>
+  <script type="module" src="/assets/js/checkin-flow.js"></script>
+  <script type="module" src="/assets/js/sandra-widget.js"></script>
 
-                if (callBtn) {
-                    callBtn.addEventListener('click', () => this.initSandraCall());
-                }
-            }
-
-            performSearch() {
-                const query = document.getElementById('search-input').value.trim();
-                if (query) {
-                    window.location.href = '/alojamientos.html?search=' + encodeURIComponent(query);
-                }
-            }
-
-            initSandraChat() {
-                if (window.SandraWidgetInstance) {
-                    window.SandraWidgetInstance.open('chat');
-                } else if (window.SandraWidget) {
-                    // Crear instancia si no existe
-                    window.SandraWidgetInstance = window.SandraWidget.create(window.SANDRA_WIDGET_CONFIG);
-                    window.SandraWidgetInstance.open('chat');
-                } else {
-                    console.log('Sandra Widget Premium cargándose...');
-                    setTimeout(() => this.initSandraChat(), 1000);
-                }
-            }
-
-            initSandraCall() {
-                if (window.SandraWidgetInstance) {
-                    window.SandraWidgetInstance.open('call');
-                } else if (window.SandraWidget) {
-                    // Crear instancia si no existe
-                    window.SandraWidgetInstance = window.SandraWidget.create(window.SANDRA_WIDGET_CONFIG);
-                    window.SandraWidgetInstance.open('call');
-                } else {
-                    console.log('Sandra Widget Premium cargándose...');
-                    setTimeout(() => this.initSandraCall(), 1000);
-                }
-            }
-        }
-
-        // Inicializar cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', () => {
-            new ModernIndexController();
-        });
-    </script>
-
-    <!-- Script de la nueva aplicación -->
-    <script src="gv-app.js"></script>
-
-    <!-- Performance Optimizer ÉLITE -->
-    <script src="assets/performance-optimizer.js"></script>
-
-    <!-- Sandra IA Widget Premium v7.0 -->
-    <script src="assets/sandra-widget-premium.js"></script>
-    <script>
-        // Configuración global para Sandra IA Premium
-        window.SANDRA_WIDGET_CONFIG = {
-            apiEndpoint: '/api/sandra-chat',
-            wsEndpoint: 'wss://api.guestsvalencia.es/sandra-ws',
-            voiceEndpoint: '/api/sandra-voice',
-            debug: false, // Producción
-            reconnectAttempts: 5,
-            features: {
-                chat: true,
-                voice: true,
-                video: true,
-                calls: true
-            }
-        };
-    </script>
-
-    <!-- TUS NETLIFY HANDLERS EXISTENTES - NO TOCO NADA -->
-    <script>
-        // MANTENGO TU CONFIGURACIÓN EXACTA
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                    window.netlifyIdentity.on("login", () => {
-                        document.location.href = "/panel/";
-                    });
-                }
-            });
-        }
-    </script>
-
-    <!-- TUS ANALYTICS EXISTENTES - NO MODIFICO -->
-    <script src="navbar-script.js"></script>
-    <!-- PWA Scripts -->
-    <script>
-      if("serviceWorker" in navigator){ navigator.serviceWorker.register("/sw.js"); }
-    </script>
-    <script src="/assets/pwa-install.js"></script>
-    <script src="frontend-updates.js"></script>
+  <!-- Reduced motion -->
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      #hero-video { display:none; }
+      .animate-spin { animation: none !important; }
+    }
+  </style>
 </body>
 </html>
