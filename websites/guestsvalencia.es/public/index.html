@@ -1,478 +1,326 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GuestsValencia · Apartamentos en Valencia</title>
-  <meta name="theme-color" content="#0b1020">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
-  <script defer src="/assets/js/site.js"></script>
-  <script>window.WSS_URL=window.WSS_URL||"wss://TU-DOMINIO";</script>
-</head>
-<body class="bg-gray-50 text-slate-800">
-  <!-- NAVBAR -->
-  <div class="bg-slate-900 text-white">
-    <div class="mx-auto max-w-6xl px-6 py-3 flex items-center justify-between">
-      <a href="/index.html" class="text-sm font-semibold">GuestsValencia</a>
-      <nav class="flex items-center gap-4 text-sm">
-        <a href="/index.html"        class="hover:underline">Inicio</a>
-        <a href="/alojamientos.html" class="hover:underline">Alojamientos</a>
-        <a href="/owners.html"       class="hover:underline">Propietarios</a>
-        <a href="/servicios.html"    class="hover:underline">Servicios</a>
-        <a href="/contacto.html"     class="hover:underline">Contacto</a>
-        <span class="mx-2 h-4 w-px bg-white/25"></span>
-        <a href="/auth.html#login"   class="rounded-full bg-white/10 px-3 py-1 border border-white/20">Acceder</a>
-        <a href="/auth.html#signup"  class="rounded-full bg-blue-600 hover:bg-blue-700 px-3 py-1">Registrarse</a>
-      </nav>
-    </div>
-  </div>
-
-  <header class="relative isolate overflow-hidden text-white">
-    <!-- VIDEO de fondo (silenciado = autoplay garantizado) -->
-    <video id="hero-video" class="absolute inset-0 -z-20 w-full h-full object-cover"
-           autoplay muted loop playsinline
-           poster="/media/valencia-hero-poster.jpg"
-           preload="metadata">
-      <source src="/media/valencia-hero.mp4" type="video/mp4">
-      <source src="/media/valencia-hero.webm" type="video/webm">
-    </video>
-
-    <!-- Gradiente + halo para legibilidad -->
-    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--bg-top)/90] to-[var(--bg-bottom)/92]"></div>
-    <div class="absolute inset-0 -z-10 halo-hero"></div>
-
-    <div class="mx-auto max-w-6xl px-6 py-16">
-      <span class="pill">Llegada autónoma</span>
-      <h1 id="home-title" class="mt-4 text-4xl sm:text-5xl font-extrabold leading-tight">
-        Alojamientos en Valencia
-      </h1>
-      <p id="home-subtitle" class="mt-3 text-lg text-white/85">
-        Reserva rápida, llegada autónoma y soporte inmediato.
-      </p>
-
-      <!-- Barra de búsqueda -->
-      <form class="mt-6 grid md:grid-cols-4 gap-3 glass shadow-soft p-4 rounded-2xl">
-        <label class="text-sm">Zona
-          <input class="w-full rounded-lg border-0 px-3 py-2 text-slate-900" placeholder="Puerto, Centro…" />
-        </label>
-        <label class="text-sm">Huéspedes
-          <input type="number" min="1" class="w-full rounded-lg border-0 px-3 py-2 text-slate-900" />
-        </label>
-        <label class="text-sm">Habitaciones
-          <input type="number" min="1" class="w-full rounded-lg border-0 px-3 py-2 text-slate-900" />
-        </label>
-        <div class="flex items-end gap-2">
-          <button class="rounded-xl bg-white text-slate-900 px-4 py-2 font-semibold">Buscar</button>
-          <button type="button" id="ai-help" class="rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 transition-all">
-            🔎 Búsqueda con IA
-          </button>
-        </div>
-
-        <!-- Panel AI Búsqueda (inicialmente oculto) -->
-        <div id="ai-search-panel" class="hidden mt-4 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200">
-          <div class="text-center">
-            <div class="mb-3">
-              <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full">
-                <span class="text-2xl">🎤</span>
-              </div>
-            </div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">Búsqueda Inteligente con Sandra</h3>
-            <p class="text-sm text-gray-600 mb-4">Cuéntame qué buscas y te ayudo a encontrar el alojamiento perfecto</p>
-
-            <div class="flex items-center justify-center gap-3">
-              <button id="ai-speak-btn" class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                <span class="text-sm">🎙️ Hablar</span>
-              </button>
-              <button id="ai-type-btn" class="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
-                <span class="text-sm">✍️ Escribir</span>
-              </button>
-              <button id="ai-close-btn" class="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
-                <span class="text-sm">✕ Cerrar</span>
-              </button>
-            </div>
-
-            <!-- Área de texto para escribir -->
-            <div id="ai-text-area" class="hidden mt-4">
-              <textarea id="ai-text-input" class="w-full p-3 border border-gray-300 rounded-lg" rows="3" placeholder="Ej: Busco un apartamento cerca del puerto para 2 personas, preferiblemente con terraza..."></textarea>
-              <button id="ai-text-send" class="mt-2 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                Enviar consulta
-              </button>
-            </div>
-
-            <!-- Estado de la llamada/grabación -->
-            <div id="ai-status" class="hidden mt-4 p-3 bg-white rounded-lg border">
-              <div class="flex items-center justify-center gap-2">
-                <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                <span class="text-sm font-medium">Sandra está escuchando...</span>
-              </div>
-              <p class="text-xs text-gray-500 mt-1">Describe lo que buscas y Sandra te ayudará</p>
-            </div>
-
-            <!-- Respuesta de Sandra -->
-            <div id="ai-response" class="hidden mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
-              <div class="flex items-start gap-2">
-                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                  <span class="text-sm">🤖</span>
-                </div>
-                <div class="flex-1">
-                  <p class="text-sm font-medium text-green-800">Sandra responde:</p>
-                  <div id="ai-response-text" class="text-sm text-green-700 mt-1"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </header>
-
-  <!-- Destacados (cards modernizadas con hover y píldora "Llegada autónoma" donde aplique) -->
-  <!-- 9 cards en home → llevan a /alojamientos.html -->
-  <section class="mx-auto max-w-6xl px-6 py-10">
-    <h2 class="text-2xl font-bold text-slate-900">Alojamientos</h2>
-    <p class="text-slate-600">Explora nuestras opciones con <b>llegada autónoma</b> y soporte 24/7.</p>
-    <div class="mt-6 grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <a href="/alojamientos.html?pref=MN47" class="group block rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
-        <div class="relative">
-          <img src="/images/mn47_1.jpg" class="w-full h-44 object-cover transition group-hover:scale-[1.02]" alt="Méndez Núñez 47">
-          <span class="absolute top-2 left-2 inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold bg-black/60 text-white">Llegada autónoma</span>
-        </div>
-        <div class="p-4">
-          <div class="flex justify-between items-center">
-            <b class="text-slate-900">Méndez Núñez, 47 — Puerto</b>
-            <span class="text-blue-700 font-bold">€125</span>
-          </div>
-          <p class="text-sm text-slate-600 mt-1">4 hab · hasta 8 huéspedes</p>
-        </div>
-      </a>
-      <a href="/alojamientos.html?pref=APT01" class="group block rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
-        <div class="relative">
-          <img src="/images/apt1_1.jpg" class="w-full h-44 object-cover transition group-hover:scale-[1.02]" alt="Apartamento 1">
-        </div>
-        <div class="p-4">
-          <div class="flex justify-between items-center">
-            <b class="text-slate-900">Apartamento céntrico 1</b>
-            <span class="text-blue-700 font-bold">€85</span>
-          </div>
-          <p class="text-sm text-slate-600 mt-1">2 hab · hasta 4</p>
-        </div>
-      </a>
-      <a href="/alojamientos.html?pref=APT02" class="group block rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition">
-        <div class="relative">
-          <img src="/images/apt2_1.jpg" class="w-full h-44 object-cover transition group-hover:scale-[1.02]" alt="Apartamento 2">
-          <span class="absolute top-2 left-2 inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold bg-black/60 text-white">Llegada autónoma</span>
-        </div>
-        <div class="p-4">
-          <div class="flex justify-between items-center">
-            <b class="text-slate-900">Apartamento céntrico 2</b>
-            <span class="text-blue-700 font-bold">€90</span>
-          </div>
-          <p class="text-sm text-slate-600 mt-1">2 hab · hasta 4</p>
-        </div>
-      </a>
-      <a href="/alojamientos.html?pref=APT03" class="group block rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition"><div class="relative"><img src="/images/apt3_1.jpg" class="w-full h-44 object-cover" alt=""></div><div class="p-4"><div class="flex justify-between items-center"><b>Loft marítimo</b><span class="text-blue-700 font-bold">€110</span></div><p class="text-sm text-slate-600 mt-1">1 hab · hasta 3</p></div></a>
-      <a href="/alojamientos.html?pref=APT04" class="group block rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition"><div class="relative"><img src="/images/apt4_1.jpg" class="w-full h-44 object-cover" alt=""></div><div class="p-4"><div class="flex justify-between items-center"><b>Ático con terraza</b><span class="text-blue-700 font-bold">€140</span></div><p class="text-sm text-slate-600 mt-1">2 hab · hasta 5</p></div></a>
-      <a href="/alojamientos.html?pref=APT05" class="group block rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition"><div class="relative"><img src="/images/apt5_1.jpg" class="w-full h-44 object-cover" alt=""></div><div class="p-4"><div class="flex justify-between items-center"><b>Suite histórica</b><span class="text-blue-700 font-bold">€130</span></div><p class="text-sm text-slate-600 mt-1">1 hab · hasta 2</p></div></a>
-      <a href="/alojamientos.html?pref=APT06" class="group block rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition"><div class="relative"><img src="/images/apt6_1.jpg" class="w-full h-44 object-cover" alt=""></div><div class="p-4"><div class="flex justify-between items-center"><b>Family & Friends</b><span class="text-blue-700 font-bold">€95</span></div><p class="text-sm text-slate-600 mt-1">3 hab · hasta 6</p></div></a>
-      <a href="/alojamientos.html?pref=APT07" class="group block rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition"><div class="relative"><img src="/images/apt7_1.jpg" class="w-full h-44 object-cover" alt=""></div><div class="p-4"><div class="flex justify-between items-center"><b>Vista jardines</b><span class="text-blue-700 font-bold">€88</span></div><p class="text-sm text-slate-600 mt-1">1 hab · hasta 3</p></div></a>
-      <a href="/alojamientos.html?pref=APT08" class="group block rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-lg transition"><div class="relative"><img src="/images/apt8_1.jpg" class="w-full h-44 object-cover" alt=""></div><div class="p-4"><div class="flex justify-between items-center"><b>Business Centro</b><span class="text-blue-700 font-bold">€105</span></div><p class="text-sm text-slate-600 mt-1">1 hab · hasta 2</p></div></a>
-    </div>
-  </section>
-
-  <!-- SERVICIOS abreviados + CTA Presupuesto -->
-  <section class="mx-auto max-w-6xl px-6 pb-12">
-    <h2 class="text-2xl font-bold text-slate-900">Servicios</h2>
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <a href="/servicios.html#licencias" class="block rounded-2xl border bg-white p-5 shadow-sm hover:shadow-lg">
-        <b>Gestión de licencias turísticas</b>
-        <p class="text-sm text-slate-600 mt-1">Tramitamos y mantenemos tu VT.</p>
-      </a>
-      <a href="/servicios.html#limpieza" class="block rounded-2xl border bg-white p-5 shadow-sm hover:shadow-lg">
-        <b>Limpieza profesional</b>
-        <p class="text-sm text-slate-600 mt-1">Particulares y empresas.</p>
-      </a>
-      <a href="/servicios.html#mantenimiento" class="block rounded-2xl border bg-white p-5 shadow-sm hover:shadow-lg">
-        <b>Mantenimiento integral</b>
-        <p class="text-sm text-slate-600 mt-1">Revisiones y asistencia.</p>
-      </a>
-    </div>
-    <div class="mt-8 rounded-2xl glass shadow-soft p-6 text-white relative overflow-hidden">
-      <div class="absolute inset-0 -z-10 halo-sub"></div>
-      <h3 class="text-xl font-bold">¿Quieres un presupuesto?</h3>
-      <p class="text-slate-200 mt-1">Cuéntanos tu vivienda o tus necesidades y te respondemos al momento.</p>
-      <div class="mt-3 flex gap-2">
-        <a href="/contacto.html#presupuesto" class="rounded-xl bg-white text-slate-900 px-4 py-2 font-semibold">Pedir presupuesto</a>
-        <a href="https://wa.me/34624829117?text=Quiero%20un%20presupuesto" class="rounded-xl bg-emerald-600 text-white px-4 py-2">WhatsApp</a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="mx-auto max-w-6xl px-6 py-10 text-sm text-slate-500">
-    © GuestsValencia · ClayTomSystems — <a class="underline" href="/legal.html">Aviso legal & cookies</a>
-  </footer>
-
-  <!-- Sandra IA Híbrida: Chat + Video + Avatar + Compartir Pantalla -->
-  <div id="sandra-widget" class="fixed right-4 bottom-20 z-50">
-    <button id="sandra-toggle" class="rounded-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 shadow-soft">
-      💬 Sandra IA
-    </button>
-
-    <!-- Panel Principal Híbrido -->
-    <div id="sandra-panel" class="hidden mt-3 w-80 rounded-2xl border bg-white shadow-soft overflow-hidden transition-all duration-300">
-      <!-- Header con controles -->
-      <div class="flex items-center justify-between p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div class="flex items-center gap-2">
-          <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-          <b>Sandra IA 7.0</b>
-        </div>
-        <div class="flex gap-1">
-          <button id="sandra-video-toggle" class="text-white/80 hover:text-white" title="Videollamada">📹</button>
-          <button id="sandra-avatar-toggle" class="text-white/80 hover:text-white" title="Avatar">👤</button>
-          <button id="sandra-fullscreen" class="text-white/80 hover:text-white" title="Pantalla completa">⛶</button>
-          <button id="sandra-share" class="text-white/80 hover:text-white" title="Compartir pantalla">📤</button>
-          <button id="sandra-close" class="text-white/80 hover:text-white">✕</button>
-        </div>
-      </div>
-
-      <!-- Área de Video/Avatar (oculta por defecto) -->
-      <div id="sandra-video-area" class="hidden relative bg-gradient-to-b from-slate-900 to-slate-800">
-        <!-- Avatar Container Premium -->
-        <div id="sandra-avatar-container" class="w-full h-64 sandra-avatar-container">
-          <div class="sandra-avatar-loading">
-            <div class="text-center">
-              <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
-              <p class="text-sm text-white">Conectando avatar...</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Controles de Video -->
-        <div class="absolute bottom-3 left-3 right-3 flex justify-center gap-2">
-          <button id="sandra-video-small" class="bg-black/50 text-white px-2 py-1 rounded text-xs">Mini</button>
-          <button id="sandra-video-medium" class="bg-black/50 text-white px-2 py-1 rounded text-xs">Mediano</button>
-          <button id="sandra-video-large" class="bg-black/50 text-white px-2 py-1 rounded text-xs">Grande</button>
-        </div>
-      </div>
-
-      <!-- Chat Area -->
-      <div id="sandra-chat-area" class="flex flex-col">
-        <!-- Mensajes -->
-        <div id="sandra-log" class="h-40 overflow-auto p-3 text-sm space-y-2 bg-gray-50">
-          <div class="text-center text-gray-500 text-xs">
-            Escribe o habla con Sandra IA 💬🎤
-          </div>
-        </div>
-
-        <!-- Input de texto -->
-        <div class="border-t bg-white p-3">
-          <div class="flex gap-2">
-            <input
-              id="sandra-text-input"
-              type="text"
-              placeholder="Escribe tu mensaje..."
-              class="flex-1 rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-            <button id="sandra-send" class="rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-3 py-2">
-              📤
-            </button>
-          </div>
-
-          <!-- Controles de voz -->
-          <div class="mt-2 flex items-center gap-2">
-            <button id="sandra-ptt" class="rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 text-sm">
-              🎙️ Pulsar para hablar
-            </button>
-            <button id="sandra-stop" class="rounded-lg bg-slate-200 text-slate-800 px-3 py-2 text-sm">
-              ⏹️ Parar
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Status Bar -->
-      <div class="bg-slate-100 px-3 py-2 text-xs text-slate-600 flex justify-between">
-        <span>Barge-in activo | Avatar Premium</span>
-        <span id="sandra-status">Conectado</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Pantalla Completa -->
-  <div id="sandra-fullscreen-modal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center">
-    <div class="w-full h-full max-w-4xl max-h-[90vh] bg-white rounded-lg overflow-hidden">
-      <div class="flex items-center justify-between p-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <h2 class="text-xl font-bold">Sandra IA - Videollamada</h2>
-        <div class="flex gap-2">
-          <button id="sandra-share-screen" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded">
-            📺 Compartir pantalla
-          </button>
-          <button id="sandra-fullscreen-close" class="bg-white/20 hover:bg-white/30 px-3 py-1 rounded">
-            ✕ Cerrar
-          </button>
-        </div>
-      </div>
-      <div class="flex h-full">
-        <!-- Video principal -->
-        <div class="flex-1 bg-gradient-to-b from-slate-900 to-slate-800">
-          <div id="sandra-fullscreen-avatar" class="w-full h-full sandra-avatar-container">
-            <div class="sandra-avatar-loading">
-              <div class="text-center">
-                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-                <p class="text-white">Cargando videollamada...</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Chat lateral -->
-        <div class="w-80 border-l bg-white flex flex-col">
-          <div id="sandra-fullscreen-chat" class="flex-1 p-4 overflow-auto space-y-2 text-sm">
-            <!-- Mensajes del chat -->
-          </div>
-          <div class="border-t p-4">
-            <div class="flex gap-2">
-              <input
-                id="sandra-fullscreen-input"
-                type="text"
-                placeholder="Mensaje en videollamada..."
-                class="flex-1 rounded-lg border px-3 py-2 text-sm"
-              >
-              <button id="sandra-fullscreen-send" class="bg-blue-600 text-white px-3 py-2 rounded-lg">
-                📤
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script defer src="/assets/js/sandra-widget.js"></script>
-
-  <!-- Opener automático (3–5s). El navegador puede bloquear audio con sonido
-       hasta la 1ª interacción. Este script lo lanza onload y, si lo bloquea,
-       se engancha al primer tap/scroll/tecla sin mostrar botón. -->
-  <audio id="opener-audio" src="/audio/sandra-opener.wav" preload="auto"></audio>
-  <script>
-  (function(){
-    const a = document.getElementById('opener-audio');
-    let done = false;
-    async function tryPlay(){ if(done) return;
-      try { await a.play(); done=true; cleanup(); }
-      catch(e){ /* bloqueado hasta interacción */ }
-    }
-    function onInteract(){ if(done) return;
-      a.play().then(()=>{ done=true; cleanup(); }).catch(()=>{});
-    }
-    function cleanup(){
-      ['pointerdown','touchstart','scroll','keydown'].forEach(ev=>window.removeEventListener(ev,onInteract,{passive:true}));
-    }
-    // 1) intenta al cargar
-    window.addEventListener('load', tryPlay);
-    // 2) si bloquea, dispara con la primera interacción
-    ['pointerdown','touchstart','scroll','keydown'].forEach(ev=>window.addEventListener(ev,onInteract,{passive:true, once:false}));
-  })();
-  </script>
-
-  <!-- Respeto a usuarios con reducción de movimiento -->
+  <meta charset="UTF-8">
+  <title>Gæst València - Sandra IA 7.0 (Pack Único)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  @media (prefers-reduced-motion: reduce) {
-    #hero-video { display:none; }
-  }
+    body {
+      background: #f3f4f6;
+      min-height: 100vh;
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #main {
+      background: #fff;
+      max-width: 440px;
+      margin: 2.5rem auto 2rem auto;
+      border-radius: 12px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.10);
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      text-align: center;
+    }
+    h1, h2 {
+      color: #2563eb;
+      font-weight: 700;
+      margin: 0.3rem 0 0.4rem 0;
+    }
+    .messages {
+      height: 310px;
+      overflow-y: auto;
+      border-radius: 8px;
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      margin: 0.7rem 0 0.1rem 0;
+      padding: 0.7rem 0.7rem 0.2rem 0.7rem;
+      text-align: left;
+    }
+    .chat-msg {
+      max-width: 84%;
+      margin-bottom: 0.32rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 20px;
+      font-size: 1rem;
+      word-break: break-word;
+      box-shadow: 0 1px 3px rgb(80 112 221 / 9%);
+    }
+    .chat-user {
+      background: #2563eb;
+      color: #fff;
+      margin-left: 16%;
+      border-bottom-right-radius: 3px;
+      text-align: right;
+    }
+    .chat-sandra {
+      background: #f1f5f9;
+      color: #0f172a;
+      margin-right: 16%;
+      border-bottom-left-radius: 3px;
+    }
+    .controls-row {
+      display: flex;
+      gap: 0.4rem;
+      margin: 0.4rem 0;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 0.55rem 0.7rem;
+      border-radius: 7px;
+      border: 1.3px solid #cfd6ee;
+      font-size: 1rem;
+    }
+    input[type="text"]:focus {
+      outline: 2px solid #3b82f6;
+      border-color: #2563eb;
+    }
+    button {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-weight: 600;
+      padding: 0.7rem 1.1rem;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:disabled {
+      background: #b4bdfc;
+      cursor: not-allowed;
+    }
+    button#speakBtn {
+      background: #059669;
+    }
+    button#payBtn {
+      background: #d97706;
+      font-size: 1.02em;
+    }
+    .status {
+      min-height: 1em;
+      color: #2563eb;
+      font-weight: 600;
+      font-size: 0.97em;
+      margin: 0.17rem 0 0.58rem 0;
+    }
+    #payFlow {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #a7f3d0;
+      border-radius: 8px;
+      margin-top: 1.1rem;
+      padding: 1.38rem 1rem;
+      display: none;
+      font-size: 1.07em;
+      position: relative;
+      text-align: left;
+    }
+    #closePay {
+      background: #ecfdf5;
+      color: #166534;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.96em;
+      position: absolute;
+      top: 9px;
+      right: 9px;
+      padding: 0.3em 0.7em;
+      cursor: pointer;
+    }
+    footer {
+      margin-top: 2rem;
+      color: #64748b;
+      font-size: 0.93em;
+      text-align: center;
+      max-width: 440px;
+    }
   </style>
-
-  <script>
-  // Lazy-ish: pausa el vídeo si no está visible (ahorro batería móvil)
-  (function(){
-    const vid = document.getElementById('hero-video');
-    if(!vid) return;
-    const io = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){ vid.play().catch(()=>{}); }
-        else { try{ vid.pause(); }catch(_){} }
-      });
-    },{threshold:0.1});
-    io.observe(vid);
-  })();
-  </script>
-
-  <!-- Footer Unificado -->
-  <footer class="bg-slate-900 text-white">
-    <div class="mx-auto max-w-6xl px-6 py-10">
-      <div class="grid md:grid-cols-4 gap-8">
-        <!-- Columna 1: Marca -->
-        <div>
-          <h3 class="text-xl font-bold mb-4">GuestsValencia</h3>
-          <p class="text-slate-400 text-sm mb-4">
-            Alojamientos premium en Valencia con llegada autónoma y atención 24/7.
-            Tecnología ClayTom Systems.
-          </p>
-          <div class="flex gap-3">
-            <a href="https://facebook.com/guestsvalencia" target="_blank" class="text-slate-400 hover:text-white transition-colors">
-              <span class="sr-only">Facebook</span>📘
-            </a>
-            <a href="https://instagram.com/guestsvalencia" target="_blank" class="text-slate-400 hover:text-white transition-colors">
-              <span class="sr-only">Instagram</span>📷
-            </a>
-            <a href="https://tiktok.com/@guestsvalencia" target="_blank" class="text-slate-400 hover:text-white transition-colors">
-              <span class="sr-only">TikTok</span>🎵
-            </a>
-          </div>
-        </div>
-
-        <!-- Columna 2: Enlaces rápidos -->
-        <div>
-          <h4 class="font-semibold mb-4">Enlaces rápidos</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/alojamientos.html" class="text-slate-400 hover:text-white transition-colors">Alojamientos</a></li>
-            <li><a href="/search.html" class="text-slate-400 hover:text-white transition-colors">Buscar</a></li>
-            <li><a href="/owners.html" class="text-slate-400 hover:text-white transition-colors">Propietarios</a></li>
-            <li><a href="/contacto.html" class="text-slate-400 hover:text-white transition-colors">Contacto</a></li>
-          </ul>
-        </div>
-
-        <!-- Columna 3: Servicios -->
-        <div>
-          <h4 class="font-semibold mb-4">Servicios</h4>
-          <ul class="space-y-2 text-sm">
-            <li><span class="text-slate-400">✓ Llegada autónoma</span></li>
-            <li><span class="text-slate-400">✓ Atención 24/7</span></li>
-            <li><span class="text-slate-400">✓ Limpieza incluida</span></li>
-            <li><span class="text-slate-400">✓ WiFi premium</span></li>
-            <li><span class="text-slate-400">✓ Sandra IA asistente</span></li>
-          </ul>
-        </div>
-
-        <!-- Columna 4: Contacto -->
-        <div>
-          <h4 class="font-semibold mb-4">Contacto</h4>
-          <ul class="space-y-2 text-sm text-slate-400">
-            <li>📞 <a href="tel:+34624829117" class="hover:text-white transition-colors">+34 624 829 117</a></li>
-            <li>📧 <a href="mailto:info@guestsvalencia.es" class="hover:text-white transition-colors">info@guestsvalencia.es</a></li>
-            <li>📍 Valencia, España</li>
-            <li>🤖 <button onclick="document.getElementById('sandra-toggle').click()" class="hover:text-white transition-colors cursor-pointer">Chat con Sandra IA</button></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Separador -->
-      <div class="border-t border-slate-700 mt-8 pt-6">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
-          <div class="flex flex-wrap gap-4">
-            <span>© 2024 GuestsValencia</span>
-            <span>•</span>
-            <span>ClayTom Systems</span>
-            <span>•</span>
-            <span>Tecnología Cubana Independiente</span>
-          </div>
-          <div class="flex flex-wrap gap-4">
-            <a href="/legal.html#aviso" class="hover:text-white transition-colors">Aviso Legal</a>
-            <a href="/legal.html#privacidad" class="hover:text-white transition-colors">Privacidad</a>
-            <a href="/legal.html#cookies" class="hover:text-white transition-colors">Cookies</a>
-            <a href="/legal.html#condiciones" class="hover:text-white transition-colors">Condiciones</a>
-          </div>
-        </div>
-      </div>
+</head>
+<body>
+  <div id="main">
+    <h1>Sandra IA 7.0</h1>
+    <h2>Gæst València - Sistema Único</h2>
+    <div class="messages" id="msgLog" aria-label="Conversación" aria-live="polite"></div>
+    <div class="status" id="statusLine">&nbsp;</div>
+    <form onsubmit="return false;" class="controls-row">
+      <button id="speakBtn" title="Habla con Sandra IA" type="button" aria-pressed="false">🎙️</button>
+      <input id="msgInput" type="text" placeholder="Escribe o habla aquí..." aria-label="Mensaje a Sandra IA" autocomplete="off" />
+      <button id="sendBtn" type="button" title="Enviar mensaje a Sandra">Enviar</button>
+    </form>
+    <button id="payBtn" title="Iniciar Pago Fácil Sandra">💳 Pago Fácil</button>
+    <div id="payFlow">
+      <button id="closePay">Salir</button>
+      <strong>Pago Fácil está activo.</strong>
+      <br>Por favor sigue las instrucciones de Sandra IA para completar tu reserva y pago de forma guiada y segura.<br><br>
+      <span id="payStep"></span>
     </div>
+  </div>
+  <footer>
+    Versión compacta autocontenida: Sandra IA con Barge-In, chat, voz, demo Pago Fácil y lógica integrada para desarrollo PRO.<br>
+    Listo para pruebas, extensible a integración backend profesional o cloud real.<br><br>
+    <span style="font-size:0.9em;color:#334155;">
+      Gæst València &copy; 2025 Proyecto IA Multimodal.
+    </span>
   </footer>
+<script>
+(function() {
+  // --- ELEMENTOS Y ESTADO ---
+  const msgLog = document.getElementById('msgLog');
+  const statusLine = document.getElementById('statusLine');
+  const speakBtn = document.getElementById('speakBtn');
+  const sendBtn = document.getElementById('sendBtn');
+  const msgInput = document.getElementById('msgInput');
+  const payBtn = document.getElementById('payBtn');
+  const payFlow = document.getElementById('payFlow');
+  const closePay = document.getElementById('closePay');
+  const payStep = document.getElementById('payStep');
+
+  let isListening = false;
+  let isSpeaking = false;
+  let bargeInActive = false;
+  let recognition = null;
+  let synth = window.speechSynthesis;
+  let utterance = null;
+  let pagoFacil = false;
+  let conversation = [];
+
+  // --- UI/UX ---
+  function printMsg(text, who = 'sandra') {
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + (who === 'user' ? 'chat-user' : 'chat-sandra');
+    div.textContent = text;
+    msgLog.appendChild(div);
+    msgLog.scrollTop = msgLog.scrollHeight + 80;
+    conversation.push({ sender: who, text });
+  }
+
+  function setStatus(txt = '') {
+    statusLine.textContent = txt;
+  }
+
+  // --- IA simulada / LOGICA SANDRA ---
+  async function handleSandra(message) {
+    // IA local patrón, aquí se conecta API real si quisieras escalar.
+    let response = "No he entendido eso. ¿Puedes reformularlo?";
+    const lmsg = message.toLowerCase();
+
+    if (lmsg.match(/hola|buenas|buenos/))      response = "¡Hola! ¿En qué puedo ayudarte con tu alojamiento en València?";
+    else if (lmsg.match(/reserva/))            response = "¿Sobre qué alojamiento y fechas necesitas reservar?";
+    else if (lmsg.match(/pago fácil|easy pay|pagar|pago/)) activatePagoFacil();
+    else if (lmsg.match(/precio|coste/))       response = "El coste depende de las fechas y alojamiento. ¿Qué prefieres consultar?";
+    else if (lmsg.match(/gracias|grácias/))    response = "De nada, ¡siempre a tu disposición!";
+    else if (lmsg.match(/adiós|chau|ciao/))    response = "¡Hasta pronto!";
+
+    if (pagoFacil && (!lmsg.match(/pago fácil|easy pay/))) {
+      // Flujo guiado sencillo demo de pago fácil
+      if(lmsg.match(/confirmar|acepto|pagar/)) {
+        response = "Reserva confirmada y pagada. En minutos tendrás email con tu comprobante.";
+        deactivatePagoFacil(true);
+      } else {
+        response = "Confirma con 'acepto' y procederé a gestionar tu pago y reserva.";
+      }
+    }
+
+    // Evita respuesta doble al activar Pago Fácil
+    if (response) {
+      printMsg(response, 'sandra');
+      await speak(response);
+    }
+  }
+
+  // --- VOZ ---
+  function speak(text) {
+    return new Promise(resolve => {
+      if (synth.speaking) synth.cancel();
+      isSpeaking = true; setStatus('Sandra hablando...');
+      utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "es-ES";
+      utterance.onend = () => { isSpeaking = false; setStatus(''); resolve(); };
+      utterance.onerror = () => { isSpeaking = false; setStatus('Error de síntesis'); resolve(); };
+      synth.speak(utterance);
+    });
+  }
+
+  // --- RECONOCIMIENTO DE VOZ BARGE-IN ---
+  function startListening() {
+    if (!('webkitSpeechRecognition' in window)) {
+      alert("Reconocimiento de voz no soportado");
+      return;
+    }
+    recognition = new window.webkitSpeechRecognition();
+    recognition.lang = "es-ES";
+    recognition.interimResults = false;
+    recognition.continuous = false;
+    recognition.onstart = function() {
+      isListening = true;
+      bargeInActive = true;
+      speakBtn.setAttribute('aria-pressed', 'true');
+      setStatus("Escuchando... (Barge-In activo)");
+      if(isSpeaking) synth.cancel();
+      isSpeaking = false;
+    };
+    recognition.onresult = async function(event) {
+      const recognText = event.results[0][0].transcript;
+      isListening = false; bargeInActive = false;
+      speakBtn.setAttribute('aria-pressed', 'false');
+      setStatus('');
+      printMsg(recognText, 'user');
+      await handleSandra(recognText.trim());
+    };
+    recognition.onerror = function(e) {
+      isListening = false;
+      bargeInActive = false;
+      speakBtn.setAttribute('aria-pressed', 'false');
+      setStatus("Error de voz: "+e.error);
+    };
+    recognition.onend = function() {
+      isListening = false;
+      bargeInActive = false;
+      speakBtn.setAttribute('aria-pressed', 'false');
+      setStatus('');
+    };
+    recognition.start();
+  }
+
+  // --- FLUJO UI Y HANDLERS ---
+  function activatePagoFacil() {
+    if (!pagoFacil) {
+      pagoFacil = true;
+      payFlow.style.display = 'block';
+      payStep.textContent = "¿Confirmas que deseas proceder con el pago de tu reserva?";
+      printMsg("Iniciando el Pago Fácil. Lee atentamente y confirma cuando estés listo.", 'sandra');
+      speak("Iniciando el Pago Fácil. Lee atentamente y confirma cuando estés listo.");
+    }
+  }
+  function deactivatePagoFacil(confirm) {
+    pagoFacil = false; payFlow.style.display = 'none';
+    if(confirm){
+      printMsg("Pago y reserva completados ✔️. ¿Necesitas algo más?", 'sandra');
+      speak("Pago y reserva completados. ¿Deseas ayuda con algo más?");
+    }
+  }
+
+  // --- EVENTOS ---
+  speakBtn.onclick = () => {
+    if(isListening && recognition) recognition.stop();
+    else startListening();
+  };
+  sendBtn.onclick = async () => {
+    const text = msgInput.value.trim();
+    if(!text) return;
+    printMsg(text, 'user');
+    msgInput.value = '';
+    await handleSandra(text);
+  };
+  msgInput.onkeydown = e => { if(e.key === 'Enter'){ sendBtn.click();}};
+  payBtn.onclick = () => { activatePagoFacil(); };
+  closePay.onclick = () => { deactivatePagoFacil(false); };
+
+  // --- BOOT ---
+  printMsg("¡Hola! Soy Sandra, IA pro con voz y Pago Fácil. Pregúntame cualquier cosa o haz tu reserva.", 'sandra');
+})();
+</script>
 </body>
 </html>
