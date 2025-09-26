@@ -1,32 +1,36 @@
 {
-  "name": "guestsvalencia-website",
-  "version": "2.1.0",
-  "description": "Guests Valencia - Apartamentos en Valencia con Sandra IA",
-  "main": "index.html",
+  "name": "guestsvalencia-pwa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Guests Valencia PWA Pro+ (Sandra + bots + voz)",
+  "type": "module",
   "scripts": {
-    "dev": "netlify dev",
-    "build": "echo 'Static site - no build needed'",
-    "test:e2e": "./ops/test-e2e-complete.sh",
-    "deploy": "netlify deploy --prod"
+    "dev": "next dev -p 5173",
+    "build": "next build",
+    "start": "next start",
+    "lint": "echo 'No linter configurado'"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GUESTVALENCIA/CLAYTOMSYSTEMS"
+  "dependencies": {
+    "@netlify/plugin-nextjs": "^5.2.0",
+    "@supabase/supabase-js": "^2.45.4",
+    "@deepgram/sdk": "^3.7.0",
+    "@twilio/voice-sdk": "^2.7.6",
+    "elevenlabs": "^0.15.0",
+    "next": "14.2.5",
+    "openai": "^4.56.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "twilio": "^4.22.0",
+    "xmlbuilder2": "^3.1.1"
   },
-  "keywords": [
-    "valencia",
-    "apartamentos",
-    "sandra-ia",
-    "guests",
-    "tourism"
-  ],
-  "author": "ClayTom Systems - Clayton Thomas",
-  "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
-    "netlify-cli": "^17.0.0"
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.5.4",
+    "@types/node": "^20.11.30",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0"
   },
-  "engines": {
-    "node": "18.x"
-  }
+  "engines": { "node": ">=18" }
 }

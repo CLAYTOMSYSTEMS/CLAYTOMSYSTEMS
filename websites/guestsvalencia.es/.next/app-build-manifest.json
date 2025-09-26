@@ -1,0 +1,47 @@
+{
+  "pages": {
+    "/_not-found/page": [
+      "static/chunks/webpack-d27b648d47101208.js",
+      "static/chunks/fd9d1056-be48aeae6e94b8d1.js",
+      "static/chunks/23-17d109591ec31f31.js",
+      "static/chunks/main-app-2b105afca7ad963f.js",
+      "static/chunks/app/_not-found/page-846bc14f8cdb3714.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-d27b648d47101208.js",
+      "static/chunks/fd9d1056-be48aeae6e94b8d1.js",
+      "static/chunks/23-17d109591ec31f31.js",
+      "static/chunks/main-app-2b105afca7ad963f.js",
+      "static/css/69fc6e702830f563.css",
+      "static/chunks/app/layout-9ac9995575544422.js"
+    ],
+    "/alojamientos/page": [
+      "static/chunks/webpack-d27b648d47101208.js",
+      "static/chunks/fd9d1056-be48aeae6e94b8d1.js",
+      "static/chunks/23-17d109591ec31f31.js",
+      "static/chunks/main-app-2b105afca7ad963f.js",
+      "static/chunks/app/alojamientos/page-cd55dfde448dc7d7.js"
+    ],
+    "/admin/page": [
+      "static/chunks/webpack-d27b648d47101208.js",
+      "static/chunks/fd9d1056-be48aeae6e94b8d1.js",
+      "static/chunks/23-17d109591ec31f31.js",
+      "static/chunks/main-app-2b105afca7ad963f.js",
+      "static/chunks/app/admin/page-e0849cf8044ef7df.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-d27b648d47101208.js",
+      "static/chunks/fd9d1056-be48aeae6e94b8d1.js",
+      "static/chunks/23-17d109591ec31f31.js",
+      "static/chunks/main-app-2b105afca7ad963f.js",
+      "static/chunks/app/page-fc0cea058bf94e3b.js"
+    ],
+    "/sandra/page": [
+      "static/chunks/webpack-d27b648d47101208.js",
+      "static/chunks/fd9d1056-be48aeae6e94b8d1.js",
+      "static/chunks/23-17d109591ec31f31.js",
+      "static/chunks/main-app-2b105afca7ad963f.js",
+      "static/chunks/app/sandra/page-619a4d8385a1cd84.js"
+    ]
+  }
+}

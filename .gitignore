@@ -1,2 +1,3 @@
 # Local Netlify folder
 .netlify
+\r\n# General ignores\r\nnode_modules/\r\n.next/\r\n
