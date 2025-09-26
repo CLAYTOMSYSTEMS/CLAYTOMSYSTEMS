@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { chatGPTValidator, PatchResponse, ReviewFindings } from './validate';
+import { chatGPTValidator, PatchResponse, ReviewFindings } from './validate.js';
+import { etoReporter, ETOReport } from './eto-status.js';
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
@@ -70,12 +71,18 @@ class ChatGPTValidationServer {
   private setupRoutes(): void {
     // Health check
     this.app.get('/health', (req: Request, res: Response) => {
+      etoReporter.incrementRequests();
       res.json({
         status: 'healthy',
         timestamp: new Date().toISOString(),
         validator: 'ready'
       });
     });
+
+    // ETO Status endpoints
+    this.app.get('/status/eto', this.getETOStatus.bind(this));
+    this.app.get('/status/chatgpt5', this.getChatGPT5Report.bind(this));
+    this.app.get('/status/full', this.getFullSystemStatus.bind(this));
 
     // Webhook endpoint for ChatGPT patches
     this.app.post('/webhook/chatgpt', this.verifyWebhookSignature.bind(this), this.handleChatGPTWebhook.bind(this));
@@ -186,20 +193,75 @@ class ChatGPTValidationServer {
     await this.storeReviewResults(validation.data!);
   }
 
+  // ETO Status Reporting Methods
+  private async getETOStatus(req: Request, res: Response): Promise<void> {
+    try {
+      etoReporter.incrementRequests();
+      const report = await etoReporter.generateETOReport();
+      res.json(report);
+    } catch (error) {
+      res.status(500).json({ error: 'ETO status generation failed', details: error });
+    }
+  }
+
+  private async getChatGPT5Report(req: Request, res: Response): Promise<void> {
+    try {
+      etoReporter.incrementRequests();
+      const report = await etoReporter.generateChatGPT5Report();
+      
+      // Return as both JSON and formatted text
+      res.json({
+        formatted_report: report,
+        timestamp: new Date().toISOString(),
+        target: 'ChatGPT-5',
+        status: 'generated'
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'ChatGPT-5 report generation failed', details: error });
+    }
+  }
+
+  private async getFullSystemStatus(req: Request, res: Response): Promise<void> {
+    try {
+      etoReporter.incrementRequests();
+      const etoReport = await etoReporter.generateETOReport();
+      const chatgpt5Report = await etoReporter.generateChatGPT5Report();
+      
+      res.json({
+        eto_report: etoReport,
+        chatgpt5_report: chatgpt5Report,
+        system_info: {
+          version: '7.0.0',
+          name: 'SANDRA IA',
+          description: 'Advanced AI Middleware with ChatGPT Integration',
+          timestamp: new Date().toISOString()
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Full system status generation failed', details: error });
+    }
+  }
+
   private async validatePatchEndpoint(req: Request, res: Response): Promise<void> {
     try {
+      etoReporter.incrementRequests();
       const result = chatGPTValidator.validateAndSecurePatch(req.body);
+      etoReporter.recordValidation(result.valid);
       res.json(result);
     } catch (error) {
+      etoReporter.recordValidation(false);
       res.status(400).json({ error: 'Validation failed', details: error });
     }
   }
 
   private async validateReviewEndpoint(req: Request, res: Response): Promise<void> {
     try {
+      etoReporter.incrementRequests();
       const result = chatGPTValidator.validateReviewFindings(req.body);
+      etoReporter.recordValidation(result.valid);
       res.json(result);
     } catch (error) {
+      etoReporter.recordValidation(false);
       res.status(400).json({ error: 'Validation failed', details: error });
     }
   }
@@ -427,16 +489,21 @@ class ChatGPTValidationServer {
 
   public start(port: number = 3000): void {
     this.app.listen(port, () => {
-      console.log(`🚀 ChatGPT Validation Server running on port ${port}`);
+      console.log(`🚀 SANDRA IA 7.0 - ChatGPT Validation Server running on port ${port}`);
       console.log(`📋 Endpoints:`);
-      console.log(`  GET  /health`);
-      console.log(`  POST /webhook/chatgpt`);
-      console.log(`  POST /validate/patch`);
-      console.log(`  POST /validate/review`);
-      console.log(`  POST /validate/batch`);
-      console.log(`  POST /chatgpt/analyze`);
-      console.log(`  POST /chatgpt/review`);
-      console.log(`  POST /chatgpt/patch`);
+      console.log(`  GET  /health - System health check`);
+      console.log(`  GET  /status/eto - Comprehensive ETO status report`);
+      console.log(`  GET  /status/chatgpt5 - ChatGPT-5 executive report`);
+      console.log(`  GET  /status/full - Full system status`);
+      console.log(`  POST /webhook/chatgpt - ChatGPT webhook handler`);
+      console.log(`  POST /validate/patch - Validate individual patch`);
+      console.log(`  POST /validate/review - Validate review findings`);
+      console.log(`  POST /validate/batch - Validate patch batch`);
+      console.log(`  POST /chatgpt/analyze - Code analysis`);
+      console.log(`  POST /chatgpt/review - Automated review`);
+      console.log(`  POST /chatgpt/patch - Patch generation`);
+      console.log(`\n🎯 ETO Status Reporter initialized`);
+      console.log(`📊 Ready to serve ChatGPT-5 (Colaborador Favorito)`);
     });
   }
 }
@@ -445,7 +512,13 @@ class ChatGPTValidationServer {
 export { ChatGPTValidationServer };
 
 // Auto-start if run directly
-if (require.main === module) {
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+if (process.argv[1] === __filename) {
   const server = new ChatGPTValidationServer();
   const port = parseInt(process.env.PORT || '3000');
   server.start(port);
